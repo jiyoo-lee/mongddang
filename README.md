@@ -1,7 +1,7 @@
 # mongddang
 
 <b>Drop The Mongddang!</b> <br>
-그림을 통한 Social Network Service 서비스
+그림을 통한 Social Network Service
 
 - ERD
 
