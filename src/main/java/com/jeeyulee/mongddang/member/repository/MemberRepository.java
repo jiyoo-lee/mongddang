@@ -12,6 +12,6 @@ import java.util.List;
 public interface MemberRepository {
 
     @Insert("insert into member (user_id, password, name, nickname, phone_number, address) " +
-            "value (#{userId}, #{password}, #{name}, #{nickname}, #{phoneNumber}, #{address})")
+            "value (#{userId}, SHA2(#{password}, 512), #{name}, #{nickname}, #{phoneNumber}, #{address})")
     public int save(MemberJoinDTO memberJoinDTO);
 }

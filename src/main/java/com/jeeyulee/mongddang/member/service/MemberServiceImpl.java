@@ -14,7 +14,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     MemberRepository memberRepository;
-
     @Override
     public Boolean join(MemberJoinDTO memberJoinDTO) {
         log.info("MemberServiceImpl join memberJoinDTO ===> {}", memberJoinDTO);
