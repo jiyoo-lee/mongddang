@@ -38,4 +38,27 @@ public class MemberServiceImpl implements MemberService {
 
         return jwtService.createJwt(member);
     }
+
+    @Override
+    public Boolean checkOverlap(String userId) {
+        return memberRepository.countById(userId) > 0;
+    }
+
+    @Override
+    public MemberVO findById(String userId) {
+        MemberVO member = memberRepository.findById(userId);
+
+        if(member == null){
+            throw new UserNotFoundException();
+        }
+
+        return member;
+    }
+
+    @Override
+    public Boolean updateMember(MemberVO memberVO) {
+        return memberRepository.update(memberVO) > 0;
+    }
+
+
 }

@@ -3,13 +3,16 @@ package com.jeeyulee.mongddang.member.service;
 import com.jeeyulee.mongddang.member.vo.MemberVO;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
+@Slf4j
 @Service
 public class JwtServiceImpl implements JwtService{
 
@@ -28,6 +31,7 @@ public class JwtServiceImpl implements JwtService{
         return Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS512)
                 .claim("userId", memberVO.getUserId())
+                .claim("admin", memberVO.getAdmin())
                 .setIssuedAt(current)
                 .setExpiration(expired)
                 .compact();
@@ -35,13 +39,10 @@ public class JwtServiceImpl implements JwtService{
 
     public Boolean validate(String token) {
         try {
-            String userId = Jwts.parserBuilder()
-                    .setSigningKey(issueKey)
-                    .requireSubject("userId")
+            Jws<Claims> jws = Jwts.parserBuilder()
+                    .setSigningKey(Base64.getEncoder().encodeToString(issueKey.getBytes()))
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .get("userId").toString();
+                    .parseClaimsJws(token);
 
             return true;
         } catch (MissingClaimException | IncorrectClaimException | ExpiredJwtException e) {

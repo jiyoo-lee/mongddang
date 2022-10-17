@@ -5,11 +5,8 @@ import com.jeeyulee.mongddang.member.dto.MemberLoginDTO;
 import com.jeeyulee.mongddang.member.vo.MemberVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
-import java.util.Optional;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface MemberRepository {
@@ -23,4 +20,24 @@ public interface MemberRepository {
             "where user_id = #{userId} " +
             "and password = SHA2(#{password}, 512)")
     public MemberVO findByUserIdAndPassword(MemberLoginDTO memberLoginDTO);
+
+    @Select("select count(*) " +
+            "from member "+
+            "where user_id = #{userId}")
+    public Integer countById(String userId);
+
+    @Select("select * " +
+            "from member " +
+            "where user_id = #{userId}")
+    public MemberVO findById(String userId);
+
+    @Update("update member " +
+            "set password = IFNULL(SHA2(#{password}, 512), password), " +
+            "    nickname = IFNULL(#{nickname}, nickname), " +
+            "    profile_picture = IFNULL(#{profilePicture}, profile_picture), " +
+            "    phone_number = IFNULL(#{phoneNumber}, phone_number), " +
+            "    address = IFNULL(#{address}, address)" +
+            "where user_id = #{userId}")
+    public Integer update(MemberVO memberVO);
+
 }

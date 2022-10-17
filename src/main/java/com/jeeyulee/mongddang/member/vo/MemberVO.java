@@ -1,12 +1,13 @@
 package com.jeeyulee.mongddang.member.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 public class MemberVO {
     private String userId;
     private String password;
@@ -16,6 +17,5 @@ public class MemberVO {
     private String phoneNumber;
     private String address;
     private Boolean admin;
-    private String lastAccessToken;
     private String createDatetime;
 }

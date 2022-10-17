@@ -20,6 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 // Swagger 접속 요청
                 .excludePathPatterns("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs", "/error","/webjars/**")
-                .excludePathPatterns("/api/v1/member/login","/api/v1/member/join");
+                .excludePathPatterns("/api/v1/member/login","/api/v1/member/join",
+                                     "/api/v1/member/overlap", "/api/v1/member");
     }
 }
