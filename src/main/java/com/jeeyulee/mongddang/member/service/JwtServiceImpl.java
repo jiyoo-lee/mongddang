@@ -1,6 +1,6 @@
 package com.jeeyulee.mongddang.member.service;
 
-import com.jeeyulee.mongddang.member.vo.MemberVO;
+import com.jeeyulee.mongddang.member.dto.MemberLoginResponseDTO;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
@@ -23,15 +23,15 @@ public class JwtServiceImpl implements JwtService{
     Integer validTime;
 
     @Override
-    public String createJwt(MemberVO memberVO) {
+    public String createJwt(MemberLoginResponseDTO member) {
         Date current = new Date();
         Date expired = new Date(current.getTime() + validTime);
         Key key = Keys.hmacShaKeyFor(issueKey.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS512)
-                .claim("userId", memberVO.getUserId())
-                .claim("admin", memberVO.getAdmin())
+                .claim("userId", member.getUserId())
+                .claim("admin", member.getAdmin())
                 .setIssuedAt(current)
                 .setExpiration(expired)
                 .compact();

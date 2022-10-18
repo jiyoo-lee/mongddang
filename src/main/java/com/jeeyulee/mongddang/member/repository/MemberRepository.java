@@ -1,12 +1,7 @@
 package com.jeeyulee.mongddang.member.repository;
 
-import com.jeeyulee.mongddang.member.dto.MemberJoinDTO;
-import com.jeeyulee.mongddang.member.dto.MemberLoginDTO;
-import com.jeeyulee.mongddang.member.vo.MemberVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.jeeyulee.mongddang.member.dto.*;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface MemberRepository {
@@ -19,7 +14,7 @@ public interface MemberRepository {
             "from member " +
             "where user_id = #{userId} " +
             "and password = SHA2(#{password}, 512)")
-    public MemberVO findByUserIdAndPassword(MemberLoginDTO memberLoginDTO);
+    public MemberLoginResponseDTO findByUserIdAndPassword(MemberLoginDTO memberLoginDTO);
 
     @Select("select count(*) " +
             "from member "+
@@ -29,7 +24,7 @@ public interface MemberRepository {
     @Select("select * " +
             "from member " +
             "where user_id = #{userId}")
-    public MemberVO findById(String userId);
+    public MemberDTO findById(String userId);
 
     @Update("update member " +
             "set password = IFNULL(SHA2(#{password}, 512), password), " +
@@ -38,6 +33,19 @@ public interface MemberRepository {
             "    phone_number = IFNULL(#{phoneNumber}, phone_number), " +
             "    address = IFNULL(#{address}, address)" +
             "where user_id = #{userId}")
-    public Integer update(MemberVO memberVO);
+    public Integer update(MemberDTO memberDTO);
 
+
+    @Insert("insert into login_history (member_id, access_ip, latitude, longitude) " +
+            "value (#{userId}, #{accessIp}, #{latitude}, #{longitude})")
+    public int saveLogInHistory();
+
+
+    @Delete("delete from member where user_id = #{userId}")
+    public int resignMember(String userId);
+
+    @Update("update member " +
+            "set last_access_token = #{jwt}" +
+            "where user_id = #{userId}")
+    public Integer updateToken(String userId,String jwt);
 }

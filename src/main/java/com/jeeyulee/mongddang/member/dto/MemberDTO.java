@@ -1,14 +1,13 @@
-package com.jeeyulee.mongddang.member.vo;
+package com.jeeyulee.mongddang.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class MemberVO {
+public class MemberDTO {
     private String userId;
     private String password;
     private String name;

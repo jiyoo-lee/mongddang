@@ -5,7 +5,7 @@ import com.jeeyulee.mongddang.member.dto.MemberJoinDTO;
 import com.jeeyulee.mongddang.member.dto.MemberLoginDTO;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.service.MemberService;
-import com.jeeyulee.mongddang.member.vo.MemberVO;
+import com.jeeyulee.mongddang.member.dto.MemberDTO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
-    @ApiOperation(value="한줄요약", notes="설명")
+    @ApiOperation(value="회원가입", notes="회원 가입 API")
     @PostMapping("/join")
     public ResponseEntity<ResultDTO> join(@RequestBody MemberJoinDTO memberJoinDTO){
         ResultDTO result = new ResultDTO();
@@ -33,8 +33,8 @@ public class MemberController {
     public ResponseEntity<ResultDTO> login(@RequestBody MemberLoginDTO memberLoginDTO){
         ResultDTO result = new ResultDTO();
         try {
-            result.setSuccess(true);
             result.setData(memberService.login(memberLoginDTO));
+            result.setSuccess(true);
         } catch (UserNotFoundException e) {
             result.setSuccess(false);
         }
@@ -67,9 +67,18 @@ public class MemberController {
 
     @ApiOperation(value = "회원 정보 수정", notes = "회원 정보 수정")
     @PutMapping("/")
-    public ResponseEntity<ResultDTO> updateMember(@RequestBody MemberVO memberVO){
+    public ResponseEntity<ResultDTO> updateMember(@RequestBody MemberDTO memberDTO){
        ResultDTO result = new ResultDTO();
-       result.setSuccess(memberService.updateMember(memberVO));
+       result.setSuccess(memberService.updateMember(memberDTO));
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    @ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 API")
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<ResultDTO> resignMember(@PathVariable String userId){
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(memberService.resign(userId));
 
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
