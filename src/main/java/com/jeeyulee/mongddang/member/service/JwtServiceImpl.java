@@ -1,9 +1,11 @@
 package com.jeeyulee.mongddang.member.service;
 
 import com.jeeyulee.mongddang.member.dto.MemberLoginResponseDTO;
+import com.jeeyulee.mongddang.member.repository.MemberRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ import java.util.Date;
 @Slf4j
 @Service
 public class JwtServiceImpl implements JwtService{
+
+    @Autowired
+    MemberRepository memberRepository;
 
     @Value("${jwt-token.issue-key}")
     String issueKey;
@@ -44,7 +49,13 @@ public class JwtServiceImpl implements JwtService{
                     .build()
                     .parseClaimsJws(token);
 
-            return true;
+            log.info("JwtServiceImpl validate userId ===> {}", jws.getBody().get("userId").toString());
+            log.info("JwtServiceImpl validate admin ===> {}", jws.getBody().get("admin").toString());
+
+            Boolean admin = (Boolean)jws.getBody().get("admin");
+            String userId = jws.getBody().get("userId").toString();
+
+            return token.equals(memberRepository.findLastTokenById(userId));
         } catch (MissingClaimException | IncorrectClaimException | ExpiredJwtException e) {
             return false;
         }

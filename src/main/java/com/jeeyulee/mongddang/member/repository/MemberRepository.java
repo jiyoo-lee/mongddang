@@ -37,8 +37,8 @@ public interface MemberRepository {
 
 
     @Insert("insert into login_history (member_id, access_ip, latitude, longitude) " +
-            "value (#{userId}, #{accessIp}, #{latitude}, #{longitude})")
-    public int saveLogInHistory();
+            "value (#{userId}, inet_aton(#{accessIp}), #{latitude}, #{longitude})")
+    public Integer saveLogInHistory(MemberLoginDTO memberLoginDTO);
 
 
     @Delete("delete from member where user_id = #{userId}")
@@ -48,4 +48,9 @@ public interface MemberRepository {
             "set last_access_token = #{jwt}" +
             "where user_id = #{userId}")
     public Integer updateToken(String userId,String jwt);
+
+    @Select("select last_access_token " +
+            "from member " +
+            "where user_id = #{userId}")
+    public String findLastTokenById(String userId);
 }

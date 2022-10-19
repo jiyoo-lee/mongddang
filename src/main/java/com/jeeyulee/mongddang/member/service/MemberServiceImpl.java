@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.IntStream;
+
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -26,9 +28,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public String login(MemberLoginDTO memberLoginDTO) throws UserNotFoundException {
         MemberLoginResponseDTO member = memberRepository.findByUserIdAndPassword(memberLoginDTO);
-        //int count = memberRepository.saveLogInHistory(loginHistoryDTO);
+        Integer count = memberRepository.saveLogInHistory(memberLoginDTO);
+        log.info("MemberServiceImpl login ===> {} ", member.getAdmin());
 
-        if (member == null) {
+        if (member == null || count == null || count == 0) {
             throw new UserNotFoundException();
         }
         String jwt = jwtService.createJwt(member);
@@ -49,7 +52,6 @@ public class MemberServiceImpl implements MemberService {
         if(member == null){
             throw new UserNotFoundException();
         }
-
         return member;
     }
 
@@ -63,6 +65,7 @@ public class MemberServiceImpl implements MemberService {
         log.info("MemberServiceImpl resign userId ===> {}",userId);
         return memberRepository.resignMember(userId) > 0;
     }
+
 
 
 }
