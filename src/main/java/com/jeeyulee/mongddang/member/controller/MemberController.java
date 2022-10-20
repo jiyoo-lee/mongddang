@@ -1,11 +1,12 @@
 package com.jeeyulee.mongddang.member.controller;
 
 import com.jeeyulee.mongddang.common.result.ResultDTO;
-import com.jeeyulee.mongddang.member.dto.MemberJoinDTO;
-import com.jeeyulee.mongddang.member.dto.MemberLoginDTO;
+import com.jeeyulee.mongddang.member.domain.FindPasswordDTO;
+import com.jeeyulee.mongddang.member.domain.MemberJoinDTO;
+import com.jeeyulee.mongddang.member.domain.MemberLoginDTO;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.service.MemberService;
-import com.jeeyulee.mongddang.member.dto.MemberDTO;
+import com.jeeyulee.mongddang.member.domain.MemberDTO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,36 @@ public class MemberController {
         result.setSuccess(memberService.resign(userId));
 
         return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    @ApiOperation(value="비밀번호 찾기", notes="회원 비밀번호 찾기")
+    @GetMapping("/user-info/match")
+    public ResponseEntity<ResultDTO> findByIdAndPhoneNumber(FindPasswordDTO findPasswordDTO){
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(memberService.findByIdAndPhoneNumber(findPasswordDTO));
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    @ApiOperation(value="아이디 찾기", notes = "회원 아이디 찾기")
+    @GetMapping("/user-id")
+    public ResponseEntity<ResultDTO> findIdByPhoneNumber(String phoneNumber){
+        ResultDTO result = new ResultDTO();
+        try {
+            result.setSuccess(true);
+            result.setData(memberService.findIdByPhoneNumber(phoneNumber));
+        }catch (UserNotFoundException e){
+            result.setSuccess(false);
+            result.setData(e.getMessage());
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/mail-test")
+    public ResponseEntity<ResultDTO> testSendMail() {
+        ResultDTO result = new ResultDTO();
+        memberService.mailTest();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

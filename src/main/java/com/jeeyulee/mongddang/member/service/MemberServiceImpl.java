@@ -1,13 +1,15 @@
 package com.jeeyulee.mongddang.member.service;
 
-import com.jeeyulee.mongddang.member.dto.*;
+import com.jeeyulee.mongddang.common.mail.MailDTO;
+import com.jeeyulee.mongddang.common.mail.MailService;
+import com.jeeyulee.mongddang.common.mail.MailServiceImpl;
+import com.jeeyulee.mongddang.common.mail.MessageWords;
+import com.jeeyulee.mongddang.member.domain.*;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.stream.IntStream;
 
 @Slf4j
 @Service
@@ -18,6 +20,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    MailService mailService;
 
     @Override
     public Boolean join(MemberJoinDTO memberJoinDTO) {
@@ -52,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
         if(member == null){
             throw new UserNotFoundException();
         }
+
         return member;
     }
 
@@ -66,6 +72,29 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.resignMember(userId) > 0;
     }
 
+    @Override
+    public Boolean findByIdAndPhoneNumber(FindPasswordDTO findPasswordDTO) {
 
+        return memberRepository.findByIdAndPhoneNumber(findPasswordDTO) > 0;
+    }
 
+    @Override
+    public String findIdByPhoneNumber(String phoneNumber) {
+
+        return memberRepository.findIdByPhoneNumber(phoneNumber);
+    }
+    @Override
+    public void mailTest() {
+        String contents = MessageWords.AUTH_CONTENTS.getValue() + "123";
+
+        try {
+            mailService.send(MailDTO.builder()
+                    .to("gojeasuk2@naver.com")
+                    .title(MessageWords.AUTH_TITLE.getValue())
+                    .contents(contents)
+                    .build());
+        } catch (Exception e) {
+            log.info("메일 발송 중 에러 발생 {}", e);
+        }
+    }
 }

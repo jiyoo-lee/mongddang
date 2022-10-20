@@ -1,5 +1,4 @@
-package com.jeeyulee.mongddang.member.dto;
-
+package com.jeeyulee.mongddang.member.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberLoginResponseDTO {
+public class FindPasswordDTO {
     private String userId;
-    private Boolean admin;
+    private String phoneNumber;
 }

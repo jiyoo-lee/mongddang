@@ -1,6 +1,6 @@
 package com.jeeyulee.mongddang.member.service;
 
-import com.jeeyulee.mongddang.member.dto.MemberLoginResponseDTO;
+import com.jeeyulee.mongddang.member.domain.MemberLoginResponseDTO;
 import com.jeeyulee.mongddang.member.repository.MemberRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

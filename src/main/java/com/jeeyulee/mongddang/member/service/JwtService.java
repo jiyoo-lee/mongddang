@@ -1,6 +1,6 @@
 package com.jeeyulee.mongddang.member.service;
 
-import com.jeeyulee.mongddang.member.dto.MemberLoginResponseDTO;
+import com.jeeyulee.mongddang.member.domain.MemberLoginResponseDTO;
 
 public interface JwtService {
 

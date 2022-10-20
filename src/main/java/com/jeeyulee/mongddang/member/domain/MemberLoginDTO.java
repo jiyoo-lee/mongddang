@@ -1,4 +1,4 @@
-package com.jeeyulee.mongddang.member.dto;
+package com.jeeyulee.mongddang.member.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.jeeyulee.mongddang.member.repository;
 
-import com.jeeyulee.mongddang.member.dto.*;
+import com.jeeyulee.mongddang.member.domain.*;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
@@ -53,4 +53,14 @@ public interface MemberRepository {
             "from member " +
             "where user_id = #{userId}")
     public String findLastTokenById(String userId);
+
+    @Select("select count(*) count " +
+            "from member " +
+            "where user_id = #{userId} and phone_number = #{phoneNumber}")
+    public Integer findByIdAndPhoneNumber(FindPasswordDTO findPasswordDTO);
+
+    @Select("select user_id " +
+            "from member " +
+            "where phone_number = #{phoneNumber}")
+    public String findIdByPhoneNumber(String phoneNumber);
 }
