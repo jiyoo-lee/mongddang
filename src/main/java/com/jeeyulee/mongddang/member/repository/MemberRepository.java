@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface MemberRepository {
 
-    @Insert("insert into member (user_id, password, name, nickname, phone_number, address) " +
-            "value (#{userId}, SHA2(#{password}, 512), #{name}, #{nickname}, #{phoneNumber}, #{address})")
+    @Insert("insert into member (user_id, password, name, nickname, email, phone_number, address) " +
+            "value (#{userId}, SHA2(#{password}, 512), #{name}, #{nickname}, #{email}, #{phoneNumber}, #{address})")
     public int save(MemberJoinDTO memberJoinDTO);
 
     @Select("select * " +
@@ -56,11 +56,16 @@ public interface MemberRepository {
 
     @Select("select count(*) count " +
             "from member " +
-            "where user_id = #{userId} and phone_number = #{phoneNumber}")
-    public Integer findByIdAndPhoneNumber(FindPasswordDTO findPasswordDTO);
+            "where user_id = #{userId} and email = #{email}")
+    public Integer findByIdAndEmail(FindPasswordDTO findPasswordDTO);
 
     @Select("select user_id " +
             "from member " +
-            "where phone_number = #{phoneNumber}")
-    public String findIdByPhoneNumber(String phoneNumber);
+            "where email = #{email}")
+    public String findIdByEmail(String email);
+
+    @Update("update member " +
+            "set password = SHA2(#{password}, 512) " +
+            "where user_id = #{userId}")
+    public Integer updatePassword(PasswordUpdateDTO passwordUpdateDTO);
 }

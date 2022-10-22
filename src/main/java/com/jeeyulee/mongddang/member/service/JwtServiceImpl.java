@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
@@ -18,6 +19,8 @@ import java.util.Date;
 @Service
 public class JwtServiceImpl implements JwtService{
 
+    @Autowired
+    HttpServletRequest request;
     @Autowired
     MemberRepository memberRepository;
 
@@ -42,22 +45,28 @@ public class JwtServiceImpl implements JwtService{
                 .compact();
     }
 
+    @Override
     public Boolean validate(String token) {
         try {
-            Jws<Claims> jws = Jwts.parserBuilder()
-                    .setSigningKey(Base64.getEncoder().encodeToString(issueKey.getBytes()))
-                    .build()
-                    .parseClaimsJws(token);
-
-            log.info("JwtServiceImpl validate userId ===> {}", jws.getBody().get("userId").toString());
-            log.info("JwtServiceImpl validate admin ===> {}", jws.getBody().get("admin").toString());
-
-            Boolean admin = (Boolean)jws.getBody().get("admin");
-            String userId = jws.getBody().get("userId").toString();
-
+            String userId = parseUserId(token);
             return token.equals(memberRepository.findLastTokenById(userId));
         } catch (MissingClaimException | IncorrectClaimException | ExpiredJwtException e) {
             return false;
         }
+    }
+
+    @Override
+    public String retrieveUserId() {
+        return parseUserId(request.getHeader("Autorization"));
+    }
+
+
+    private String parseUserId(String token) {
+        Jws<Claims> jws = Jwts.parserBuilder()
+                .setSigningKey(Base64.getEncoder().encodeToString(issueKey.getBytes()))
+                .build()
+                .parseClaimsJws(token);
+
+        return jws.getBody().get("userId").toString();
     }
 }

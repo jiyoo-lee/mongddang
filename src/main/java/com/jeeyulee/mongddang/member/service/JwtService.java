@@ -7,4 +7,6 @@ public interface JwtService {
     public String createJwt(MemberLoginResponseDTO memberLoginResponseDTO);
 
     public Boolean validate(String token);
+
+    public String retrieveUserId();
 }

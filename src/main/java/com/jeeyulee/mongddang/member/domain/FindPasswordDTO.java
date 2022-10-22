@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FindPasswordDTO {
     private String userId;
-    private String phoneNumber;
+    private String email;
 }

@@ -1,15 +1,18 @@
 package com.jeeyulee.mongddang.member.service;
 
+import com.jeeyulee.mongddang.common.mail.MailSendException;
 import com.jeeyulee.mongddang.common.mail.MailDTO;
 import com.jeeyulee.mongddang.common.mail.MailService;
-import com.jeeyulee.mongddang.common.mail.MailServiceImpl;
 import com.jeeyulee.mongddang.common.mail.MessageWords;
+import com.jeeyulee.mongddang.common.util.CodeGenerator;
 import com.jeeyulee.mongddang.member.domain.*;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
 
 @Slf4j
 @Service
@@ -73,28 +76,52 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Boolean findByIdAndPhoneNumber(FindPasswordDTO findPasswordDTO) {
+    public String findByIdAndEmail(FindPasswordDTO findPasswordDTO) throws MailSendException{
 
-        return memberRepository.findByIdAndPhoneNumber(findPasswordDTO) > 0;
-    }
+        String userId = memberRepository.findIdByEmail(findPasswordDTO.getEmail());
 
-    @Override
-    public String findIdByPhoneNumber(String phoneNumber) {
-
-        return memberRepository.findIdByPhoneNumber(phoneNumber);
-    }
-    @Override
-    public void mailTest() {
-        String contents = MessageWords.AUTH_CONTENTS.getValue() + "123";
-
-        try {
-            mailService.send(MailDTO.builder()
-                    .to("gojeasuk2@naver.com")
-                    .title(MessageWords.AUTH_TITLE.getValue())
-                    .contents(contents)
-                    .build());
-        } catch (Exception e) {
-            log.info("메일 발송 중 에러 발생 {}", e);
+        if(userId == null || !userId.equals(findPasswordDTO.getUserId())){
+            throw new UserNotFoundException();
         }
+
+        String authNumber = CodeGenerator.generateRandom(6);
+
+        mailService.send(MailDTO.builder()
+                .to(findPasswordDTO.getEmail())
+                .title(MessageWords.AUTH_TITLE.getValue())
+                .contents(MessageWords.AUTH_CONTENTS.getValue() + authNumber)
+                .build());
+
+        return authNumber;
+    }
+
+    @Override
+    public String findIdByEmail (String email) {
+
+        return memberRepository.findIdByEmail(email);
+    }
+
+    @Override
+    public String retrieveAuthNumber(String email) throws MailSendException{
+        String userId = memberRepository.findIdByEmail(email);
+
+        if (userId == null){
+           throw new UserNotFoundException();
+        }
+
+        String authNumber = CodeGenerator.generateRandom(6);
+
+        mailService.send(MailDTO.builder()
+                    .to(email)
+                    .title(MessageWords.AUTH_TITLE.getValue())
+                    .contents(MessageWords.AUTH_CONTENTS.getValue() + authNumber)
+                    .build());
+
+        return authNumber;
+    }
+
+    @Override
+    public Boolean updatePassword(PasswordUpdateDTO passwordUpdateDTO) {
+        return memberRepository.updatePassword(passwordUpdateDTO) > 0;
     }
 }
