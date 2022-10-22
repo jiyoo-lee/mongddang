@@ -64,7 +64,7 @@ public class MemberController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "회원 정보 수정", notes = "회원 정보 수정")
+    @ApiOperation(value = "회원 정보 수정", notes ="회원 정보 수정")
     @PutMapping
     public ResponseEntity<ResultDTO> updateMember(@RequestBody MemberDTO memberDTO){
        ResultDTO result = new ResultDTO();
