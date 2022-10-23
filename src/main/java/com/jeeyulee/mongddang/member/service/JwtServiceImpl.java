@@ -57,7 +57,7 @@ public class JwtServiceImpl implements JwtService{
 
     @Override
     public String retrieveUserId() {
-        return parseUserId(request.getHeader("Autorization"));
+        return parseUserId(request.getHeader("Authorization"));
     }
 
 

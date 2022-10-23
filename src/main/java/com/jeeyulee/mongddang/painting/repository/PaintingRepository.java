@@ -1,7 +1,6 @@
 package com.jeeyulee.mongddang.painting.repository;
 
 import com.jeeyulee.mongddang.painting.domain.PaintingCreationDTO;
-import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/painting")
 @RequiredArgsConstructor
 public class PaintingController {
-
     private final PaintingService paintingService;
 
     @ApiOperation(value = "그림 업로드 API")
     @PostMapping
-    public ResponseEntity<ResultDTO> createPainting(PaintingDTO paintingDTO){
+    public ResponseEntity<ResultDTO> createPainting(@RequestBody PaintingDTO paintingDTO){
         ResultDTO result = new ResultDTO();
         try{
             result.setData(paintingService.createPainting(paintingDTO));
@@ -30,7 +30,7 @@ public class PaintingController {
         }catch(Exception e){
             result.setSuccess(false);
         }
-        return new ResponseEntity<ResultDTO>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
