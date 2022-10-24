@@ -46,4 +46,10 @@ public class PaintingCommentServiceImpl implements PaintingCommentService {
 
         return paintingCommentRepository.update(updateDTO) > 0;
     }
+
+    @Override
+    public Boolean delete(Long commentId) {
+
+        return paintingCommentRepository.delete(commentId) > 0;
+    }
 }

@@ -8,4 +8,6 @@ public interface PaintingCommentService {
 
     public Boolean update(Long commentId, PaintingCommentDTO paintingCommentDTO);
 
+    public Boolean delete(Long commentId);
+
 }
