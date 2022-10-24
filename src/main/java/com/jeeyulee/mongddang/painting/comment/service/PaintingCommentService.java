@@ -6,4 +6,6 @@ public interface PaintingCommentService {
 
     public Boolean save(PaintingCommentDTO paintingCommentDTO);
 
+    public Boolean update(Long commentId, PaintingCommentDTO paintingCommentDTO);
+
 }

@@ -8,10 +8,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.xml.transform.Result;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,11 +19,21 @@ public class PaintingCommentController {
 
     private final PaintingCommentService paintingCommentService;
 
-    @ApiOperation(value = "", notes = "")
+    @ApiOperation(value = "그림 댓글 등록 API", notes = "그림 댓글 등록 API")
     @PostMapping
     public ResponseEntity<ResultDTO> createPaintingComment(@RequestBody PaintingCommentDTO paintingCommentDTO){
         ResultDTO result = new ResultDTO();
         result.setSuccess(paintingCommentService.save(paintingCommentDTO));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "", notes="")
+    @PutMapping("/{commentId}")
+    public ResponseEntity<ResultDTO> updatePaintingComment(@PathVariable Long commentId,
+                                                           @RequestBody PaintingCommentDTO paintingCommentDTO ){
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(paintingCommentService.update(commentId, paintingCommentDTO));
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
