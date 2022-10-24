@@ -1,6 +1,5 @@
 package com.jeeyulee.mongddang.painting.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PaintingUpdateDTO {
-    private Long dropsId;
+public class PopularPaintingsDTO {
+
+    private String memberId;
+    private String nickname;
+    private String profileUrl;
     private Long genreId;
     private String name;
-    private String extension;
+    private String paintingUrl;
     private String description;
+    private Integer mongddangCount;
+
 }

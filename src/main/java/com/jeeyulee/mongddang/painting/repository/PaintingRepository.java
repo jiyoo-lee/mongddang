@@ -2,10 +2,10 @@ package com.jeeyulee.mongddang.painting.repository;
 
 import com.jeeyulee.mongddang.painting.domain.PaintingCreationDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateBuilderDTO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import com.jeeyulee.mongddang.painting.domain.PopularPaintingsDTO;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface PaintingRepository {
@@ -27,4 +27,16 @@ public interface PaintingRepository {
             "from painting " +
             "where id = #{paintingId}")
     public Integer delete(Long paintingId);
+
+    @Select("select member_id " +
+            "from drops " +
+            "where id = #{dropsId} ")
+    public String findUserIdByDropsId(Long dropsId);
+
+    @Select("select * " +
+            "from painting " +
+            "left outer join" +
+            "member ")
+    public List<PopularPaintingsDTO> retrievePopularPaintings();
+
 }

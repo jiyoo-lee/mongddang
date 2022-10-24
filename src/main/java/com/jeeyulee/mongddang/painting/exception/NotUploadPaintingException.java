@@ -1,4 +1,4 @@
 package com.jeeyulee.mongddang.painting.exception;
 
-public class NotUploadPaintingException extends Exception{
+public class NotUploadPaintingException extends RuntimeException{
 }

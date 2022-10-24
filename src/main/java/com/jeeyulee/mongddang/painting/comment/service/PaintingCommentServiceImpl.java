@@ -22,26 +22,22 @@ public class PaintingCommentServiceImpl implements PaintingCommentService {
     public Boolean save(PaintingCommentDTO paintingCommentDTO) {
 
         String userIdOnToken = jwtService.retrieveUserId();
-        int isSecret = paintingCommentDTO.getSecret() ? 1 : 0;
 
         PaintingCommentBuilderDTO builderDTO = PaintingCommentBuilderDTO.builder()
                 .memberId(userIdOnToken)
                 .paintingId(paintingCommentDTO.getPaintingId())
                 .contents(paintingCommentDTO.getContents())
-                .secret(isSecret).build();
+                .secret(paintingCommentDTO.getSecret()).build();
 
         return paintingCommentRepository.save(builderDTO) > 0;
     }
 
     @Override
     public Boolean update(Long commentId, PaintingCommentDTO paintingCommentDTO) {
-
-        int isSecret = paintingCommentDTO.getSecret() ? 1 : 0;
-
         PaintingCommentUpdateDTO updateDTO = PaintingCommentUpdateDTO.builder()
                 .commentId(commentId)
                 .contents(paintingCommentDTO.getContents())
-                .secret(isSecret)
+                .secret(paintingCommentDTO.getSecret())
                 .build();
 
         return paintingCommentRepository.update(updateDTO) > 0;
@@ -52,4 +48,6 @@ public class PaintingCommentServiceImpl implements PaintingCommentService {
 
         return paintingCommentRepository.delete(commentId) > 0;
     }
+
+
 }

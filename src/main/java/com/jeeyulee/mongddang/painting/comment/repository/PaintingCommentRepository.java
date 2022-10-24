@@ -1,7 +1,6 @@
 package com.jeeyulee.mongddang.painting.comment.repository;
 
 import com.jeeyulee.mongddang.painting.comment.domain.PaintingCommentBuilderDTO;
-import com.jeeyulee.mongddang.painting.comment.domain.PaintingCommentDTO;
 import com.jeeyulee.mongddang.painting.comment.domain.PaintingCommentUpdateDTO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -21,7 +20,8 @@ public interface PaintingCommentRepository {
             "where id = #{commentId}")
     public Integer update(PaintingCommentUpdateDTO paintingCommentUpdateDTO);
 
-    @Delete("delete from comment " +
+    @Delete("delete " +
+            "from comment " +
             "where id = #{commentId}")
     public Integer delete(Long commentId);
 }

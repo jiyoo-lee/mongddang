@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
@@ -18,9 +20,6 @@ import java.util.Date;
 @Slf4j
 @Service
 public class JwtServiceImpl implements JwtService{
-
-    @Autowired
-    HttpServletRequest request;
     @Autowired
     MemberRepository memberRepository;
 
@@ -57,6 +56,7 @@ public class JwtServiceImpl implements JwtService{
 
     @Override
     public String retrieveUserId() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return parseUserId(request.getHeader("Authorization"));
     }
 

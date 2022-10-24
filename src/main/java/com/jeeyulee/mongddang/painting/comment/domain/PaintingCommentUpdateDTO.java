@@ -13,5 +13,5 @@ public class PaintingCommentUpdateDTO {
 
     private Long commentId;
     private String contents;
-    private Integer secret;
+    private Boolean secret;
 }

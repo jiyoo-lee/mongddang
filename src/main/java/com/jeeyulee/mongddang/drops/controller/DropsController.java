@@ -52,10 +52,10 @@ public class DropsController {
     }
 
     @ApiOperation(value = "드랍 삭제 API")
-    @DeleteMapping("/{dropId}")
-    public ResponseEntity<ResultDTO> deleteDrop (@PathVariable Long dropId){
+    @DeleteMapping("/{dropsId}")
+    public ResponseEntity<ResultDTO> deleteDrop (@PathVariable Long dropsId){
         ResultDTO result = new ResultDTO();
-        result.setSuccess(dropsService.deleteDrop(dropId));
+        result.setSuccess(dropsService.deleteDrop(dropsId));
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

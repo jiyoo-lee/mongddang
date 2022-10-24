@@ -1,8 +1,10 @@
 package com.jeeyulee.mongddang.painting.controller;
 
 import com.jeeyulee.mongddang.common.result.ResultDTO;
+import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateDTO;
+import com.jeeyulee.mongddang.painting.exception.NotUploadPaintingException;
 import com.jeeyulee.mongddang.painting.service.PaintingService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +27,7 @@ public class PaintingController {
         try{
             result.setData(paintingService.createPainting(paintingDTO));
             result.setSuccess(true);
-        }catch(Exception e){
+        }catch(NotUploadPaintingException e){
             result.setSuccess(false);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -36,8 +38,12 @@ public class PaintingController {
     public ResponseEntity<ResultDTO> updatePainting(@PathVariable Long paintingId,
                                                     @RequestBody PaintingUpdateDTO paintingUpdateDTO){
         ResultDTO result = new ResultDTO();
-        result.setSuccess(paintingService.updatePainting(paintingId, paintingUpdateDTO));
-
+        try {
+            result.setSuccess(true);
+            result.setData(paintingService.updatePainting(paintingId, paintingUpdateDTO));
+        } catch (UserNotFoundException | NotUploadPaintingException e) {
+            result.setSuccess(false);
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -46,6 +52,15 @@ public class PaintingController {
     public ResponseEntity<ResultDTO> deletePainting(Long paintingId){
         ResultDTO result = new ResultDTO();
         result.setSuccess(paintingService.deletePainting(paintingId));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @ApiOperation(value="", notes = "")
+    @GetMapping("/popular")
+    public ResponseEntity<ResultDTO> retrievePopularPaintings(){
+        ResultDTO result = new ResultDTO();
+        result.setData(paintingService.retrievePopularPaintings());
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

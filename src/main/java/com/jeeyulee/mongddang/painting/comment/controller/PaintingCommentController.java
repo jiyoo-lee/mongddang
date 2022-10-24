@@ -3,14 +3,11 @@ package com.jeeyulee.mongddang.painting.comment.controller;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import com.jeeyulee.mongddang.painting.comment.domain.PaintingCommentDTO;
 import com.jeeyulee.mongddang.painting.comment.service.PaintingCommentService;
-import com.jeeyulee.mongddang.painting.service.PaintingService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.transform.Result;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +28,7 @@ public class PaintingCommentController {
     @ApiOperation(value = "댓글 수정 기능", notes="댓글 수정 API")
     @PutMapping("/{commentId}")
     public ResponseEntity<ResultDTO> updatePaintingComment(@PathVariable Long commentId,
-                                                           @RequestBody PaintingCommentDTO paintingCommentDTO ){
+                                                           @RequestBody PaintingCommentDTO paintingCommentDTO){
         ResultDTO result = new ResultDTO();
         result.setSuccess(paintingCommentService.update(commentId, paintingCommentDTO));
 
@@ -43,6 +40,7 @@ public class PaintingCommentController {
     public ResponseEntity<ResultDTO> deletePaintingComment(@PathVariable Long commentId){
         ResultDTO result = new ResultDTO();
         result.setSuccess(paintingCommentService.delete(commentId));
-        return new ResponseEntity<ResultDTO>(result, HttpStatus.OK);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

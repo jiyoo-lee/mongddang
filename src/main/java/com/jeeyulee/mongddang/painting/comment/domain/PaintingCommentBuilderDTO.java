@@ -16,5 +16,5 @@ public class PaintingCommentBuilderDTO {
     private Long paintingId;
     private String memberId;
     private String contents;
-    private Integer secret;
+    private Boolean secret;
 }
