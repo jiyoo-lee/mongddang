@@ -6,7 +6,8 @@
 당신의 낙서는 누군가에겐 또 다른 시작될지도 모릅니다.<br><br>
 
 - 진행기간 : 2022.10.14 ~ 2022.11.10
-- 목표 : 1. 그림을 잘 그리진 못하지만 도전하고싶은 사람, <br>
+- 목표 : <br>
+        1. 그림을 잘 그리진 못하지만 도전하고싶은 사람, <br>
         2. 내가 그린 그림을 사람들과 공유하고 소통하고싶은 사람, <br>
         3. 그냥 자유롭게 낙서하고 나를 표현하고싶은 사람<br>
         위와 같은 사람들을 위한 웹사이트 만들기
@@ -28,7 +29,11 @@ IDE<br>
 <img src="https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=for-the-badge&logo=IntelliJ%20IDEA&logoColor=white"> 
 
 버전관리도구<br>
-<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=MySql&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/>
+        
+협업툴<br>
+<img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/>
+<img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=white"/>
 
 <b>ERD</b> <br>
 
