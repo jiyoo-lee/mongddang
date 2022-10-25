@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/103879030/197795983-e7921339-084a-4423-a6b5-c873b9e648d3.png)
 
-<h3>Drop the MONGDDANG ! </h3> <br/>
+<h3>Drop the <span style="color:yellow">MONGDDANG !</span></h3> <br/>
 그림을 통해 자신의 마음을 표현해보세요!<br/><br/>
 드랍더몽땅은 그림을 통한 Social Network Service입니다. <br>
 잘 그리진 못해도 몽땅연필이 될때까지 낙서를 자신의 드랍에 그려보세요.<br>
@@ -40,7 +40,8 @@ IDE<br>
 
 ![image](https://user-images.githubusercontent.com/103879030/197790623-a55e1e54-5e68-45f9-bee6-e01407cf9624.png)
 
-
-
+<details><summary>UI 구성안</summary>
+<img src="https://user-images.githubusercontent.com/103879030/197798411-1e2bed0c-3fad-42bf-8203-e6e74993abe2.png"/>
+</details> 
 
 
