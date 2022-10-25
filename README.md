@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/103879030/197795983-e7921339-084a-4423-a6b5-c873b9e648d3.png)
 
 <h3>Drop the MONGDDANG ! </h3> <br/>
 그림을 통해 자신의 마음을 표현해보세요!<br/><br/>
