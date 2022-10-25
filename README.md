@@ -1,7 +1,16 @@
 # mongddang
 
-<b>Drop The Mongddang!</b> <br>
+<h1>Drop The Mongddang!</h1> <br>
 그림을 통한 Social Network Service
+
+<h1>개발 환경<h1>
+- Language : Java 11
+- Framework : Spring-Boot
+- DB : MySQL 8.0
+- IDE: IntelliJ
+- WAS: Tomcat
+- Build Tool : Maven
+- 버전관리도구: GitHub
 
 - ERD
 
