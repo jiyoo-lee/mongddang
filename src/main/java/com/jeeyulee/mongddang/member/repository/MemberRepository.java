@@ -6,9 +6,10 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface MemberRepository {
 
-    @Insert("insert into member (user_id, password, name, nickname, email, phone_number, address) " +
-            "value (#{userId}, SHA2(#{password}, 512), #{name}, #{nickname}, #{email}, #{phoneNumber}, #{address})")
-    public int save(MemberJoinDTO memberJoinDTO);
+    @Insert("insert into member (user_id, password, name, nickname, profile_picture, email, phone_number, address) " +
+            "value (#{userId}, SHA2(#{password}, 512), #{name}, #{nickname}, #{profilePicture}, " +
+            "#{email}, #{phoneNumber}, #{address})")
+    public int save(MemberJoinBuilderDTO memberJoinBuilderDTO);
 
     @Select("select * " +
             "from member " +
@@ -42,7 +43,7 @@ public interface MemberRepository {
 
 
     @Delete("delete from member where user_id = #{userId}")
-    public int resignMember(String userId);
+    public int resignMember(MemberDeleteDTO memberDeleteDTO);
 
     @Update("update member " +
             "set last_access_token = #{jwt}" +

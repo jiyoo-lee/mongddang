@@ -1,18 +1,21 @@
 package com.jeeyulee.mongddang.member.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberJoinDTO {
+@Data
+@Builder
+public class MemberJoinBuilderDTO {
+
     private String userId;
     private String password;
     private String name;
     private String nickname;
-    private String extension;
+    private String profilePicture;
     private String email;
     private String phoneNumber;
     private String address;

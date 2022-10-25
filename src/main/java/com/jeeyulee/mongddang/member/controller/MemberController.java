@@ -74,10 +74,10 @@ public class MemberController {
     }
 
     @ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 API")
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<ResultDTO> resignMember(@PathVariable String userId){
+    @DeleteMapping
+    public ResponseEntity<ResultDTO> resignMember(MemberDeleteDTO memberDeleteDTO){
         ResultDTO result = new ResultDTO();
-        result.setSuccess(memberService.resign(userId));
+        result.setSuccess(memberService.resign(memberDeleteDTO));
 
         return new ResponseEntity<>(result,HttpStatus.OK);
     }

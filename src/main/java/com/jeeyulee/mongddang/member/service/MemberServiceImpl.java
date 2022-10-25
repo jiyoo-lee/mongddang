@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -30,7 +31,21 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Boolean join(MemberJoinDTO memberJoinDTO) {
         log.info("MemberServiceImpl join memberJoinDTO ===> {}", memberJoinDTO);
-        return memberRepository.save(memberJoinDTO) > 0;
+
+        String fileName = convertToUUID(memberJoinDTO.getUserId(), memberJoinDTO.getNickname());
+
+        MemberJoinBuilderDTO memberJoinBuilderDTO = MemberJoinBuilderDTO.builder()
+                .userId(memberJoinDTO.getUserId())
+                .password(memberJoinDTO.getPassword())
+                .name(memberJoinDTO.getName())
+                .nickname(memberJoinDTO.getNickname())
+                .profilePicture(fileName + memberJoinDTO.getExtension())
+                .email(memberJoinDTO.getEmail())
+                .address(memberJoinDTO.getAddress())
+                .phoneNumber(memberJoinDTO.getPhoneNumber())
+                .build();
+
+        return memberRepository.save(memberJoinBuilderDTO) > 0;
     }
 
     @Override
@@ -70,9 +85,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Boolean resign(String userId) {
-        log.info("MemberServiceImpl resign userId ===> {}",userId);
-        return memberRepository.resignMember(userId) > 0;
+    public Boolean resign(MemberDeleteDTO memberDeleteDTO) {
+        log.info("MemberServiceImpl resign userId ===> {}",memberDeleteDTO.getUserId());
+        return memberRepository.resignMember(memberDeleteDTO) > 0;
     }
 
     @Override
@@ -123,5 +138,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Boolean updatePassword(PasswordUpdateDTO passwordUpdateDTO) {
         return memberRepository.updatePassword(passwordUpdateDTO) > 0;
+    }
+
+    private String convertToUUID(String userId, String userName){
+        return UUID.randomUUID().toString() + "_" + userId + "_" + userName;
     }
 }
