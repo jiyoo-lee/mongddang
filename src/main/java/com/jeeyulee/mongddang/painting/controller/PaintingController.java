@@ -69,5 +69,19 @@ public class PaintingController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @ApiOperation(value="장르 별 인기조회 API", notes = "장르별 인기 조회 API")
+    @GetMapping("/popular/genre/{genreId}")
+    public ResponseEntity<ResultDTO> retrievePopularGenrePaintings(@PathVariable Long genreId){
+        ResultDTO result = new ResultDTO();
+        try {
+            result.setData(paintingService.retrievePopularGenrePaintings(genreId));
+            result.setSuccess(true);
+        }catch (NotUploadPaintingException e){
+            result.setSuccess(false);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
 }

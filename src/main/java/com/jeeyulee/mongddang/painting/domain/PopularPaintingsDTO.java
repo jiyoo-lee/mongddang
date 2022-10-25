@@ -12,7 +12,7 @@ public class PopularPaintingsDTO {
     private String memberId;
     private String nickname;
     private String profileUrl;
-    private Long genreId;
+    private String genreName;
     private String name;
     private String paintingUrl;
     private String description;

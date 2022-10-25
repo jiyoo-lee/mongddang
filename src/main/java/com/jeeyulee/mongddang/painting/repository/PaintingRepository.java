@@ -57,4 +57,27 @@ public interface PaintingRepository {
 
     public List<PopularPaintingsDTO> retrievePopularPaintings();
 
+    @Select("select M.user_id as memberId," +
+            "M.nickname, " +
+            "M.profile_picture as profileUrl, " +
+            "(select name from genre where id = D2.genre_id) as genreName, " +
+            "D2.name, " +
+            "D2.painting_url as paintingUrl, " +
+            "D2.description, " +
+            "D2.mongddangCount, " +
+            "D2.create_datetime " +
+            "from member M right outer join (" +
+            "select member_id, P2.* " +
+            "from drops D right outer join (select P.*, C.count mongddangCount " +
+            "from painting P right outer join (select painting_id, count(*) count " +
+            "from painting_mongddang " +
+            "group by painting_id " +
+            "order by count desc " +
+            "limit 0, 20) C " +
+            " on P.id = C.painting_id where P.genre_id = #{genreId}) P2 " +
+            "on D.id = P2.drops_id " +
+            ") D2 " +
+            "on M.user_id = D2.member_id")
+    public List<PopularPaintingsDTO> retrievePopularPaintingsByGenreId(Long genreId);
+
 }
