@@ -18,4 +18,6 @@ public interface PaintingService {
 
     public List<PopularPaintingsDTO> retrievePopularGenrePaintings(Long genreId);
 
+    public List<PopularPaintingsDTO> retrieveLastPaintings();
+
 }

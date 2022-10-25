@@ -63,10 +63,11 @@ public class PaintingController {
         try {
             result.setData(paintingService.retrievePopularPaintings());
             result.setSuccess(true);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }catch (NotUploadPaintingException e){
             result.setSuccess(false);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation(value="장르 별 인기조회 API", notes = "장르별 인기 조회 API")
@@ -76,12 +77,27 @@ public class PaintingController {
         try {
             result.setData(paintingService.retrievePopularGenrePaintings(genreId));
             result.setSuccess(true);
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
+
         }catch (NotUploadPaintingException e){
             result.setSuccess(false);
         }
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
+    @ApiOperation(value="모든 최신 그림 조회 API",notes = "최신보기 API")
+    @GetMapping("")
+    public ResponseEntity<ResultDTO> retrieveLastPainting(){
+        ResultDTO result = new ResultDTO();
+        try{
+            result.setSuccess(true);
+            result.setData(paintingService.retrieveLastPaintings());
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }catch (NotUploadPaintingException e){
+            result.setSuccess(false);
+        }
+        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+    }
 
 }

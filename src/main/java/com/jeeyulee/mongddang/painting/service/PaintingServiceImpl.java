@@ -86,6 +86,12 @@ public class PaintingServiceImpl implements PaintingService {
         return paintingRepository.retrievePopularPaintingsByGenreId(genreId);
     }
 
+    @Override
+    public List<PopularPaintingsDTO> retrieveLastPaintings() {
+
+        return paintingRepository.retrieveLastPaintings();
+    }
+
     private String convertToUUID(Long dropsId, String fileName){
         return UUID.randomUUID().toString() + "_" + dropsId + "_" + fileName;
     }
