@@ -16,7 +16,7 @@ public class FollowingController {
 
     private final FollowingService followingService;
 
-    @ApiOperation(value="", notes = "")
+    @ApiOperation(value="멤버 팔로잉", notes = "멤버 팔로잉 API")
     @GetMapping("/{userId}")
     public ResponseEntity<ResultDTO> followMember(@PathVariable String userId){
         ResultDTO result = new ResultDTO();
@@ -29,7 +29,7 @@ public class FollowingController {
         }
     }
 
-    @ApiOperation(value="", notes = "")
+    @ApiOperation(value="멤버 언팔로잉 API", notes = "멤버 언팔로잉 API")
     @DeleteMapping("/{userId}")
     public ResponseEntity<ResultDTO> unfollowMember(@PathVariable String userId){
         ResultDTO result = new ResultDTO();
