@@ -17,7 +17,7 @@ public class MongddangController {
 
 
     @ApiOperation(value="드랍 좋아요 생성 API", notes = "드랍 좋아요 기능")
-    @GetMapping("/{dropsId}")
+    @PostMapping ("/{dropsId}")
     public ResponseEntity<ResultDTO> createMongddang(@PathVariable Long dropsId){
 
         ResultDTO result = new ResultDTO();

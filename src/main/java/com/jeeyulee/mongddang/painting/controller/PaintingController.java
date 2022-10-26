@@ -1,6 +1,7 @@
 package com.jeeyulee.mongddang.painting.controller;
 
 import com.jeeyulee.mongddang.common.result.ResultDTO;
+import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateDTO;
@@ -70,7 +71,7 @@ public class PaintingController {
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
-    @ApiOperation(value="장르 별 인기조회 API", notes = "장르별 인기 조회 API")
+    @ApiOperation(value="장르 별 인기 그림 조회 API", notes = "장르별 인기 그림 조회 API")
     @GetMapping("/popular/genre/{genreId}")
     public ResponseEntity<ResultDTO> retrievePopularGenrePaintings(@PathVariable Long genreId){
         ResultDTO result = new ResultDTO();
@@ -99,5 +100,23 @@ public class PaintingController {
         }
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
+
+    @ApiOperation(value="", notes = "")
+    @GetMapping("/following")
+    public ResponseEntity<ResultDTO> retrieveLastFollowingPaintings(){
+
+        ResultDTO result = new ResultDTO();
+        try{
+            result.setSuccess(true);
+            result.setData(paintingService.retrieveLastFollowingPaintings());
+
+        }catch (ResultException e){
+
+            result.setSuccess(false);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
 }

@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -75,21 +74,26 @@ public class PaintingServiceImpl implements PaintingService {
     }
 
     @Override
-    public List<PopularPaintingsDTO> retrievePopularPaintings() {
+    public List<ConditionalPaintingsDTO> retrievePopularPaintings() {
 
         return paintingRepository.retrievePopularPaintings();
     }
 
     @Override
-    public List<PopularPaintingsDTO> retrievePopularGenrePaintings(Long genreId) {
+    public List<ConditionalPaintingsDTO> retrievePopularGenrePaintings(Long genreId) {
 
         return paintingRepository.retrievePopularPaintingsByGenreId(genreId);
     }
 
     @Override
-    public List<PopularPaintingsDTO> retrieveLastPaintings() {
+    public List<ConditionalPaintingsDTO> retrieveLastPaintings() {
 
         return paintingRepository.retrieveLastPaintings();
+    }
+
+    @Override
+    public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings() {
+        return paintingRepository.retrieveLastFollowingPaintings();
     }
 
     private String convertToUUID(Long dropsId, String fileName){

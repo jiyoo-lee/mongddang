@@ -2,7 +2,7 @@ package com.jeeyulee.mongddang.painting.repository;
 
 import com.jeeyulee.mongddang.painting.domain.PaintingCreationDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateBuilderDTO;
-import com.jeeyulee.mongddang.painting.domain.PopularPaintingsDTO;
+import com.jeeyulee.mongddang.painting.domain.ConditionalPaintingsDTO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public interface PaintingRepository {
             ") D2 " +
             "on M.user_id = D2.member_id")
 
-    public List<PopularPaintingsDTO> retrievePopularPaintings();
+    public List<ConditionalPaintingsDTO> retrievePopularPaintings();
 
     @Select("select M.user_id as memberId," +
             "M.nickname, " +
@@ -78,7 +78,7 @@ public interface PaintingRepository {
             "on D.id = P2.drops_id " +
             ") D2 " +
             "on M.user_id = D2.member_id")
-    public List<PopularPaintingsDTO> retrievePopularPaintingsByGenreId(Long genreId);
+    public List<ConditionalPaintingsDTO> retrievePopularPaintingsByGenreId(Long genreId);
 
 
     @Select("select M.user_id as memberId, " +
@@ -98,5 +98,9 @@ public interface PaintingRepository {
             "on D.id = P2.drops_id " +
             ") D2 " +
             "on M.user_id = D2.member_id order by D2.create_datetime desc;")
-    public List<PopularPaintingsDTO> retrieveLastPaintings();
+    public List<ConditionalPaintingsDTO> retrieveLastPaintings();
+
+
+    @Select("")
+    public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings();
 }

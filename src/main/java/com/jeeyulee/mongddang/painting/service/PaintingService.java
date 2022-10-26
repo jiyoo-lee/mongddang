@@ -2,7 +2,7 @@ package com.jeeyulee.mongddang.painting.service;
 
 import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateDTO;
-import com.jeeyulee.mongddang.painting.domain.PopularPaintingsDTO;
+import com.jeeyulee.mongddang.painting.domain.ConditionalPaintingsDTO;
 
 import java.util.List;
 
@@ -14,10 +14,12 @@ public interface PaintingService {
 
     public Boolean deletePainting(Long paintingId);
 
-    public List<PopularPaintingsDTO> retrievePopularPaintings();
+    public List<ConditionalPaintingsDTO> retrievePopularPaintings();
 
-    public List<PopularPaintingsDTO> retrievePopularGenrePaintings(Long genreId);
+    public List<ConditionalPaintingsDTO> retrievePopularGenrePaintings(Long genreId);
 
-    public List<PopularPaintingsDTO> retrieveLastPaintings();
+    public List<ConditionalPaintingsDTO> retrieveLastPaintings();
+
+    public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings();
 
 }

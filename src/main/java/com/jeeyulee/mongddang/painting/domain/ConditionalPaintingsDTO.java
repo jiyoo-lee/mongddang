@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PopularPaintingsDTO {
+public class ConditionalPaintingsDTO {
 
     private String memberId;
     private String nickname;

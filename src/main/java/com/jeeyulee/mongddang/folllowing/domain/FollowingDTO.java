@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class FollowingDTO {
     private String memberId;
+    private String nickname;
     private String profileUrl;
-    private String updated;
+
 }
