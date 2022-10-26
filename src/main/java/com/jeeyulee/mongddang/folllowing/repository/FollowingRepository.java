@@ -22,14 +22,16 @@ public interface FollowingRepository {
 
     @Select("select M.user_id as memberId, M.nickname, M.profile_picture as profileUrl " +
             "from member M " +
-            "join (select * from social where follow_member_id = 'jeeyu') S " +
+            "join (select * from social where follow_member_id = #{userIdOnToken} )S " +
             "on S.member_id = M.user_id ")
     public List<FollowingDTO> retrieveFollowersById(String userIdOnToken);
 
-    @Select("select member_id from social " +
-            "where member_id !=#{userIdOnToken} " +
-            "and follow_member_id !=#{userIdOnToken} " +
-            "group by member_id")
+    @Select("select M.user_id memberId, M.nickname, M.profile_picture profileUrl from member M " +
+            "right outer join " +
+            "(select member_id from social " +
+            "where member_id != #{userIdOnToken} " +
+            "and follow_member_id != #{userIdOnToken} " +
+            "group by member_id)S on M.user_id = S.member_id")
     public List<FollowingDTO> retrieveRecommendFriends(String userIdOnToken);
 
     @Delete("delete from social " +

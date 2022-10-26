@@ -30,11 +30,9 @@ public class FollowingController {
         }
     }
 
-
     @ApiOperation(value = "팔로잉 목록 조회", notes = "팔로잉 목록 조회 API")
     @GetMapping("/my-followings")
-    public ResponseEntity<ResultDTO> retrieveMyfollowings(){
-
+    public ResponseEntity<ResultDTO> retrieveFollowing(){
         ResultDTO result = new ResultDTO();
         try {
             result.setSuccess(true);
@@ -47,30 +45,18 @@ public class FollowingController {
         }
     }
 
-    @ApiOperation(value = "팔로워 목록 조회", notes = "팔로워 목록 조회 API")
-    @GetMapping("/my-followers")
-    public ResponseEntity<ResultDTO> retrieveMyfollowers(){
-        ResultDTO result = new ResultDTO();
-        try {
-            result.setSuccess(true);
-            result.setData(followingService.retrieveMyFollowers());
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (ResultException e){
-            result.setSuccess(false);
-            result.setData("해당 요청 기능을 이용 하실 수 없습니다.");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-        }
-    }
-
     @ApiOperation(value = "친구 추천 API", notes = "친구 추천 API")
     @GetMapping("/recommend")
     public ResponseEntity<ResultDTO> retrieveRecommendFriends(){
         ResultDTO result = new ResultDTO();
-        result.setData(followingService.retrieveRecommendFriends());
-
+        try {
+            result.setData(followingService.retrieveRecommendFriends());
+            result.setSuccess(true);
+        }catch (ResultException e){
+            result.setData(false);
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
 
     @ApiOperation(value="멤버 언팔로잉 API", notes = "멤버 언팔로잉 API")
     @DeleteMapping("/{userId}")
@@ -80,5 +66,4 @@ public class FollowingController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
 }
