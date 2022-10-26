@@ -45,6 +45,11 @@ public class FollowingServiceImpl implements FollowingService {
         return followingRepository.retrieveFollowersById(userIdOnToken);
     }
 
+    public List<FollowingDTO> retrieveRecommendFriends(){
+        String userIdOnToken = jwtService.retrieveUserId();
+
+        return followingRepository.retrieveRecommendFriends(userIdOnToken);
+    }
 
     @Override
     public Boolean unfollowMember(String userId)  {

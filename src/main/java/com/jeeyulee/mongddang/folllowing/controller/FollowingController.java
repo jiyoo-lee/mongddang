@@ -62,6 +62,16 @@ public class FollowingController {
         }
     }
 
+    @ApiOperation(value = "친구 추천 API", notes = "친구 추천 API")
+    @GetMapping("/recommend")
+    public ResponseEntity<ResultDTO> retrieveRecommendFriends(){
+        ResultDTO result = new ResultDTO();
+        result.setData(followingService.retrieveRecommendFriends());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
     @ApiOperation(value="멤버 언팔로잉 API", notes = "멤버 언팔로잉 API")
     @DeleteMapping("/{userId}")
     public ResponseEntity<ResultDTO> unfollowMember(@PathVariable String userId){

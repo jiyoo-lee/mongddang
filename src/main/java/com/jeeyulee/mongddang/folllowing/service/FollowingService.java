@@ -12,6 +12,8 @@ public interface FollowingService {
 
     public List<FollowingDTO> retrieveMyFollowers();
 
+    public List<FollowingDTO> retrieveRecommendFriends();
+
     public Boolean unfollowMember(String userId);
 
 }
