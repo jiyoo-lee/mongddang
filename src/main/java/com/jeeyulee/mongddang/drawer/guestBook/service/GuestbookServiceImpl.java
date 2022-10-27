@@ -1,18 +1,12 @@
 package com.jeeyulee.mongddang.drawer.guestBook.service;
 
-import com.jeeyulee.mongddang.common.result.ResultDTO;
 import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.drawer.guestBook.domain.*;
 import com.jeeyulee.mongddang.drawer.guestBook.repository.GuestBookRepository;
 import com.jeeyulee.mongddang.member.service.JwtService;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @Slf4j
@@ -48,7 +42,7 @@ public class GuestbookServiceImpl implements GuestBookService{
             return guestBookRepository.update(builderDTO) > 0;
         }
         else{
-            throw new ResultException();
+            throw new ResultException("");
         }
     }
 

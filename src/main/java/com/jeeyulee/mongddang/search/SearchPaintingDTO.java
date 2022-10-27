@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class SearchPaintingDTO {
-
+    private Long paintingId;
     private String memberId;
     private String nickname;
     private String profileUrl;

@@ -25,12 +25,9 @@ public class PaintingController {
     @PostMapping
     public ResponseEntity<ResultDTO> createPainting(@RequestBody PaintingDTO paintingDTO){
         ResultDTO result = new ResultDTO();
-        try{
-            result.setData(paintingService.createPainting(paintingDTO));
-            result.setSuccess(true);
-        }catch(NotUploadPaintingException e){
-            result.setSuccess(false);
-        }
+        result.setData(paintingService.createPainting(paintingDTO));
+        result.setSuccess(true);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -91,14 +88,10 @@ public class PaintingController {
     @GetMapping("")
     public ResponseEntity<ResultDTO> retrieveLastPainting(){
         ResultDTO result = new ResultDTO();
-        try{
-            result.setSuccess(true);
-            result.setData(paintingService.retrieveLastPaintings());
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (NotUploadPaintingException e){
-            result.setSuccess(false);
-        }
-        return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        result.setSuccess(true);
+        result.setData(paintingService.retrieveLastPaintings());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation(value="", notes = "")

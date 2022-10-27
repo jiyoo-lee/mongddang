@@ -19,7 +19,7 @@ public interface SearchRepository {
 
     @Select("select D.member_id MemberId, D.nickname, D.profile_picture profileUrl, " +
             " P.name,(select G.name from genre G where G.id = P.genre_id) as genre, " +
-            "P.description, P.painting_url as paintingUrl " +
+            "P.description, P.painting_url as paintingUrl, P.id as paintingId " +
             "from painting P " +
             "join (select D2.id, D2.member_id, M.nickname, M.profile_picture " +
             "from Drops D2 join member M " +

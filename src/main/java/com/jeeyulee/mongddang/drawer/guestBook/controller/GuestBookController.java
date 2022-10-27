@@ -40,7 +40,6 @@ public class GuestBookController {
     @ApiOperation(value= "방명록 삭제 API", notes = "방명록 삭제 API")
     @DeleteMapping("/{guestBookId}")
     public ResponseEntity<ResultDTO> deleteGuestBook(@PathVariable Long guestBookId){
-
         ResultDTO result = new ResultDTO();
         result.setSuccess(guestBookService.deleteGuestbook(guestBookId));
 

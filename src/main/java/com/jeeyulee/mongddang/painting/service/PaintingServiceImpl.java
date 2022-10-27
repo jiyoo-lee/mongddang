@@ -1,5 +1,6 @@
 package com.jeeyulee.mongddang.painting.service;
 
+import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.service.JwtService;
 import com.jeeyulee.mongddang.painting.domain.*;
@@ -38,7 +39,7 @@ public class PaintingServiceImpl implements PaintingService {
         if (result > 0) {
             return fileName + paintingDTO.getExtension();
         }
-        throw new NotUploadPaintingException();
+        throw new ResultException("그림을 업로드할 수 없습니다.");
     }
 
     @Override
@@ -49,7 +50,7 @@ public class PaintingServiceImpl implements PaintingService {
         String userIdByToken = jwtService.retrieveUserId();
 
         if (!userId.equals(userIdByToken)) {
-            throw new UserNotFoundException();
+            throw new ResultException("그림을 업로드할 수 없습니다.");
         }
 
         PaintingUpdateBuilderDTO builderDTO = PaintingUpdateBuilderDTO.builder()
@@ -93,7 +94,7 @@ public class PaintingServiceImpl implements PaintingService {
 
     @Override
     public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings() {
-        return paintingRepository.retrieveLastFollowingPaintings();
+        return paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId());
     }
 
     private String convertToUUID(Long dropsId, String fileName){

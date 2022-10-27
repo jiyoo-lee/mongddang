@@ -1,5 +1,6 @@
 package com.jeeyulee.mongddang.common.interceptor;
 
+import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.member.service.JwtService;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,10 @@ public class JwtInterceptor implements HandlerInterceptor {
         log.info("JwtInterceptor preHandle token ===> {}", token);
         log.info("URL ===> {}", request.getRequestURL().toString());
 
-        return StringUtils.hasText(token) && jwtService.validate(token);
+        if (StringUtils.hasText(token) && jwtService.validate(token)) {
+            return true;
+        }
+
+        throw new ResultException("[WARNING] TOKEN IS NOT VALIDATE");
     }
 }

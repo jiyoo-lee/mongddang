@@ -35,15 +35,10 @@ public class SearchController {
     @ApiOperation(value = "그림 제목 검색 API", notes = "그림 제목 검색 API")
     @GetMapping("painting/{keyword}")
     public ResponseEntity<ResultDTO> retrieveSearchByPaintingName(@PathVariable String keyword){
-
         ResultDTO result = new ResultDTO();
-        try{
-            result.setSuccess(true);
-            result.setData(searchService.retrieveByPaintingName(keyword));
-            return new ResponseEntity<> (result, HttpStatus.OK);
-        }catch (ResultException e){
-            result.setSuccess(false);
-            return new ResponseEntity<> (result, HttpStatus.BAD_REQUEST);
-        }
+        result.setSuccess(true);
+        result.setData(searchService.retrieveByPaintingName(keyword));
+
+        return new ResponseEntity<> (result, HttpStatus.OK);
     }
 }

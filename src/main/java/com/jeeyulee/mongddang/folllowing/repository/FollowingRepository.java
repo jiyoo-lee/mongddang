@@ -26,13 +26,15 @@ public interface FollowingRepository {
             "on S.member_id = M.user_id ")
     public List<FollowingDTO> retrieveFollowersById(String userIdOnToken);
 
-    @Select("select M.user_id memberId, M.nickname, M.profile_picture profileUrl from member M "+
-            "right outer join " +
-            "(select member_id from social " +
-            "where member_id != #{userIdOnToken} " +
-            "and follow_member_id != #{userIdOnToken} " +
-            "group by member_id)S on M.user_id = S.member_id")
-    public List<FollowingDTO> retrieveRecommendFriends(String userIdOnToken);
+    @Select("select M.user_id memberId, M.nickname, M.profile_picture profileUrl " +
+            "from member M join (select member_id " +
+            "                    from social " +
+            "                    where follow_member_id = #{userId} " +
+            "                    and member_id not in (select follow_member_id " +
+            "                                          from social " +
+            "                                          where member_id = #{userId})) S " +
+            "on M.user_id = S.member_id")
+    public List<FollowingDTO> retrieveRecommendFriends(String userId);
 
     @Delete("delete from social " +
             "where member_id = #{userIdOnToken} and follow_member_id = #{userId} ")

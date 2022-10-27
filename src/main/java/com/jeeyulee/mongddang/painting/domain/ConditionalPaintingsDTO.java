@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ConditionalPaintingsDTO {
-
     private String memberId;
     private String nickname;
     private String profileUrl;
+    private Long paintingId;
     private String genreName;
     private String name;
     private String paintingUrl;
