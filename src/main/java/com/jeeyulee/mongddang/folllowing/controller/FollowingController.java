@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/following")
 @RequiredArgsConstructor
 public class FollowingController {
-
     private final FollowingService followingService;
 
     @ApiOperation(value="멤버 팔로잉", notes = "멤버 팔로잉 API")
