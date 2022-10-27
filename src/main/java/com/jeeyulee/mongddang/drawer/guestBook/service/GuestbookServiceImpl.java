@@ -3,6 +3,7 @@ package com.jeeyulee.mongddang.drawer.guestBook.service;
 import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookBuilderDTO;
 import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookDTO;
+import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookUpdateBuilderDTO;
 import com.jeeyulee.mongddang.drawer.guestBook.repository.GuestBookRepository;
 import com.jeeyulee.mongddang.member.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,20 @@ public class GuestbookServiceImpl implements GuestBookService{
                 .contents(guestBookDTO.getContents()).build();
 
         return guestBookRepository.save(guestBookBuilderDTO) > 0;
+    }
+
+    @Override
+    public Boolean updateGuestBook(String userId, Long guestBookId, GuestBookDTO guestBookDTO) throws ResultException {
+
+        if(jwtService.retrieveUserId().equals(userId)) {
+
+            GuestBookUpdateBuilderDTO builderDTO = GuestBookUpdateBuilderDTO.builder()
+                    .GuestBookId(guestBookId)
+                    .contents(guestBookDTO.getContents()).build();
+            return guestBookRepository.update(builderDTO) > 0;
+        }
+        else{
+            throw new ResultException();
+        }
     }
 }
