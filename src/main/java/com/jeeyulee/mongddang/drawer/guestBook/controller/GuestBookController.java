@@ -3,6 +3,7 @@ package com.jeeyulee.mongddang.drawer.guestBook.controller;
 
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookDTO;
+import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookUpdateDTO;
 import com.jeeyulee.mongddang.drawer.guestBook.service.GuestBookService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +27,23 @@ public class GuestBookController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value="", notes = "")
-    @PutMapping("/{userId})/guestbook/{guesetbookId}")
+    @ApiOperation(value="방명록 수정 API", notes = "방명록 수정 API")
+    @PutMapping("/{userId})/guestbook")
     public ResponseEntity<ResultDTO> updateGuestBook(@PathVariable String userId,
-                                                     @PathVariable Long guestBookId,
-                                                     GuestBookDTO guestBookDTO){
+                                                     GuestBookUpdateDTO guestBookUpdateDTO){
         ResultDTO result = new ResultDTO();
-        result.setSuccess(guestBookService.updateGuestBook(userId, guestBookId,guestBookDTO));
+        result.setSuccess(guestBookService.updateGuestBook(userId,guestBookUpdateDTO));
 
         return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    @ApiOperation(value= "방명록 삭제 API", notes = "방명록 삭제 API")
+    @DeleteMapping("/{guestBookId}")
+    public ResponseEntity<ResultDTO> deleteGuestBook(@PathVariable Long guestBookId){
+
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(guestBookService.deleteGuestbook(guestBookId));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

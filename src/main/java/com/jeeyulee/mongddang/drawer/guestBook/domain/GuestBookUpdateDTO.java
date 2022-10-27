@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class GuestBookUpdateBuilderDTO {
-    private String drawerMemberId;
-    private String guestId;
-    private Long guestBookId;
+public class GuestBookUpdateDTO {
+    private String GuestId;
+    private Long GuestBookId;
     private String contents;
 }

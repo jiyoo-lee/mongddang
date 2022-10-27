@@ -1,7 +1,10 @@
 package com.jeeyulee.mongddang.drawer.guestBook.repository;
 
 import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookBuilderDTO;
+import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookDeleteDTO;
 import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookUpdateBuilderDTO;
+import com.jeeyulee.mongddang.drawer.guestBook.domain.GuestBookUpdateDTO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
@@ -15,6 +18,11 @@ public interface GuestBookRepository {
 
     @Update("update guest_book " +
             "set contents = #{contents} " +
-            "where id = #{GuestBookId} ")
+            "where id = #{guestBookId} and drawer_guest_id = #{guestId}")
     public Integer update(GuestBookUpdateBuilderDTO builderDTO);
+
+    @Delete("delete from guest_book " +
+            "where id = #{guestBookId} " +
+            "and drawer_guest_id = #{guestId}")
+    public Integer delete(GuestBookDeleteDTO guestBookDeleteDTO);
 }
