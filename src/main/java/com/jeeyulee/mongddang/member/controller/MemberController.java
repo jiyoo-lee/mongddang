@@ -31,14 +31,8 @@ public class MemberController {
 
     @ApiOperation(value="로그인", notes="설명")
     @PostMapping("/login")
-    public ResponseEntity<ResultDTO> login(@RequestBody MemberLoginDTO memberLoginDTO){
-        ResultDTO result = new ResultDTO();
-        try {
-            result.setData(memberService.login(memberLoginDTO));
-            result.setSuccess(true);
-        } catch (UserNotFoundException e) {
-            result.setSuccess(false);
-        }
+    public ResponseEntity<ResultDTO> login(@Valid @RequestBody MemberLoginDTO memberLoginDTO){
+        ResultDTO result = new ResultDTO(true, memberService.login(memberLoginDTO));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
