@@ -12,16 +12,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequestMapping("/api/v1/member")
 @RequiredArgsConstructor
 @RestController
 public class MemberController {
 
-    MemberService memberService;
+    private final MemberService memberService;
 
     @ApiOperation(value="회원가입", notes="회원 가입 API")
     @PostMapping("/join")
-    public ResponseEntity<ResultDTO> join(@RequestBody MemberJoinDTO memberJoinDTO){
+    public ResponseEntity<ResultDTO> join(@Valid @RequestBody MemberJoinDTO memberJoinDTO){
         ResultDTO result = new ResultDTO();
         result.setSuccess(memberService.join(memberJoinDTO));
         return new ResponseEntity<>(result, HttpStatus.OK);
