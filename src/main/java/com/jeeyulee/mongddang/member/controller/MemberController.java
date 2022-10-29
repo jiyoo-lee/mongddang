@@ -7,16 +7,16 @@ import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.service.MemberService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/v1/member")
+@RequiredArgsConstructor
 @RestController
 public class MemberController {
 
-    @Autowired
     MemberService memberService;
 
     @ApiOperation(value="회원가입", notes="회원 가입 API")

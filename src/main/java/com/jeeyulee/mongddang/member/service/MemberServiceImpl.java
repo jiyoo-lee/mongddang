@@ -4,29 +4,29 @@ import com.jeeyulee.mongddang.common.mail.MailSendException;
 import com.jeeyulee.mongddang.common.mail.MailDTO;
 import com.jeeyulee.mongddang.common.mail.MailService;
 import com.jeeyulee.mongddang.common.mail.MessageWords;
+import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.common.util.CodeGenerator;
 import com.jeeyulee.mongddang.member.domain.*;
 import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
 import java.util.UUID;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired
-    MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    @Autowired
-    JwtService jwtService;
+    private final JwtService jwtService;
 
-    @Autowired
-    MailService mailService;
+    private final MailService mailService;
 
     @Override
     public Boolean join(MemberJoinDTO memberJoinDTO) {
@@ -44,18 +44,22 @@ public class MemberServiceImpl implements MemberService {
                 .address(memberJoinDTO.getAddress())
                 .phoneNumber(memberJoinDTO.getPhoneNumber())
                 .build();
-
-        return memberRepository.save(memberJoinBuilderDTO) > 0;
+        try {
+            return memberRepository.save(memberJoinBuilderDTO) > 0;
+        } catch (DuplicateKeyException e) {
+            throw new ResultException("이미 존재하는 회원 ID 입니다.");
+        }
     }
 
     @Override
-    public String login(MemberLoginDTO memberLoginDTO) throws UserNotFoundException {
+    @Transactional
+    public String login(MemberLoginDTO memberLoginDTO){
         MemberLoginResponseDTO member = memberRepository.findByUserIdAndPassword(memberLoginDTO);
         Integer count = memberRepository.saveLogInHistory(memberLoginDTO);
-        log.info("MemberServiceImpl login ===> {} ", member.getAdmin());
+        log.info("MemberServiceImpl login ===> {} ", member);
 
         if (member == null || count == null || count == 0) {
-            throw new UserNotFoundException();
+            throw new ResultException("로그인에 실패했습니다.");
         }
         String jwt = jwtService.createJwt(member);
         memberRepository.updateToken(memberLoginDTO.getUserId(), jwt);
@@ -141,6 +145,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private String convertToUUID(String userId, String userName){
-        return UUID.randomUUID().toString() + "_" + userId + "_" + userName;
+        return UUID.randomUUID() + "_" + userId + "_" + userName;
     }
 }
