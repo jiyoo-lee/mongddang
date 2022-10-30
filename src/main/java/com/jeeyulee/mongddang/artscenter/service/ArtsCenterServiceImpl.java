@@ -1,6 +1,7 @@
 package com.jeeyulee.mongddang.artscenter.service;
 
 import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterResponseDTO;
+import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterWinnerResponseDTO;
 import com.jeeyulee.mongddang.artscenter.repository.ArtsCenterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,5 +19,10 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
     @Override
     public List<ArtsCenterResponseDTO> retrieveArtCenters() {
         return artsCenterRepository.findAll();
+    }
+
+    @Override
+    public List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long dropsId) {
+        return artsCenterRepository.findWinnerByDropsId(dropsId);
     }
 }

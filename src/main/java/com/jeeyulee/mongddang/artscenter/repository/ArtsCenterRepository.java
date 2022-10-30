@@ -1,6 +1,7 @@
 package com.jeeyulee.mongddang.artscenter.repository;
 
 import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterResponseDTO;
+import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterWinnerResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -10,31 +11,58 @@ import java.util.List;
 public interface ArtsCenterRepository {
 
 
-    @Select("select D2.id dropsId, " +
-            "       D2.name dropsName, " +
-            "       D2.user_id memberId, " +
-            "       D2.nickname, " +
-            "       D2.profile_picture profileUrl, " +
+    @Select("select P4.drops_id dropsId, " +
+            "       (select name from drops where id = P4.drops_id) dropsName, " +
+            "       P4.member_id memberId, " +
+            "       (select nickname from member where member_id = P4.member_id) nickname, " +
+            "       (select profile_picture from member where member_id = P4.member_id) profileUrl, " +
+            "       P4.name paintingName, " +
+            "       (select name from genre where id = P4.genre_id) genreName, " +
+            "       P4.description, " +
+            "       P4.painting_url paintingUrl, " +
+            "       P4.count paintingMongddangCount " +
+            "from (select drops_id, max(count) count " +
+            "      from (select * " +
+            "            from drops " +
+            "            where type_id = (select id " +
+            "                             from drops_type " +
+            "                             where name = '몽땅전')) D " +
+            "      right outer join (select * " +
+            "                        from painting P " +
+            "                        left outer join (select painting_id, count(*) count " +
+            "                                         from painting_mongddang " +
+            "                                         group by painting_id) PM " +
+            "                        on P.id = PM.painting_id) P2 " +
+            "      on D.id = P2.drops_id " +
+            "      group by drops_id) DM " +
+            "right outer join (select * " +
+            "                  from painting P3 " +
+            "                  left outer join (select painting_id, count(*) count " +
+            "                                   from painting_mongddang " +
+            "                                   group by painting_id) PM2 " +
+            "                  on P3.id = PM2.painting_id) P4 " +
+            "on DM.drops_id = P4.drops_id and DM.count = P4.count " +
+            "order by P4.create_datetime desc")
+    List<ArtsCenterResponseDTO> findAll();
+
+    @Select("select M.user_id memberId, " +
+            "       M.nickname, " +
+            "       M.profile_picture profileUrl, " +
             "       P2.name paintingName, " +
-            "       (select name from genre where genre_id = P2.genre_id) genreName, " +
+            "       (select name from genre where id = P2.genre_id) genreName, " +
             "       P2.description, " +
             "       P2.painting_url paintingUrl, " +
-            "       P2.mongddangCount paintingMongddangCount " +
-            "from (select D.id, D.name, M.user_id, M.nickname, M.profile_picture " +
-            "      from member M right outer join (select id, member_id, name " +
-            "                                      from drops " +
-            "                                      where type_id = (select id from drops_type where name = '몽땅전')) D " +
-            "      on M.user_id = D.member_id) D2 " +
-            "left outer join (select P.*, max((select count(*) from painting_mongddang where painting_id = P.id)) mongddangCount " +
-            "                 from painting P " +
-            "                 where P.drops_id in (select id " +
-            "                                      from drops " +
-            "                                      where type_id = (select id " +
-            "                                                       from drops_type " +
-            "                                                       where name = '몽땅전')) " +
-            "                 group by P.drops_id, id) P2 " +
-            "on D2.id = P2.drops_id " +
-            "order by P2.create_datetime desc")
-    public List<ArtsCenterResponseDTO> findAll();
-
+            "       P2.paintingMongddangCount " +
+            "from member M right outer join (select P.*, PM.paintingMongddangCount " +
+            "                                from (select id, member_id, name, painting_url, description, genre_id " +
+            "                                      from painting " +
+            "                                      where drops_id = #{dropsId}) P " +
+            "                                left outer join (select painting_id, count(*) paintingMongddangCount " +
+            "                                                 from painting_mongddang " +
+            "                                                 group by painting_id) PM " +
+            "                                on P.id = PM.painting_id " +
+            "                                order by paintingMongddangCount desc " +
+            "                                limit 0, 10) P2 " +
+            "on M.user_id = P2.member_id ")
+    List<ArtsCenterWinnerResponseDTO> findWinnerByDropsId(Long dropsId);
 }
