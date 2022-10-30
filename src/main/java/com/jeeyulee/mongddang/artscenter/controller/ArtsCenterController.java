@@ -3,7 +3,6 @@ package com.jeeyulee.mongddang.artscenter.controller;
 import com.jeeyulee.mongddang.artscenter.service.ArtsCenterService;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +17,10 @@ public class ArtsCenterController {
 
     private final ArtsCenterService artsCenterService;
 
-    @ApiOperation(value="", notes = "")
-    @GetMapping("/winners")
-    public ResponseEntity<ResultDTO> retrieveWinnersOfHistory(){
-
-        ResultDTO result = new ResultDTO();
-        result.setData(artsCenterService.retrieveWinnersOfHistory());
-
+    @ApiOperation(value="모든 예술의몽땅 조회 API", notes = "모든 예술의몽땅을 최신순 목록으로 응답")
+    @GetMapping
+    public ResponseEntity<ResultDTO> retrieveArtCenters(){
+        ResultDTO result = new ResultDTO(true, artsCenterService.retrieveArtCenters());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

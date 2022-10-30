@@ -1,6 +1,6 @@
 package com.jeeyulee.mongddang.artscenter.service;
 
-import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterDTO;
+import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterResponseDTO;
 import com.jeeyulee.mongddang.artscenter.repository.ArtsCenterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +16,7 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
     private final ArtsCenterRepository artsCenterRepository;
 
     @Override
-    public List<ArtsCenterDTO> retrieveWinnersOfHistory() {
-
-        return artsCenterRepository.retrieveWinners();
+    public List<ArtsCenterResponseDTO> retrieveArtCenters() {
+        return artsCenterRepository.findAll();
     }
 }
