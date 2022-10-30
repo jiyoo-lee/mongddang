@@ -27,6 +27,13 @@ public class GuestBookController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "방명록 조회 API", notes = "방명록 및 그 아래의 답글을 조회해서 응답한다.")
+    @GetMapping("/{userId}/guestbook")
+    public ResponseEntity<ResultDTO> retrieveGuestBook(@PathVariable String userId){
+        ResultDTO result = new ResultDTO(true, guestBookService.retrieveGuestBook(userId));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @ApiOperation(value="방명록 수정 API", notes = "방명록 수정 API")
     @PutMapping("/{userId})/guestbook")
     public ResponseEntity<ResultDTO> updateGuestBook(@PathVariable String userId,

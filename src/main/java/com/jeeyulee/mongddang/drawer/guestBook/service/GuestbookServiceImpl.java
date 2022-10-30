@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -53,6 +56,28 @@ public class GuestbookServiceImpl implements GuestBookService{
                 .guestId(jwtService.retrieveUserId())
                 .guestBookId(guestBookId).build();
         return guestBookRepository.delete(guestBookDeleteDTO) > 0;
+    }
+
+    @Override
+    public List<GuestBookResponseDTO> retrieveGuestBook(String userId) {
+        List<GuestBookAndCommentDTO> guestBookAndCommentDTOs = guestBookRepository.findByUserId(userId);
+        return guestBookAndCommentDTOs.stream()
+                                      .map(this::convertToResponse)
+                                      .collect(Collectors.toList());
+    }
+
+    private GuestBookResponseDTO convertToResponse(GuestBookAndCommentDTO guestBookAndCommentDTO) {
+        return GuestBookResponseDTO.builder()
+                .guestBookId(guestBookAndCommentDTO.getGuestBookId())
+                .guestId(guestBookAndCommentDTO.getGuestId())
+                .contents(guestBookAndCommentDTO.getGuestBookContents())
+                .createDatetime(guestBookAndCommentDTO.getGuestBookCreateDatetime())
+                .comment(GuestBookResponseCommentDTO.builder()
+                        .commentId(guestBookAndCommentDTO.getCommentId())
+                        .contents(guestBookAndCommentDTO.getCommentContents())
+                        .createDatetime(guestBookAndCommentDTO.getCommentCreateDatetime())
+                        .build())
+                .build();
     }
 
 }
