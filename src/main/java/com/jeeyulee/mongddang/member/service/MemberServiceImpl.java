@@ -7,7 +7,6 @@ import com.jeeyulee.mongddang.common.mail.MessageWords;
 import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.common.util.CodeGenerator;
 import com.jeeyulee.mongddang.member.domain.*;
-import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +22,7 @@ import java.util.UUID;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
-
     private final JwtService jwtService;
-
     private final MailService mailService;
 
     @Override
@@ -77,9 +74,8 @@ public class MemberServiceImpl implements MemberService {
         MemberDTO member = memberRepository.findById(userId);
 
         if(member == null){
-            throw new UserNotFoundException();
+            throw new ResultException("불가능한 접근입니다.");
         }
-
         return member;
     }
 
@@ -95,22 +91,25 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String findByIdAndEmail(FindPasswordDTO findPasswordDTO) throws MailSendException{
+    public String findByIdAndEmail(FindPasswordDTO findPasswordDTO){
 
         String userId = memberRepository.findIdByEmail(findPasswordDTO.getEmail());
 
         if(userId == null || !userId.equals(findPasswordDTO.getUserId())){
-            throw new UserNotFoundException();
+            throw new ResultException("사용자를 찾을 수 없습니다. ");
         }
 
         String authNumber = CodeGenerator.generateRandom(6);
 
-        mailService.send(MailDTO.builder()
-                .to(findPasswordDTO.getEmail())
-                .title(MessageWords.AUTH_TITLE.getValue())
-                .contents(MessageWords.AUTH_CONTENTS.getValue() + authNumber)
-                .build());
-
+        try {
+            mailService.send(MailDTO.builder()
+                    .to(findPasswordDTO.getEmail())
+                    .title(MessageWords.AUTH_TITLE.getValue())
+                    .contents(MessageWords.AUTH_CONTENTS.getValue() + authNumber)
+                    .build());
+        }catch (MailSendException e){
+            throw new ResultException("메일 전송에 실패하였습니다.");
+        }
         return authNumber;
     }
 
@@ -121,21 +120,24 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String retrieveAuthNumber(String email) throws MailSendException{
+    public String retrieveAuthNumber(String email) {
         String userId = memberRepository.findIdByEmail(email);
 
         if (userId == null){
-           throw new UserNotFoundException();
+           throw new ResultException("사용자를 찾을 수 없습니다.");
         }
 
         String authNumber = CodeGenerator.generateRandom(6);
 
-        mailService.send(MailDTO.builder()
+        try {
+            mailService.send(MailDTO.builder()
                     .to(email)
                     .title(MessageWords.AUTH_TITLE.getValue())
                     .contents(MessageWords.AUTH_CONTENTS.getValue() + authNumber)
                     .build());
-
+        } catch (MailSendException e) {
+            throw new ResultException("해당 서비스 이용 오류");
+        }
         return authNumber;
     }
 

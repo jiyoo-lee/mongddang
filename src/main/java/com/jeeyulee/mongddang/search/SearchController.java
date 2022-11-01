@@ -22,14 +22,9 @@ public class SearchController {
     public ResponseEntity<ResultDTO> retrieveSearchBydropsName(@PathVariable String keyword){
 
         ResultDTO result = new ResultDTO();
-        try {
             result.setData(searchService.retrieveSearch(keyword));
             result.setSuccess(true);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (ResultException e){
-            result.setSuccess(false);
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-        }
     }
 
     @ApiOperation(value = "그림 제목 검색 API", notes = "그림 제목 검색 API")

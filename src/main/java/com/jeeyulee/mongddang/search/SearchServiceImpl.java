@@ -1,5 +1,6 @@
 package com.jeeyulee.mongddang.search;
 
+import com.jeeyulee.mongddang.common.result.ResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,5 @@ public class SearchServiceImpl implements SearchService {
 
         return searchRepository.retrievePaintings(keyword);
     }
+
 }

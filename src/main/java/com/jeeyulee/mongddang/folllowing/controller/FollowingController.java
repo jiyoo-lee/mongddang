@@ -1,8 +1,6 @@
 package com.jeeyulee.mongddang.folllowing.controller;
 
-import com.jeeyulee.mongddang.common.exception.DeniedAccessException;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
-import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.folllowing.service.FollowingService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +18,6 @@ public class FollowingController {
     @PostMapping("/{userId}")
     public ResponseEntity<ResultDTO> followMember(@PathVariable String userId){
         ResultDTO result = new ResultDTO();
-
             result.setSuccess(followingService.followMember(userId));
             return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -38,12 +35,8 @@ public class FollowingController {
     @GetMapping("/recommend")
     public ResponseEntity<ResultDTO> retrieveRecommendFriends(){
         ResultDTO result = new ResultDTO();
-        try {
             result.setData(followingService.retrieveRecommendFriends());
             result.setSuccess(true);
-        }catch (ResultException e){
-            result.setData(false);
-        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

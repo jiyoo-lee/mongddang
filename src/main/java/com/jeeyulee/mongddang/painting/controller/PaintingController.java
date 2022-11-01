@@ -2,7 +2,6 @@ package com.jeeyulee.mongddang.painting.controller;
 
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import com.jeeyulee.mongddang.common.result.ResultException;
-import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateDTO;
 import com.jeeyulee.mongddang.painting.exception.NotUploadPaintingException;
@@ -36,18 +35,15 @@ public class PaintingController {
     public ResponseEntity<ResultDTO> updatePainting(@PathVariable Long paintingId,
                                                     @RequestBody PaintingUpdateDTO paintingUpdateDTO){
         ResultDTO result = new ResultDTO();
-        try {
-            result.setSuccess(true);
-            result.setData(paintingService.updatePainting(paintingId, paintingUpdateDTO));
-        } catch (UserNotFoundException | NotUploadPaintingException e) {
-            result.setSuccess(false);
-        }
+        result.setSuccess(true);
+        result.setData(paintingService.updatePainting(paintingId, paintingUpdateDTO));
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation(value="그림 삭제 API", notes = "그림 삭제 API")
-    @DeleteMapping
-    public ResponseEntity<ResultDTO> deletePainting(Long paintingId){
+    @DeleteMapping("/{paintingId}")
+    public ResponseEntity<ResultDTO> deletePainting(@PathVariable Long paintingId){
         ResultDTO result = new ResultDTO();
         result.setSuccess(paintingService.deletePainting(paintingId));
 
@@ -94,19 +90,13 @@ public class PaintingController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value="", notes = "")
+    @ApiOperation(value="팔로잉한 친구들의 최신 그림보기 API", notes = "팔로잉한 친구들의 최신 그림 보기API")
     @GetMapping("/following")
     public ResponseEntity<ResultDTO> retrieveLastFollowingPaintings(){
 
         ResultDTO result = new ResultDTO();
-        try{
             result.setSuccess(true);
             result.setData(paintingService.retrieveLastFollowingPaintings());
-
-        }catch (ResultException e){
-
-            result.setSuccess(false);
-        }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

@@ -1,10 +1,8 @@
 package com.jeeyulee.mongddang.painting.service;
 
 import com.jeeyulee.mongddang.common.result.ResultException;
-import com.jeeyulee.mongddang.member.exception.UserNotFoundException;
 import com.jeeyulee.mongddang.member.service.JwtService;
 import com.jeeyulee.mongddang.painting.domain.*;
-import com.jeeyulee.mongddang.painting.exception.NotUploadPaintingException;
 import com.jeeyulee.mongddang.painting.repository.PaintingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +64,7 @@ public class PaintingServiceImpl implements PaintingService {
         if (result > 0) {
             return fileName + paintingUpdateDTO.getExtension();
         }
-        throw new NotUploadPaintingException();
+        throw new ResultException("그림 업로드를 실패하였습니다. ");
     }
 
     @Override
@@ -77,28 +75,46 @@ public class PaintingServiceImpl implements PaintingService {
 
     @Override
     public List<ConditionalPaintingsDTO> retrievePopularPaintings() {
-
-        return paintingRepository.retrievePopularPaintings();
+        List<ConditionalPaintingsDTO> popularPaintingsList =
+                paintingRepository.retrievePopularPaintings();
+        checkEmpty(popularPaintingsList);
+        return popularPaintingsList;
     }
 
     @Override
     public List<ConditionalPaintingsDTO> retrievePopularGenrePaintings(Long genreId) {
 
-        return paintingRepository.retrievePopularPaintingsByGenreId(genreId);
+        List<ConditionalPaintingsDTO> popularGenrePaintings =
+                paintingRepository.retrievePopularPaintingsByGenreId(genreId);
+        checkEmpty(popularGenrePaintings);
+        return popularGenrePaintings;
     }
 
     @Override
     public List<ConditionalPaintingsDTO> retrieveLastPaintings() {
 
-        return paintingRepository.retrieveLastPaintings();
+        List<ConditionalPaintingsDTO> retrieveLastPaintings =
+                paintingRepository.retrieveLastPaintings();
+        checkEmpty(retrieveLastPaintings);
+        return retrieveLastPaintings;
     }
 
     @Override
     public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings() {
-        return paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId());
+
+        List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings =
+                paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId());
+        checkEmpty(retrieveLastFollowingPaintings);
+        return retrieveLastFollowingPaintings;
     }
 
     private String convertToUUID(Long dropsId, String fileName){
         return UUID.randomUUID().toString() + "_" + dropsId + "_" + fileName;
+    }
+
+    private void checkEmpty(List<ConditionalPaintingsDTO> list) {
+        if(list.isEmpty()){
+            throw new ResultException("그림 업로드에 실패하였습니다.");
+        }
     }
 }
