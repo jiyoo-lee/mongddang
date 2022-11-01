@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaintingCreationDTO {
 
+    private String memberId;
     private Long dropsId;
     private Long genreId;
     private String name;

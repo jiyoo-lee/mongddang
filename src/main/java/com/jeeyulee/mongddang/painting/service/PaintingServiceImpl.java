@@ -27,6 +27,7 @@ public class PaintingServiceImpl implements PaintingService {
        String fileName = convertToUUID(paintingDTO.getDropsId(), paintingDTO.getName());
 
         PaintingCreationDTO paintingCreationDTO = PaintingCreationDTO.builder()
+                                .memberId(paintingDTO.getMemberId())
                                 .genreId(paintingDTO.getGenreId())
                                 .dropsId(paintingDTO.getDropsId())
                                 .name(paintingDTO.getName())

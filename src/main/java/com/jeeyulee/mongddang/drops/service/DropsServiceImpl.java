@@ -1,7 +1,7 @@
 package com.jeeyulee.mongddang.drops.service;
 
+import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.drops.domain.*;
-import com.jeeyulee.mongddang.drops.exception.DeniedUserAccessException;
 import com.jeeyulee.mongddang.drops.repository.DropsRepository;
 import com.jeeyulee.mongddang.member.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class DropsServiceImpl implements DropsService{
     }
 
     @Override
-    public DropsDetailDTO retrieveDropsDetail(Long dropsId) throws DeniedUserAccessException{
+    public DropsDetailDTO retrieveDropsDetail(Long dropsId) {
         DropsDetailDTO dropsDetailDTO = dropsRepository.findById(dropsId);
         String userIdOnToken = jwtService.retrieveUserId();
 
@@ -35,7 +35,7 @@ public class DropsServiceImpl implements DropsService{
             return dropsDetailDTO;
         }
 
-        throw new DeniedUserAccessException();
+        throw new ResultException("잘못된 접근입니다.");
     }
 
     private boolean isNormalDrops(String dropTypeName) {

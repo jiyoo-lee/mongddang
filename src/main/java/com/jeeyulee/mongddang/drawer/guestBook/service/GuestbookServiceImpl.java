@@ -44,9 +44,7 @@ public class GuestbookServiceImpl implements GuestBookService{
 
             return guestBookRepository.update(builderDTO) > 0;
         }
-        else{
-            throw new ResultException("");
-        }
+            throw new ResultException("잘못된 접근입니다. ");
     }
 
     @Override
