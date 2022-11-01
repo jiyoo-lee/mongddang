@@ -6,7 +6,7 @@ import com.jeeyulee.mongddang.folllowing.domain.FollowingDTO;
 import java.util.List;
 
 public interface FollowingService {
-    public Boolean followMember(String userId) throws DeniedAccessException;
+    public Boolean followMember(String userId);
 
     public List<FollowingDTO> retrieveMyFollowings();
 

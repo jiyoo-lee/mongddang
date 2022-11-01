@@ -20,28 +20,18 @@ public class FollowingController {
     @PostMapping("/{userId}")
     public ResponseEntity<ResultDTO> followMember(@PathVariable String userId){
         ResultDTO result = new ResultDTO();
-        try {
+
             result.setSuccess(followingService.followMember(userId));
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (DeniedAccessException e){
-            result.setSuccess(false);
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-        }
     }
 
     @ApiOperation(value = "팔로잉 목록 조회", notes = "팔로잉 목록 조회 API")
     @GetMapping("/my-followings")
     public ResponseEntity<ResultDTO> retrieveFollowing(){
         ResultDTO result = new ResultDTO();
-        try {
             result.setSuccess(true);
             result.setData(followingService.retrieveMyFollowings());
             return new ResponseEntity<>(result, HttpStatus.OK);
-        }catch (ResultException e){
-            result.setSuccess(false);
-            result.setData("해당 요청 기능을 이용 하실 수 없습니다.");
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-        }
     }
 
     @ApiOperation(value = "친구 추천 API", notes = "친구 추천 API")
