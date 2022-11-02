@@ -39,7 +39,8 @@ IDE<br>
 <img src="https://img.shields.io/badge/Google%20Meeting-4285F4?style=flat-square&logo=Google&logoColor=white"/>
 
 <b>ERD</b> <br>
-<img width="632" alt="image" src="https://user-images.githubusercontent.com/103879030/199373267-585fb2d7-f5b8-4eaa-8a14-645ac7fef72f.png">
+<img width="675" alt="image" src="https://user-images.githubusercontent.com/103879030/199373768-ac0d1be3-b6b6-48ac-96da-cd422c0d5959.png">
+
 
 
 <details><summary>UI 구성안</summary>
