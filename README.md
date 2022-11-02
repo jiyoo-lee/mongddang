@@ -39,12 +39,18 @@ IDE<br>
 <img src="https://img.shields.io/badge/Google%20Meeting-4285F4?style=flat-square&logo=Google&logoColor=white"/>
 
 <b>ERD</b> <br>
-<img width="675" alt="image" src="https://user-images.githubusercontent.com/103879030/199373768-ac0d1be3-b6b6-48ac-96da-cd422c0d5959.png">
+<img width="591" alt="image" src="https://user-images.githubusercontent.com/103879030/199439045-5cbccea9-735c-484f-9594-a8fa406162b3.png">
+
 
 
 
 <details><summary>UI 구성안</summary>
 <img src="https://user-images.githubusercontent.com/103879030/197798411-1e2bed0c-3fad-42bf-8203-e6e74993abe2.png"/>
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/103879030/199439301-6931d4a1-7b51-457a-b8ac-22387daf367d.png">
+<img width="953" alt="image" src="https://user-images.githubusercontent.com/103879030/199439534-60fb299d-48eb-459f-8da3-bd8d1a731e26.png">
+<img width="955" alt="image" src="https://user-images.githubusercontent.com/103879030/199439802-12fd4486-f936-4621-a27a-c9a4d160da1e.png">
+
+
 </details> 
 
 
