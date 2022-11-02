@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ArtsCenterResponseDTO {
-    private Long dropsId;
-    private String dropsName;
+    private String contestId;
+    private String title;
+    private String poster;
+    private String startDay;
+    private String endDay;
+    private String createDatetime;
     private String memberId;
-    private String nickname;
-    private String profileUrl;
-    private String painingName;
-    private String genreName;
-    private String description;
-    private String paintingUrl;
+    private String paintingTitle;
+    private String contestPaintingUrl;
     private Integer paintingMongddangCount;
 }

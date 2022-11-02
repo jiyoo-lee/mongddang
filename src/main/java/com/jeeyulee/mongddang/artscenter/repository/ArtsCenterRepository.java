@@ -1,7 +1,7 @@
 package com.jeeyulee.mongddang.artscenter.repository;
 
-import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterResponseDTO;
-import com.jeeyulee.mongddang.artscenter.domain.ArtsCenterWinnerResponseDTO;
+import com.jeeyulee.mongddang.artscenter.domain.*;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -9,6 +9,15 @@ import java.util.List;
 
 @Mapper
 public interface ArtsCenterRepository {
+
+    @Insert("insert into contest_painting (contest_id, member_id, title, contest_painting_url, description) " +
+            "value (#{contestId},#{memberId},#{title},#{contestPaintingUrl},#{description}) ")
+    public Integer savePainting(ContestPaintingBuilderDTO contestPaintingBuilderDTO);
+
+
+    @Insert("insert into contest (admin_id, title, poster_url, start_day, end_day) " +
+            "value (#{memberId},#{title},#{posterUrl},#{startDay},#{endDay}) ")
+    public Integer saveContest(ContestBuilderDTO contestBuilderDTO);
 
 
     @Select("select P4.drops_id dropsId, " +
