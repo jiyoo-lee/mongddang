@@ -1,7 +1,6 @@
 package com.jeeyulee.mongddang.artscenter.controller;
 
 import com.jeeyulee.mongddang.artscenter.domain.ContestDTO;
-import com.jeeyulee.mongddang.artscenter.domain.ContestPaintingDTO;
 import com.jeeyulee.mongddang.artscenter.service.ArtsCenterService;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import io.swagger.annotations.ApiOperation;
@@ -17,12 +16,6 @@ public class ArtsCenterController {
 
     private final ArtsCenterService artsCenterService;
 
-    @ApiOperation(value="예술의 몽땅 그림 등록 API", notes = "진행 중인 예술의 몽땅전에만 등록 가능")
-    @PostMapping("/painting")
-    public ResponseEntity<ResultDTO> createContestPainting(@RequestBody ContestPaintingDTO contestPaintingDTO){
-        ResultDTO result = new ResultDTO(true, artsCenterService.savePainting(contestPaintingDTO));
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
 
     @ApiOperation(value="예술의 몽땅 공모전 등록(관리자페이지) API", notes="예술의 몽땅 공모전 등록")
     @PostMapping("/contest")
@@ -30,8 +23,6 @@ public class ArtsCenterController {
         ResultDTO result = new ResultDTO(true,artsCenterService.saveContest(contestDTO));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-
 
 
 

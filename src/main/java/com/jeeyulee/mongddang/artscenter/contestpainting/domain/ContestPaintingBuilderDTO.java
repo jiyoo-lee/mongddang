@@ -1,19 +1,20 @@
-package com.jeeyulee.mongddang.artscenter.domain;
+package com.jeeyulee.mongddang.artscenter.contestpainting.domain;
+
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ContestPaintingDTO {
+@Builder
+public class ContestPaintingBuilderDTO {
 
-    private Long contestId;
     private String memberId;
+    private Long contestId;
     private String title;
-    private String extension;
+    private String contestPaintingUrl;
     private String description;
-
 }

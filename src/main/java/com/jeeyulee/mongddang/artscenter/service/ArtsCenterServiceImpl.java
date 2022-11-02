@@ -17,23 +17,6 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
 
     private final ArtsCenterRepository artsCenterRepository;
 
-    @Override
-    public Boolean savePainting(ContestPaintingDTO contestPaintingDTO) {
-
-        String fileName =
-                convertToUUID(contestPaintingDTO.getContestId(), contestPaintingDTO.getTitle());
-
-        ContestPaintingBuilderDTO builderDTO =
-                ContestPaintingBuilderDTO.builder()
-                        .contestId(contestPaintingDTO.getContestId())
-                        .memberId(contestPaintingDTO.getMemberId())
-                        .title(contestPaintingDTO.getTitle())
-                        .contestPaintingUrl(fileName + contestPaintingDTO.getExtension())
-                        .description(contestPaintingDTO.getDescription()).build();
-
-        log.info("ArtsCenterServiceImpl savePainting ====> {}", builderDTO.toString());
-        return artsCenterRepository.savePainting(builderDTO) > 0;
-    }
 
     @Override
     public Boolean saveContest(ContestDTO contestDTO) {

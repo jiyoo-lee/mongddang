@@ -10,10 +10,6 @@ import java.util.List;
 @Mapper
 public interface ArtsCenterRepository {
 
-    @Insert("insert into contest_painting (contest_id, member_id, title, contest_painting_url, description) " +
-            "value (#{contestId},#{memberId},#{title},#{contestPaintingUrl},#{description}) ")
-    public Integer savePainting(ContestPaintingBuilderDTO contestPaintingBuilderDTO);
-
 
     @Insert("insert into contest (admin_id, title, poster_url, start_day, end_day) " +
             "value (#{memberId},#{title},#{posterUrl},#{startDay},#{endDay}) ")
