@@ -14,29 +14,7 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 public class ArtsCenterServiceImpl implements ArtsCenterService {
-
     private final ArtsCenterRepository artsCenterRepository;
-
-
-    @Override
-    public Boolean saveContest(ContestDTO contestDTO) {
-
-        if(contestDTO.getExtension() == null){
-            throw new ResultException("파일이 없습니다.");
-        }
-
-        String fileName =
-                convertToUUID(contestDTO.getStartDay(),contestDTO.getTitle());
-        ContestBuilderDTO contestBuilderDTO = ContestBuilderDTO.builder()
-                .memberId(contestDTO.getMemberId())
-                .title(contestDTO.getTitle())
-                .posterUrl(fileName + contestDTO.getExtension())
-                .startDay(contestDTO.getStartDay())
-                .EndDay(contestDTO.getEndDay())
-                .build();
-
-        return artsCenterRepository.saveContest(contestBuilderDTO) > 0;
-    }
 
     @Override
     public List<ArtsCenterResponseDTO> retrieveArtCenters() {
@@ -44,10 +22,7 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
     }
 
     @Override
-    public List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long dropsId) {
-        return artsCenterRepository.findWinnerByDropsId(dropsId);
-    }
-    private String convertToUUID(Object first, String title){
-        return UUID.randomUUID().toString() + "_" + first + "_" + title;
+    public List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId) {
+        return artsCenterRepository.findWinnerByDropsId(contestId);
     }
 }

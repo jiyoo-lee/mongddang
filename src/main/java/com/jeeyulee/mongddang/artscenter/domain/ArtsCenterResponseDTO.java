@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 public class ArtsCenterResponseDTO {
     private String contestId;
     private String title;
-    private String poster;
+    private String posterUrl;
     private String startDay;
     private String endDay;
-    private String createDatetime;
     private String memberId;
+    private String nickname;
+    private Long PaintingId;
     private String paintingTitle;
-    private String contestPaintingUrl;
-    private Integer paintingMongddangCount;
+    private String paintingUrl;
+    private Integer mongddangCount;
 }

@@ -2,15 +2,13 @@ package com.jeeyulee.mongddang.admin.controller;
 
 import com.jeeyulee.mongddang.admin.domain.AdminResignDTO;
 import com.jeeyulee.mongddang.admin.service.AdminService;
+import com.jeeyulee.mongddang.artscenter.domain.ContestDTO;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,6 +31,14 @@ public class AdminController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
+    @ApiOperation(value="예술의 몽땅 공모전 등록(관리자페이지) API", notes="예술의 몽땅 공모전 등록")
+    @PostMapping("/arts-center/contest")
+    public ResponseEntity<ResultDTO> createContest(@RequestBody ContestDTO contestDTO){
+        ResultDTO result = new ResultDTO(true,adminService.saveContest(contestDTO));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @ApiOperation(value="회원 그림 조회", notes = "회원 그림 전체 조회 API")
     @GetMapping("/paintings")
     public ResponseEntity<ResultDTO> retrieveAllPaintings(){
@@ -41,9 +47,9 @@ public class AdminController {
     }
 
     @ApiOperation(value="그림 삭제 API", notes = "그림 삭제 API")
-    @DeleteMapping
-    public ResponseEntity<ResultDTO> deletePainting() {
-        ResultDTO result = new ResultDTO(true, adminService.deleteAllPaintings());
+    @DeleteMapping("/painting/{paintingId}")
+    public ResponseEntity<ResultDTO> deletePainting(@PathVariable Long paintingId) {
+        ResultDTO result = new ResultDTO(true, adminService.deleteAllPaintings(paintingId));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

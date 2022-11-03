@@ -1,6 +1,5 @@
 package com.jeeyulee.mongddang.artscenter.controller;
 
-import com.jeeyulee.mongddang.artscenter.domain.ContestDTO;
 import com.jeeyulee.mongddang.artscenter.service.ArtsCenterService;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import io.swagger.annotations.ApiOperation;
@@ -17,17 +16,8 @@ public class ArtsCenterController {
     private final ArtsCenterService artsCenterService;
 
 
-    @ApiOperation(value="예술의 몽땅 공모전 등록(관리자페이지) API", notes="예술의 몽땅 공모전 등록")
-    @PostMapping("/contest")
-    public ResponseEntity<ResultDTO> createContest(@RequestBody ContestDTO contestDTO){
-        ResultDTO result = new ResultDTO(true,artsCenterService.saveContest(contestDTO));
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
 
-
-
-
-    @ApiOperation(value="모든 예술의몽땅 조회 API", notes="모든 예술의몽땅을 최신순 목록으로 응답")
+    @ApiOperation(value="현재 진행 중인 예술의몽땅 조회 API", notes="진행 중인 공모전 최신순 목록으로 응답")
     @GetMapping
     public ResponseEntity<ResultDTO> retrieveArtCenters(){
         ResultDTO result = new ResultDTO(true, artsCenterService.retrieveArtCenters());
@@ -35,9 +25,9 @@ public class ArtsCenterController {
     }
 
     @ApiOperation(value="예술의몽땅별 수상작목록 조회 API", notes="예술의몽땅별 1~10위의 수상작목록을 조회하여 응답")
-    @GetMapping("/{dropsId}")
-    public ResponseEntity<ResultDTO> retrieveArtCenterWinners(@PathVariable Long dropsId) {
-        ResultDTO result = new ResultDTO(true, artsCenterService.retrieveArtCenterWinners(dropsId));
+    @GetMapping("/{contestId}")
+    public ResponseEntity<ResultDTO> retrieveArtCenterWinners(@PathVariable Long contestId) {
+        ResultDTO result = new ResultDTO(true, artsCenterService.retrieveArtCenterWinners(contestId));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

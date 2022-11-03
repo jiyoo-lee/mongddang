@@ -8,10 +8,7 @@ import java.util.List;
 
 public interface ArtsCenterService {
 
-
-    public Boolean saveContest(ContestDTO contestDTO);
-
     List<ArtsCenterResponseDTO> retrieveArtCenters();
 
-    List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long dropsId);
+    List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId);
 }
