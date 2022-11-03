@@ -32,7 +32,7 @@ public interface MemberRepository {
             "    nickname = IFNULL(#{nickname}, nickname), " +
             "    profile_picture = IFNULL(#{profilePicture}, profile_picture), " +
             "    phone_number = IFNULL(#{phoneNumber}, phone_number), " +
-            "    address = IFNULL(#{address}, address)" +
+            "    address = IFNULL(#{address}, address) " +
             "where user_id = #{userId}")
     public Integer update(MemberDTO memberDTO);
 

@@ -1,17 +1,20 @@
-package com.jeeyulee.mongddang.artscenter.domain;
+package com.jeeyulee.mongddang.admin.domain;
+
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ContestDTO {
+@Builder
+public class ContestBuilderDTO {
 
     private String memberId;
     private String title;
-    private String extension;
+    private String posterUrl;
     private String startDay;
     private String EndDay;
 }

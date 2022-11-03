@@ -1,11 +1,7 @@
 package com.jeeyulee.mongddang.admin.service;
 
-import com.jeeyulee.mongddang.admin.domain.AdminMemberDTO;
-import com.jeeyulee.mongddang.admin.domain.AdminPaintingDTO;
-import com.jeeyulee.mongddang.admin.domain.AdminResignDTO;
+import com.jeeyulee.mongddang.admin.domain.*;
 import com.jeeyulee.mongddang.admin.repository.AdminRepository;
-import com.jeeyulee.mongddang.artscenter.domain.ContestBuilderDTO;
-import com.jeeyulee.mongddang.artscenter.domain.ContestDTO;
 import com.jeeyulee.mongddang.common.result.ResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -67,6 +63,38 @@ public class AdminServiceImpl implements AdminService{
         if(paintingId == null) throw new ResultException("잘못된 요청입니다.");
         return adminRepository.deletePainting(paintingId) > 0;
     }
+
+    @Override
+    public List<AdminMemberDTO> findMemberByKeyword(String keyword) {
+        if(keyword == null) throw new ResultException("키워드가 없습니다.");
+
+        return adminRepository.findMemberByKeyword(keyword);
+    }
+
+    @Override
+    public List<AdminPaintingDTO> findPaintingByKeyword(String keyword) {
+        if(keyword == null) throw new ResultException("키워드가 없습니다.");
+
+        return adminRepository.findPaintingByKeyword(keyword);
+    }
+
+    @Override
+    public Boolean updateContest(Long contestId, ContestUpdateDTO contestDTO) {
+
+        if(contestDTO.getExtension() == null) throw new ResultException("파일이 없습니다.");
+        String fileName =
+                convertToUUID(contestDTO.getStartDay(),contestDTO.getTitle());
+
+        ContestUpdateBuilderDTO builderDTO = ContestUpdateBuilderDTO.builder()
+                .contestId(contestId)
+                .title(contestDTO.getTitle())
+                .contestPaintingUrl(fileName + contestDTO.getExtension())
+                .startDay(contestDTO.getStartDay())
+                .endDay(contestDTO.getEndDay())
+                .build();
+        return adminRepository.updateContest(builderDTO) > 0;
+    }
+
 
     private String convertToUUID(Object first, String title){
         return UUID.randomUUID().toString() + "_" + first + "_" + title;

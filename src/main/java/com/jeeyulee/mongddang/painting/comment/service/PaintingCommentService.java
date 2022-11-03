@@ -1,13 +1,20 @@
 package com.jeeyulee.mongddang.painting.comment.service;
 
+import com.jeeyulee.mongddang.painting.comment.domain.CommentDTO;
 import com.jeeyulee.mongddang.painting.comment.domain.PaintingCommentDTO;
+
+import java.util.List;
 
 public interface PaintingCommentService {
 
-    public Boolean save(PaintingCommentDTO paintingCommentDTO);
+    Boolean save(PaintingCommentDTO paintingCommentDTO);
 
-    public Boolean update(Long commentId, PaintingCommentDTO paintingCommentDTO);
+    List<CommentDTO> retrieveComments(Long paintingId);
 
-    public Boolean delete(Long commentId);
+    Boolean update(Long commentId, PaintingCommentDTO paintingCommentDTO);
+
+    Boolean delete(Long commentId);
+
+
 
 }

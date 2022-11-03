@@ -25,4 +25,10 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
     public List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId) {
         return artsCenterRepository.findWinnerByDropsId(contestId);
     }
+
+    @Override
+    public List<ArtsCenterPaintingDetailDTO> retrievePaintingDetail(Long contestId, Long paintingId) {
+        if(contestId == null || paintingId == null) throw new ResultException("잘못된 접근입니다.");
+        return artsCenterRepository.findPaintingDetail(contestId,paintingId);
+    }
 }

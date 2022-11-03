@@ -50,6 +50,7 @@ public class PaintingController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
     @ApiOperation(value="인기 그림 조회 API", notes = "인기 그림 조회 API")
     @GetMapping("/popular")
     public ResponseEntity<ResultDTO> retrievePopularPaintings(){

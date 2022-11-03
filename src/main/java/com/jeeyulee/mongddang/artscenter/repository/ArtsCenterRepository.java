@@ -40,4 +40,16 @@ public interface ArtsCenterRepository {
             "on C.id = P.contest_id " +
             "order by mongddangCount desc limit 0,20")
     List<ArtsCenterWinnerResponseDTO> findWinnerByDropsId(Long contestId);
+
+    @Select("select P.id paintingId, M.user_id memberId, M.nickname, P.title, " +
+            "P.contest_painting_url contestPaintingUrl, P.description, " +
+            "               (select count(*) from contest_mongddang CM " +
+            "               where P.id = CM.contest_painting_id )mongddangCount, " +
+            "               (select count(*) from contest_comment CC " +
+            "               where P.ID = CC.contest_painting_id) comment " +
+            "from contest_painting P " +
+            "join member M " +
+            "on P.member_id = M.user_id " +
+            "where P.id = #{paintingId} and P.contest_id = #{contentId}")
+    List<ArtsCenterPaintingDetailDTO> findPaintingDetail(Long contentId, Long paintingId);
 }
