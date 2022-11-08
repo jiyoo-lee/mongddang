@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/v1/member")
 @RequiredArgsConstructor
 @RestController
@@ -31,6 +32,7 @@ public class MemberController {
     @ApiOperation(value="로그인", notes="설명")
     @PostMapping("/login")
     public ResponseEntity<ResultDTO> login(@Valid @RequestBody MemberLoginDTO memberLoginDTO){
+        System.out.println("왔냐");
         ResultDTO result = new ResultDTO(true, memberService.login(memberLoginDTO));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

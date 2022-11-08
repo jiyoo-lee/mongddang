@@ -25,7 +25,7 @@ public class DropsController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
+    
     @ApiOperation(value="드랍 상세조회 API", notes="드랍의 정보와 그림을 조회하는 API")
     @GetMapping("/{dropsId}")
     public ResponseEntity<ResultDTO> retrieveDropsDetail(@PathVariable Long dropsId) {
