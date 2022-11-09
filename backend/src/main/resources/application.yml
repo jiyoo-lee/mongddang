@@ -4,15 +4,8 @@ spring:
     password: sujung9300
     url: jdbc:mysql://localhost:3306/mongddang
     driver-class-name: com.mysql.cj.jdbc.Driver
-  mail:
-    host: smtp.naver.com
-    port: 465
-    username: jeeyu-lee@naver.com
-    password: wldbenddl9400
-    properties:
-      "mail.smtp.ssl.enable": true
-      "mail.smtp.ssl.trust": smtp.naver.com
-      "mail.smtp.auth": true
+  config:
+    import: classpath:/application-mail.yml
 jwt-token:
   issue-key: longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong # 64글자 이상
   valid-time: 300000 # 5분

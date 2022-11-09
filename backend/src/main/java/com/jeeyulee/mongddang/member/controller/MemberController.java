@@ -32,7 +32,6 @@ public class MemberController {
     @ApiOperation(value="로그인", notes="설명")
     @PostMapping("/login")
     public ResponseEntity<ResultDTO> login(@Valid @RequestBody MemberLoginDTO memberLoginDTO){
-        System.out.println("왔냐");
         ResultDTO result = new ResultDTO(true, memberService.login(memberLoginDTO));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -78,9 +77,9 @@ public class MemberController {
 
     @ApiOperation(value="아이디 찾기 인증번호 생성", notes = "아이디 찾는 경우, 이메일로 아이디 유효성 검증하여 인증번호 메일발송")
     @PostMapping("/seeking-id/auth-number")
-    public ResponseEntity<ResultDTO> createAuthNumber(String email){
+    public ResponseEntity<ResultDTO> createAuthNumber(@RequestBody EmailDTO emailDto){
         ResultDTO result = new ResultDTO();
-        result.setData(memberService.retrieveAuthNumber(email));
+        result.setData(memberService.retrieveAuthNumber(emailDto.getEmail()));
         result.setSuccess(true);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

@@ -51,16 +51,21 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public String login(MemberLoginDTO memberLoginDTO){
-        MemberLoginResponseDTO member = memberRepository.findByUserIdAndPassword(memberLoginDTO);
-        Integer count = memberRepository.saveLogInHistory(memberLoginDTO);
-        log.info("MemberServiceImpl login ===> {} ", member);
 
-        if (member == null || count == null || count == 0) {
-            throw new ResultException("로그인에 실패했습니다.");
+        try {
+            MemberLoginResponseDTO member = memberRepository.findByUserIdAndPassword(memberLoginDTO);
+            Integer count = memberRepository.saveLogInHistory(memberLoginDTO);
+            log.info("MemberServiceImpl login ===> {} ", member);
+
+            if (member == null || count == null || count == 0) {
+                throw new ResultException("로그인에 실패했습니다.");
+            }
+            String jwt = jwtService.createJwt(member);
+            memberRepository.updateToken(memberLoginDTO.getUserId(), jwt);
+            return jwt;
+        }catch (Exception e){
+            throw new ResultException("아이디와 패스워드르 확인해주세요");
         }
-        String jwt = jwtService.createJwt(member);
-        memberRepository.updateToken(memberLoginDTO.getUserId(), jwt);
-        return jwt;
     }
 
 
@@ -135,9 +140,10 @@ public class MemberServiceImpl implements MemberService {
                     .title(MessageWords.AUTH_TITLE.getValue())
                     .contents(MessageWords.AUTH_CONTENTS.getValue() + authNumber)
                     .build());
-        } catch (MailSendException e) {
-            throw new ResultException("해당 서비스 이용 오류");
+        } catch (Exception e) {
+            throw new ResultException("메일 발송 실패");
         }
+
         return authNumber;
     }
 

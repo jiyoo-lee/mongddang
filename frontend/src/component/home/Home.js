@@ -2,6 +2,8 @@ import React from "react";
 import HomeContents from "./HomeContents";
 import "./Home.css";
 
+
+
 function Home () {
 
     return (

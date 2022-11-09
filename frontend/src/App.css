@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+html, body{
+  width: 100%;
+  height: 100vh;
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +43,129 @@
     transform: rotate(360deg);
   }
 }
+
+/* MyButton */
+
+.MyButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  margin-left: 5px;
+
+  font-size: 15px;
+
+  white-space: nowrap;
+  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.MyButton_default {
+  background-color: #ffbe2a;
+  color: whitesmoke;
+}
+
+.MyButton_positive {
+  background-color: #64c964;
+  color: white;
+}
+
+.MyButton_negative {
+  background-color: #4c8bf5;
+  color: white;
+}
+
+.MyButton_nothing {
+  background-color: #ececec;
+  color: black;
+}
+
+.MyButton_default:hover{
+  background-color: orange;
+  color: whitesmoke;
+}
+
+.MyButton_negative:hover{
+  background-color: #0f64f2;
+}
+
+/* Login */
+
+.member_wrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: white;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.login_logo {
+  width: 300px;
+  cursor: pointer;
+}
+
+.member_form{
+  display: inline-block;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
+  padding-bottom: 10%;
+  border-radius: 25px;
+  background-color: white;
+
+  box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+  
+}
+
+.member_text{
+  width: 300px;
+  height: 50px;
+  border: none;
+  font-size: 15px;
+  font-family: 'Nanum Gothic', sans-serif;
+  border-bottom: 2px solid orange;
+}
+
+.login_text:hover {
+  background-color: whitesmoke;
+}
+
+.login_btn_wrapper{
+  padding-top: 50px;
+}
+
+.login_btn_wrapper .MyButton{
+  width: 300px;
+}
+
+.find_info{
+  cursor: pointer;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color:dimgray;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.find_info:hover{
+  color: black;
+}
+
+/* find Member */
+.find_btn_wrapper{
+  padding-top: 50px;
+}
+
+
+
