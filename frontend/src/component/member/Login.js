@@ -43,6 +43,7 @@ const Login = ()=> {
         .then(res=>{
             if (res.success) {
                 alert("로그인 되었습니다.");
+                navigate('/home/feed')
             }
         });
         }

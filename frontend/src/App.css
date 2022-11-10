@@ -5,6 +5,10 @@ html, body{
   height: 100vh;
 }
 
+li{
+  list-style: none;
+}
+
 .App {
   text-align: center;
 }
@@ -175,13 +179,150 @@ html, body{
   font-size: 20px;
 }
 
-/* change password */
+/* Home section */
 
-.visibility_msg_hidden{
-  visibility: hidden;
+.all_wrapper{
+  background-color: white;
+  z-index: 10;
+  min-height: 100vh;
 }
 
-.visibility_msg_visible{
-  visibility:visible;
+.main_wrapper{
+  border-radius: 10px;
+  width: 70%;
+  float: right;
 }
 
+.home_wrapper{
+  border-top: 0.5px solid white;
+  min-height: 94.5vh;
+  background-color: white;
+  border-radius: 25px;
+  margin-right: 10px;
+  box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+}
+
+.profile_wrapper{
+  border-radius: 25px;
+  min-height: 60vh;
+  width: 29%;
+  border: 0.5px solid white;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  background-color: white;
+
+  position: relative;
+
+  box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+}
+
+.friends_wrapper{
+  border-radius: 25px;
+  min-height: 37vh;
+  margin-left: 5px;
+  width: 29%;
+  border: 0.5px solid white;
+  background-color: white;
+
+  box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+}
+
+/* 상단 메뉴 바*/
+.menu_wrapper{
+  align-items: center;
+  width: 380px;
+  margin-left: 240px;
+  margin-top: 5px;
+}
+.sub_wrapper{
+  border: 0.3px solid white
+}
+
+/* side menu */
+
+.top_menu_wrapper{
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  bottom: 10px;
+  justify-content: center;
+  height: 160px;
+
+  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+
+  padding-bottom: 25px;
+}
+
+.top_menu_ul{
+  position: relative;
+  margin-right: 40px;
+  display: block;
+  align-content: center;
+}
+
+.top_menu{
+  position: relative;
+  cursor: pointer;
+  height: 40px;
+  padding-right: 20px;
+}
+
+.top_menu:hover {
+  color: orange;
+  transition: color 0.3s;
+  font-weight: bold;
+}
+
+.top_menu_logo{
+  width: 20px;
+  height: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* social */
+.social_wrapper{
+  width: 100%;
+  display: block;
+  margin: auto;
+
+}
+
+.social{
+  text-align: center;
+  font-size: 15px;
+
+  display: block;
+  margin: auto;
+
+  max-width: 100%;
+  height: auto;
+}
+
+.people{
+  font-weight: bold;
+  color: orange;
+  
+}
+
+/* profile */
+
+.img_wrapper{
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  display: block;
+  margin: auto;
+}
+
+.profile_img{
+  border-radius: 100%;
+  display: flex;
+  margin: auto;
+
+  max-width: 100%;
+  width: 40% !important;
+  height: auto;
+}

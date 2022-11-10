@@ -10,6 +10,7 @@ import Findresult from './component/member/Findresult';
 import Find from './component/member/Find';
 import FindPwResult from './component/member/FindPwResult';
 import ChangePw from './component/member/ChangePw';
+import Feed from './component/home/homeContents/Feed';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path='/find' element={<Find/>}/>
         <Route path='/findPw-result' element={<FindPwResult/>}/>
         <Route path='/change-pw' element={<ChangePw/>}/>
+        <Route path='/home/feed' element={<Feed/>}/>
       </Routes>
     </BrowserRouter>
   </div>
