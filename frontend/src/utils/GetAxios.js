@@ -1,13 +1,9 @@
 import axios from "axios";
 
-export const PostAxios = (url, requestData, callback) => axios.create({
+export const GetAxios = (url, requestData, callback) => axios.create({
   baseURL: 'http://localhost:8080/api/v1',
-  headers: {
-    "Content-Type": "application/json",
-  }
-}).post(url, requestData)
+}).get(url, requestData)
 .then(response => {
-    //console.log(response);
     if (response.data.success) {
         callback(response.data);
     } else {
@@ -17,3 +13,5 @@ export const PostAxios = (url, requestData, callback) => axios.create({
 .catch(error=>{
     alert(error);
 });
+
+export default GetAxios;

@@ -1,33 +1,28 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import GetAxios from "../../utils/GetAxios";
 import MyButton from "../button/MyButton";
 
-const Findresult = () => {
+
+const FindPwResult = () => {
 
   const navigate = useNavigate(); 
   const location = useLocation();
   const [authNumber, setauthNumber] = useState("");
 
   const codeNumber = location.state.authNum;
-  const email = location.state.email;
-
-  console.log(email);
-  console.log(codeNumber);
-  const checkAuthNumber = () =>{
-    if(authNumber === codeNumber){
-      alert("인증을 완료했습니다.");
-
-        GetAxios('/member/user-id',{ params: { email : email}},
-                  (data) => {navigate('/find',{state:{memberId:data.data}})});
+  const memberId = location.state.memberId;
+  
+  const checkAuthNumber = () => {
+    if(codeNumber === authNumber){
+        navigate('/change-pw',{state:{userId:memberId}})
     }
-      else {
-        alert("인증코드를 다시 한번 확인해주세요 ");
-      }
-   }
+    else{
+        alert(" 인증코드를 다시 확인해주세요 ")
+    }
+  }
 
     return (
-      <div className="member_wrapper">
+        <div className="member_wrapper">
         <div className="member_form">
         <img className='login_logo' src={process.env.PUBLIC_URL + `img/login_logo.png`} onClick={()=> {navigate('/')}}/>
         <br/>
@@ -43,4 +38,4 @@ const Findresult = () => {
     );
 }
 
-export default Findresult;
+export default FindPwResult;

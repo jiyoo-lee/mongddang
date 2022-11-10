@@ -167,5 +167,21 @@ html, body{
   padding-top: 50px;
 }
 
+/* find */
 
+.info_id{
+  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 20px;
+}
+
+/* change password */
+
+.visibility_msg_hidden{
+  visibility: hidden;
+}
+
+.visibility_msg_visible{
+  visibility:visible;
+}
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
 import { PostAxios } from "../../utils/PostAxios";
 
-
+//()=>(navigate('/find-result')
 const FindId = () => {
     const [emailValue, setEmailValue] = useState("")
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const FindId = () => {
         }
         else {
             PostAxios('/member/seeking-id/auth-number', {email : emailValue},
-                      ()=>(navigate('/find-result')));
+                      (data)=>{navigate('/find-result',{state:{authNum:data.data, email:emailValue}})});
         }
     }
 

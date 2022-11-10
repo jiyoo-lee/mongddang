@@ -64,11 +64,9 @@ public class MemberServiceImpl implements MemberService {
             memberRepository.updateToken(memberLoginDTO.getUserId(), jwt);
             return jwt;
         }catch (Exception e){
-            throw new ResultException("아이디와 패스워드르 확인해주세요");
+            throw new ResultException("아이디와 패스워드를 확인해주세요");
         }
     }
-
-
     @Override
     public Boolean checkOverlap(String userId) {
         return memberRepository.countById(userId) > 0;
@@ -96,10 +94,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public String findByIdAndEmail(FindPasswordDTO findPasswordDTO){
 
         String userId = memberRepository.findIdByEmail(findPasswordDTO.getEmail());
 
+        log.info("findByIdAndEmail userId ===> {}",userId);
         if(userId == null || !userId.equals(findPasswordDTO.getUserId())){
             throw new ResultException("사용자를 찾을 수 없습니다. ");
         }
@@ -120,7 +120,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public String findIdByEmail (String email) {
-
+        log.info("findIdByEmail ===> {}", email);
         return memberRepository.findIdByEmail(email);
     }
 

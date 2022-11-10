@@ -7,6 +7,9 @@ import Join from './component/member/Join';
 import FindId from './component/member/FindId';
 import FindPw from './component/member/FindPw';
 import Findresult from './component/member/Findresult';
+import Find from './component/member/Find';
+import FindPwResult from './component/member/FindPwResult';
+import ChangePw from './component/member/ChangePw';
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
         <Route path='/findId' element={<FindId/>}/>
         <Route path='/findPw' element={<FindPw/>}/>
         <Route path='/find-result' element={<Findresult/>}/>
+        <Route path='/find' element={<Find/>}/>
+        <Route path='/findPw-result' element={<FindPwResult/>}/>
+        <Route path='/change-pw' element={<ChangePw/>}/>
       </Routes>
     </BrowserRouter>
   </div>
