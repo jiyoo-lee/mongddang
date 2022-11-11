@@ -31,6 +31,4 @@ public class MemberJoinDTO {
     @NotBlank(message = "휴대폰 번호는 필수 값입니다.")
     private String phoneNumber;
 
-    @NotBlank(message = "주소는 필수 값입니다.")
-    private String address;
 }

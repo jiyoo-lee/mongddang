@@ -3,49 +3,36 @@ import  axios  from 'axios';
 import { useNavigate } from "react-router-dom";
 
 import MyButton from '../button/MyButton'
+import { PostAxios } from '../../utils/PostAxios';
 
 const Login = ()=> {
-    
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
-    const [ip, setIp] = useState("");
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
+
     const navigate = useNavigate();
 
     const login = () => {
-
         if(userId.length < 5 || password < 5){
             alert("아이디와 패스워드를 다시 확인해주세요.")
-        }else{
-
-        const res = axios.get('https://geolocation-db.com/json/')
-        .then((res) => {
-          setIp(res.data["IPv4"])
-          setLatitude(res.data["latitude"])
-          setLongitude(res.data["longitude"])
-        })
-
-        fetch(`http://localhost:8080/api/v1/member/login`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+        }
+        else{
+            const requestBody = {
                 userId : userId,
-                password : password,
-                accessIp : ip,
-                latitude : latitude,
-                longitude : longitude
+                password : password
+            };
+
+            axios.get('https://geolocation-db.com/json/')
+            .then((res) => {
+                requestBody.accessIp = res.data["IPv4"];
+                requestBody.latitude = res.data["latitude"];
+                requestBody.longitude = res.data["longitude"]
+
+                PostAxios('/member/login', requestBody, (data)=>{
+                    sessionStorage.setItem("token", data.data);
+                    alert("로그인 되었습니다.");
+                    navigate('/home/feed');
+                });
             })
-        }) 
-        .then(res=>res.json())
-        .then(res=>{
-            if (res.success) {
-                alert("로그인 되었습니다.");
-                navigate('/home/feed')
-            }
-        });
         }
     }
 
@@ -53,7 +40,7 @@ const Login = ()=> {
         <>
     <div className="member_wrapper">
         <div className='member_form'>
-        <img className='login_logo' src={process.env.PUBLIC_URL + `img/login_logo.png`} onClick={()=> {navigate('/')}}/> 
+        <img className='login_logo' alt="로그인" src={process.env.PUBLIC_URL + `img/login_logo.png`} onClick={()=> {navigate('/')}}/> 
             <br/>
             <br/>
             <br/>

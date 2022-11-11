@@ -8,7 +8,7 @@ public interface MemberRepository {
 
     @Insert("insert into member (user_id, password, name, nickname, profile_picture, email, phone_number, address) " +
             "value (#{userId}, SHA2(#{password}, 512), #{name}, #{nickname}, #{profilePicture}, " +
-            "#{email}, #{phoneNumber}, #{address})")
+            "#{email}, #{phoneNumber} )")
     public int save(MemberJoinBuilderDTO memberJoinBuilderDTO);
 
     @Select("select * " +

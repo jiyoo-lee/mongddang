@@ -1,19 +1,24 @@
 import axios from "axios";
 
-export const PostAxios = (url, requestData, callback) => axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
-  headers: {
-    "Content-Type": "application/json",
-  }
-}).post(url, requestData)
-.then(response => {
-    //console.log(response);
-    if (response.data.success) {
+export const PostAxios = (url, requestData, callback) => {
+
+  return axios.create({
+    baseURL: 'http://localhost:8080/api/v1',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": sessionStorage.getItem("token")
+    }})
+    .post(url, requestData)
+    .then(response => {
+      if (response.data.success) {
         callback(response.data);
-    } else {
+      }
+      else {
         alert(response.data.data);
-    }
-})
-.catch(error=>{
-    alert(error);
-});
+      }
+    })
+    .catch(error=>{
+      alert(error);
+    });
+};
+  

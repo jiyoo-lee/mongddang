@@ -38,7 +38,6 @@ public class MemberServiceImpl implements MemberService {
                 .nickname(memberJoinDTO.getNickname())
                 .profilePicture(fileName + memberJoinDTO.getExtension())
                 .email(memberJoinDTO.getEmail())
-                .address(memberJoinDTO.getAddress())
                 .phoneNumber(memberJoinDTO.getPhoneNumber())
                 .build();
         try {
