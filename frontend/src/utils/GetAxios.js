@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const GetAxios = (url, requestData, callback) => axios.create({
+const GetAxios = (url, requestData, callback) => axios.create({
   baseURL: 'http://localhost:8080/api/v1',
   headers: {
     "Authorization": sessionStorage.getItem("token")

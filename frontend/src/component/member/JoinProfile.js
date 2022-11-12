@@ -1,22 +1,42 @@
 import { useRef, useState } from "react";
 import MyButton from "../button/MyButton";
 import { useLocation, useNavigate } from "react-router-dom";
+import PutAxios from "../../utils/PutAxios";
 
 const JoinProfile = () => {
 
     //useRef를 이용해 input 태그 접근
     const imageInput = useRef();
     const [image, setImage] = useState("");
+    const [extension, setExtension] =useState("");
     const location = useLocation();
     const navigate = useNavigate();
 
-    const nickname = location.state.nickname;
+    const userId = location.state.userId;
     const saveFileImage = (e) => {
+        const temp = (e.target.files[0].name).split(".");
+        setExtension(temp[temp.length-1]);
         setImage(URL.createObjectURL(e.target.files[0]));
     }
 
     const onClickImageUpload = () => {
         imageInput.current.click();
+    }
+
+    const profileUploadUrl = '/member/'+userId+'/profile-picture';
+
+    const requestBody = {
+        extension: extension
+    }
+
+    const onClick = () => {
+        console.log(profileUploadUrl);
+        console.log(requestBody);
+        console.log(sessionStorage.getItem("token"));
+
+        PutAxios(profileUploadUrl, requestBody, (e)=>{
+            console.log(e)
+        })
     }
 
  return (
@@ -36,13 +56,13 @@ const JoinProfile = () => {
             </div>
             <input type='file' name="imgUpload" style={{display:"none"}} ref={imageInput} onChange={saveFileImage} accept="image/*"/>
             <br/>
-           <b>{nickname}</b>
+           <b>{userId}</b>
         <br/>
         <br/>
             <MyButton onClick={onClickImageUpload} text={'이미지 업로드'}/>
         <br/>
         <br/>
-            <MyButton type={'positive'} text={'몽땅 시작하기'} onClick={()=>navigate('/home/feed')}/>
+            <MyButton type={'positive'} text={'몽땅 시작하기'} onClick={onClick}/>
         </div>
     </div>
  );

@@ -1,8 +1,6 @@
 import axios from "axios";
 
-export const PostAxios = (url, requestData, callback) => {
-
-  return axios.create({
+const PostAxios = (url, requestData, callback) => axios.create({
     baseURL: 'http://localhost:8080/api/v1',
     headers: {
       "Content-Type": "application/json",
@@ -19,6 +17,6 @@ export const PostAxios = (url, requestData, callback) => {
     })
     .catch(error=>{
       alert(error);
-    });
-};
-  
+    })
+
+export default PostAxios;

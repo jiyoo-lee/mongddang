@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
 import { useState } from "react";
+import  axios  from 'axios';
 import GetAxios from "../../utils/GetAxios";
+import PostAxios  from "../../utils/PostAxios";
 
 const Join = () => {
 
@@ -11,12 +13,13 @@ const Join = () => {
         memberId : '',
         password: '',
         passwordcheck : '',
+        name: '',
         nickname: '',
         email: '',
         phoneNumber: '',
     });
     
-    const {memberId, password, passwordcheck, nickname, email, phoneNumber} = inputs
+    const {memberId, password, passwordcheck, name, nickname, email, phoneNumber} = inputs
     const onChange = (e) => {
         const {name, value} = e.target;
         setInputs({
@@ -26,6 +29,7 @@ const Join = () => {
     };
 
     const [memberIdMessage, setMemberIdMessage] = useState("");
+    const [nameMessage, setNameMessage] = useState("");
     const [passwordMessage, setPasswordMessage] = useState("");
     const [passwordCheckMessage, setPasswordCheckMessage] = useState("");
     const [nicknameMessage, setNicknameMessage] = useState("");
@@ -36,11 +40,13 @@ const Join = () => {
     const [notOverlap, setNotOverlap] = useState(false);
     const [validPassword, setvalidPassword] = useState(false);
     const [validPasswordcheck, setvalidPasswordcheck] = useState(false);
+    const [validName, setvalidName] = useState(false);
     const [validNickname, setvalidNickname] = useState(false);
     const [validEmail, setvalidEmail] = useState(false);
     const [validPhoneNumber, setvalidPhoneNumber] = useState(false);
 
     let testId = new RegExp(/^[a-z0-9]+[a-z0-9]{4,19}$/g);
+    let testName = new RegExp( /^[가-힣a-zA-Z]+$/);
     let testEmail = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
     let testPassword = new RegExp(/^[A-Za-z0-9]{8,20}$/);
     let testPhoneNumber = new RegExp(/^[0-9\b -]{0,13}$/);
@@ -48,9 +54,34 @@ const Join = () => {
 
     // 정규식 js로 따로 만들어서 관리 할 것
     const btnOnClick = () =>{
+
+        if(notOverlap&&validPassword&&validPasswordcheck&&validName&&validNickname&&validEmail&&validPhoneNumber === true){
+            const joinRequestBody = {
+                userId:memberId, 
+                password:password,
+                name: name,
+                nickname:nickname,
+                email:email,
+                phoneNumber:phoneNumber
+            };
+
+            const loginRequestBody = {
+                userId:memberId, 
+                password:password
+            };
+            
+            PostAxios('/member/join', joinRequestBody,()=>{
+                                        
+                                        axios.get('https://geolocation-db.com/json/')
+                                        .then((res) => {
+                                            loginRequestBody.accessIp = res.data["IPv4"];
+                                            loginRequestBody.latitude = res.data["latitude"];
+                                            loginRequestBody.longitude = res.data["longitude"]
+                            
+                                            PostAxios('/member/login', loginRequestBody, (data)=>{
+                                                sessionStorage.setItem("token", data.data)})})
+                                            .then(navigate('/join/profile',{state:{userId:memberId}}))})
         
-        if(notOverlap&&validPassword&&validPasswordcheck&&validNickname&&validEmail&&validPhoneNumber === true){
-            navigate('/join/profile',{state:{nickname:nickname}})
         }else{
             alert("회원 정보를 다시 정확하게 기재해주세요")
         }
@@ -97,6 +128,16 @@ const Join = () => {
         else{
             setPasswordCheckMessage("")
             setvalidPasswordcheck(true)
+        }
+    }
+
+    const onBlurName = () => {
+        if(!testName.test(name) || name.length > 10){
+            setNameMessage("이름은 10자 이내의 영 대소문자 및 한글만 입력 가능합니다.");
+            setvalidName(false);
+        }else{
+            setNameMessage("");
+            setvalidName(true);
         }
     }
 
@@ -152,6 +193,11 @@ const Join = () => {
                 onChange={onChange} placeholder="비밀번호를 다시 입력해주세요."/>
         <br/>
             <span className="message">{passwordCheckMessage}</span>  
+        <br/>
+        <input className="member_text" type='text' name="name" value={name} onBlur={onBlurName} 
+                onChange={onChange} placeholder="이름을 입력해주세요."/>
+        <br/>
+            <span className="message">{nameMessage}</span>  
         <br/>
             <input className="member_text" type='text' name="nickname" value={nickname} onBlur={onBlurNickname}
              onChange={onChange}  placeholder="닉네임을 입력해주세요."/>

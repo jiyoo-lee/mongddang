@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
         try {
             return memberRepository.save(memberJoinDTO) > 0;
         } catch (DuplicateKeyException e) {
-            throw new ResultException("이미 존재하는 회원 ID 입니다.");
+            throw new ResultException("이미 존재하는 회원ID나 이메일입니다.");
         }
     }
 

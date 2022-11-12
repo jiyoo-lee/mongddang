@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
-import { PostAxios } from "../../utils/PostAxios";
+import PostAxios from "../../utils/PostAxios";
 
 //()=>(navigate('/find-result')
 const FindId = () => {

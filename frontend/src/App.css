@@ -99,6 +99,11 @@ li{
   background-color: #0f64f2;
 }
 
+.MyButton_positive:hover {
+  background-color: #3ac53a;
+  color: white;
+}
+
 /* Login */
 
 .member_wrapper {

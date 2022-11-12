@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import Friends from "./Friends";
 import { useNavigate } from "react-router-dom";
 import UploadedFriends from "./UploadedFriends";
+import MyFeed from "./MyFeed";
 
 
 const Feed = () =>{
@@ -20,6 +21,8 @@ const Feed = () =>{
                 <MyButton text={'업로드'}/>
             </div>
            <UploadedFriends/>
+           dd
+           <MyFeed/>
         </div>
         <div className="sub_wrapper">
             <Profile/>

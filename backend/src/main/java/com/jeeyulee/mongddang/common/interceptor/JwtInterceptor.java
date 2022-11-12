@@ -25,10 +25,14 @@ public class JwtInterceptor implements HandlerInterceptor {
         log.info("JwtInterceptor preHandle token ===> {}", token);
         log.info("URL ===> {}", request.getRequestURL().toString());
 
-        if (StringUtils.hasText(token) && jwtService.validate(token)) {
+        if (isOptions(request) || (StringUtils.hasText(token) && jwtService.validate(token))) {
             return true;
         }
 
         throw new ResultException("[WARNING] TOKEN IS NOT VALIDATE");
+    }
+
+    private boolean isOptions(HttpServletRequest request) {
+        return "OPTIONS".equals(request.getMethod());
     }
 }
