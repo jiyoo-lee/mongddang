@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/v1/member")
 @RequiredArgsConstructor
 @RestController

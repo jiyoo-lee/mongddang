@@ -1,18 +1,19 @@
 package com.jeeyulee.mongddang.common.config;
 
 import com.jeeyulee.mongddang.common.interceptor.JwtInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@RequiredArgsConstructor
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Autowired
-    JwtInterceptor jwtInterceptor;
+    private final JwtInterceptor jwtInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -23,5 +24,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/v1/member/login","/api/v1/member/join", "/api/v1/member/overlap",
                                      "/api/v1/member/seeking-id/auth-number", "/api/v1/member/user-id",
                                      "/api/v1/member/update-password/auth-number", "/api/v1/member/password");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000");
     }
 }
