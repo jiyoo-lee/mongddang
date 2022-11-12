@@ -22,8 +22,6 @@ public class MemberJoinDTO {
     @NotBlank(message = "닉네임은 필수 값입니다.")
     private String nickname;
 
-    private String extension;
-
     @Email(message = "이메일 양식을 지켜주세요.")
     @NotBlank(message = "이메일은 필수 값입니다.")
     private String email;

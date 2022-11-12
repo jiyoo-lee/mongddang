@@ -26,9 +26,7 @@ public class MemberServiceImplTest {
         member.setUserId("mong");
         member.setPassword("1234");
         member.setEmail("abc@mongddang.com");
-        member.setAddress("서울특별시");
         member.setNickname("몽당연필");
-        member.setExtension(".jpg");
         member.setName("이지유");
         member.setPhoneNumber("01012345678");
 

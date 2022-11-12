@@ -14,6 +14,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Slf4j
@@ -29,19 +31,8 @@ public class MemberServiceImpl implements MemberService {
     public Boolean join(MemberJoinDTO memberJoinDTO) {
         log.info("MemberServiceImpl join memberJoinDTO ===> {}", memberJoinDTO);
 
-        String fileName = convertToUUID(memberJoinDTO.getUserId(), memberJoinDTO.getNickname());
-
-        MemberJoinBuilderDTO memberJoinBuilderDTO = MemberJoinBuilderDTO.builder()
-                .userId(memberJoinDTO.getUserId())
-                .password(memberJoinDTO.getPassword())
-                .name(memberJoinDTO.getName())
-                .nickname(memberJoinDTO.getNickname())
-                .profilePicture(fileName + memberJoinDTO.getExtension())
-                .email(memberJoinDTO.getEmail())
-                .phoneNumber(memberJoinDTO.getPhoneNumber())
-                .build();
         try {
-            return memberRepository.save(memberJoinBuilderDTO) > 0;
+            return memberRepository.save(memberJoinDTO) > 0;
         } catch (DuplicateKeyException e) {
             throw new ResultException("이미 존재하는 회원 ID 입니다.");
         }
@@ -151,7 +142,19 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.updatePassword(passwordUpdateDTO) > 0;
     }
 
-    private String convertToUUID(String userId, String userName){
-        return UUID.randomUUID() + "_" + userId + "_" + userName;
+    @Override
+    public String uploadProfilePicture(String userId, String extension) {
+        String fileName = getFileName(userId, extension);
+
+        int update = memberRepository.updateProfilePicture(userId, fileName);
+        if (update  < 1) {
+            throw new ResultException("프로필 사진 업로드 중 오류가 발생했습니다.");
+        }
+        return fileName;
+    }
+
+    private String getFileName(String userId, String extenstion){
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        return UUID.randomUUID() + "_" + userId + today + extenstion;
     }
 }

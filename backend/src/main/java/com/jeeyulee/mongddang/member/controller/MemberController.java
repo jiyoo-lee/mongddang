@@ -1,6 +1,5 @@
 package com.jeeyulee.mongddang.member.controller;
 
-import com.jeeyulee.mongddang.common.mail.MailSendException;
 import com.jeeyulee.mongddang.common.result.ResultDTO;
 import com.jeeyulee.mongddang.member.domain.*;
 import com.jeeyulee.mongddang.member.service.MemberService;
@@ -107,6 +106,16 @@ public class MemberController {
     public ResponseEntity<ResultDTO> updatePassword(@RequestBody PasswordUpdateDTO passwordUpdateDTO) {
         ResultDTO result = new ResultDTO();
         result.setSuccess(memberService.updatePassword(passwordUpdateDTO));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @ApiOperation(value="프로필사진 업로드", notes="프로필 사진을 업로드하는 API")
+    @PutMapping("/{userId}/profile-picture")
+    public ResponseEntity<ResultDTO> uploadProfilePicture(@PathVariable String userId,
+                                                          @Valid @RequestBody ProfilePictureUploadDTO profilePictureUploadDTO) {
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(true);
+        result.setData(memberService.uploadProfilePicture(userId, profilePictureUploadDTO.getExtension()));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
