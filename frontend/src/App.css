@@ -378,3 +378,63 @@ li{
   padding-bottom: 10px;
   border-bottom: 1px solid #ececec;
 }
+.my_feed_wrapper{
+  padding-top: 10px;
+}
+
+.items{
+  width: 230px;
+  text-align: center;
+  float: left;
+}
+
+.user_info{
+  font-size: 11px;
+  padding-right: 70px;
+}
+
+.items_profile{
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+
+  cursor: pointer;
+}
+
+.items_img{
+  width: 167px;
+  height: 167px;
+
+  cursor: pointer;
+}
+
+.items_desc{
+  width: 660px;
+  height: 190px;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.items_title{
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.items_content{
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.user_like{
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.icon{
+  width: 12px;
+  cursor: pointer;
+}

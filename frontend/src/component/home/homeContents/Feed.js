@@ -21,8 +21,6 @@ const Feed = () =>{
                 <MyButton text={'업로드'}/>
             </div>
            <UploadedFriends/>
-           dd
-           <MyFeed/>
         </div>
         <div className="sub_wrapper">
             <Profile/>

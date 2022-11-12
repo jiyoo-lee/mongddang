@@ -1,3 +1,4 @@
+import MyFeed from "./MyFeed";
 
 const UploadedFriends = () =>{
     return (
@@ -17,6 +18,7 @@ const UploadedFriends = () =>{
             <img className="friendsRecommend" src='../.././img/test13.jpeg' alt="profile"/>
             <img className="friendsRecommend" src='../.././img/test14.jpeg' alt="profile"/>
         </div>
+        <MyFeed/>
     </div>
     );
 }
