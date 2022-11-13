@@ -12,25 +12,24 @@ import Find from './component/member/Find';
 import FindPwResult from './component/member/FindPwResult';
 import ChangePw from './component/member/ChangePw';
 import Feed from './component/home/homeContents/Feed';
+import AuthRoute from './utils/AuthRoute';
 
 
 function App() {
   return (
   <div>    
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/join' element={<Join/>}/>
-        <Route path='/join/profile' element={<JoinProfile/>}/>
-        <Route path='/findId' element={<FindId/>}/>
-        <Route path='/findPw' element={<FindPw/>}/>
-        <Route path='/find-result' element={<Findresult/>}/>
-        <Route path='/find' element={<Find/>}/>
-        <Route path='/findPw-result' element={<FindPwResult/>}/>
-        <Route path='/change-pw' element={<ChangePw/>}/>
-        <Route path='/home/feed' element={<Feed/>}/>
-      </Routes>
+        <AuthRoute needAuth={false} path='/' element={<Home/>}/>
+        <AuthRoute needAuth={false} path='/login' element={<Login/>}/>
+        <AuthRoute needAuth={false} path='/join' element={<Join/>}/>
+        <AuthRoute needAuth={true} path='/join/profile' element={<JoinProfile/>}/>
+        <AuthRoute needAuth={false} path='/findId' element={<FindId/>}/>
+        <AuthRoute needAuth={false} path='/findPw' element={<FindPw/>}/>
+        <AuthRoute needAuth={false} path='/find-result' element={<Findresult/>}/>
+        <AuthRoute needAuth={false} path='/find' element={<Find/>}/>
+        <AuthRoute needAuth={false} path='/findPw-result' element={<FindPwResult/>}/>
+        <AuthRoute needAuth={false} path='/change-pw' element={<ChangePw/>}/>
+        <AuthRoute needAuth={true} path='/home/feed' element={<Feed/>}/>
     </BrowserRouter>
   </div>
   );

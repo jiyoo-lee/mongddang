@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import MyButton from "../button/MyButton";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import PutAxios from "../../utils/PutAxios";
 
 const JoinProfile = () => {
@@ -10,7 +10,6 @@ const JoinProfile = () => {
     const [image, setImage] = useState("");
     const [extension, setExtension] =useState("");
     const location = useLocation();
-    const navigate = useNavigate();
 
     const userId = location.state.userId;
     const saveFileImage = (e) => {
