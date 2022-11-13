@@ -12,24 +12,26 @@ import Find from './component/member/Find';
 import FindPwResult from './component/member/FindPwResult';
 import ChangePw from './component/member/ChangePw';
 import Feed from './component/home/homeContents/Feed';
-import AuthRoute from './utils/AuthRoute';
-
+import NonAuthPage from './utils/route/NonAuthPage';
+import AuthPage from './utils/route/AuthPage';
 
 function App() {
   return (
   <div>    
     <BrowserRouter>
-        <AuthRoute needAuth={false} path='/' element={<Home/>}/>
-        <AuthRoute needAuth={false} path='/login' element={<Login/>}/>
-        <AuthRoute needAuth={false} path='/join' element={<Join/>}/>
-        <AuthRoute needAuth={true} path='/join/profile' element={<JoinProfile/>}/>
-        <AuthRoute needAuth={false} path='/findId' element={<FindId/>}/>
-        <AuthRoute needAuth={false} path='/findPw' element={<FindPw/>}/>
-        <AuthRoute needAuth={false} path='/find-result' element={<Findresult/>}/>
-        <AuthRoute needAuth={false} path='/find' element={<Find/>}/>
-        <AuthRoute needAuth={false} path='/findPw-result' element={<FindPwResult/>}/>
-        <AuthRoute needAuth={false} path='/change-pw' element={<ChangePw/>}/>
-        <AuthRoute needAuth={true} path='/home/feed' element={<Feed/>}/>
+      <Routes>
+        <Route path='/' element={<NonAuthPage><Home/></NonAuthPage>}/>
+        <Route path='/login' element={<NonAuthPage><Login/></NonAuthPage>}/>
+        <Route path='/join' element={<NonAuthPage><Join/></NonAuthPage>}/>
+        <Route path='/join/profile' element={<AuthPage><JoinProfile/></AuthPage>}/>
+        <Route path='/findId' element={<NonAuthPage><FindId/></NonAuthPage>}/>
+        <Route path='/findPw' element={<NonAuthPage><FindPw/></NonAuthPage>}/>
+        <Route path='/find-result' element={<NonAuthPage><Findresult/></NonAuthPage>}/>
+        <Route path='/find' element={<NonAuthPage><Find/></NonAuthPage>}/>
+        <Route path='/findPw-result' element={<NonAuthPage><FindPwResult/></NonAuthPage>}/>
+        <Route path='/change-pw' element={<NonAuthPage><ChangePw/></NonAuthPage>}/>
+        <Route path='/home/feed' element={<AuthPage><Feed/></AuthPage>}/>
+      </Routes>
     </BrowserRouter>
   </div>
   );

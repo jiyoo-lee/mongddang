@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate, useLocation} from "react-router-dom"
 import MyButton from "../button/MyButton";
-import  PutAxios from "../../utils/PutAxios";
+import  PutAxios from "../../utils/axios/PutAxios";
 
 const ChangePw = () => {
 

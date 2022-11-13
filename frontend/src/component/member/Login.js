@@ -3,7 +3,7 @@ import  axios  from 'axios';
 import { useNavigate } from "react-router-dom";
 
 import MyButton from '../button/MyButton'
-import PostAxios from '../../utils/PostAxios';
+import PostAxios from '../../utils/axios/PostAxios';
 
 const Login = ()=> {
     const [userId, setUserId] = useState("");

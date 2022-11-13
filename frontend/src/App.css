@@ -206,6 +206,7 @@ li{
   border-radius: 25px;
   margin-right: 10px;
   box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
+
 }
 
 .profile_wrapper{
@@ -377,9 +378,11 @@ li{
 
   padding-bottom: 10px;
   border-bottom: 1px solid #ececec;
+
 }
 .my_feed_wrapper{
-  padding-top: 10px;
+  display: inline-block;
+
 }
 
 .items{

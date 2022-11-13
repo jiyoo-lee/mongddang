@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import MyButton from "../button/MyButton";
 import { useLocation } from "react-router-dom";
-import PutAxios from "../../utils/PutAxios";
+import PutAxios from "../../utils/axios/PutAxios";
 
 const JoinProfile = () => {
 

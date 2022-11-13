@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GetAxios from "../../utils/GetAxios";
+import GetAxios from "../../utils/axios/GetAxios";
 import MyButton from "../button/MyButton";
 
 const FindPw = () => {

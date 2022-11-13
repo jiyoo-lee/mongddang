@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import GetAxios from "../../utils/GetAxios";
+import GetAxios from "../../utils/axios/GetAxios";
 import MyButton from "../button/MyButton";
 
 const Findresult = () => {

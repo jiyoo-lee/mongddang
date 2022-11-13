@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
 import { useState } from "react";
 import  axios  from 'axios';
-import GetAxios from "../../utils/GetAxios";
-import PostAxios  from "../../utils/PostAxios";
+import GetAxios from "../../utils/axios/GetAxios";
+import PostAxios  from "../../utils/axios/PostAxios";
 
 const Join = () => {
 
