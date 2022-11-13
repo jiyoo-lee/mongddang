@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import Friends from "./Friends";
 import { useNavigate } from "react-router-dom";
 import UploadedFriends from "./UploadedFriends";
+import MyUpload from "./MyUpload";
 
 const Upload = () => {
 
@@ -13,12 +14,15 @@ const Upload = () => {
         <div className="main_wrapper">
             <div className="menu_wrapper">
                 <MyButton text={'피드'}  onClick={()=>{navigate('/home/feed')}}/>
-                <MyButton text={'베스트'} type={'nothing'} onClick={()=>{navigate('/home/upload')}}/>
+                <MyButton text={'베스트'} onClick={()=>{navigate('/home/best')}}/>
                 <MyButton text={'지금 그림'}/>
-                <MyButton text={'업로드'}/>
+                <MyButton text={'업로드'} type={'nothing'} onClick={()=>{navigate('/home/upload')}}/>
             </div>
             <div className="home_wrapper">
+            <br/>
                 <UploadedFriends/>
+            <br/>
+            <MyUpload/>
             </div>
             </div>
         <div className="sub_wrapper">

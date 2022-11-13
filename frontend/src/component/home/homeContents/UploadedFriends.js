@@ -1,8 +1,7 @@
 
 const UploadedFriends = () => {
-
     return (
-        <div className="lasted_upload_friends">
+        <div className="contents_wrapper">
         최근 일주일 내 업로드한 친구들
 <br/>
 <br/>

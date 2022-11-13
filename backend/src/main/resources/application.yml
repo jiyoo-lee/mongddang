@@ -8,6 +8,6 @@ spring:
     import: classpath:/application-mail.yml
 jwt-token:
   issue-key: longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong # 64글자 이상
-  valid-time: 300000 # 5분
+  valid-time: 3000000 # 5분
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml

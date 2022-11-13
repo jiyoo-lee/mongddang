@@ -1,9 +1,7 @@
-import { Navigate } from "react-router-dom";
 import axios from "axios";
-
+import { Navigate } from "react-router-dom";
 
 const GetAxios = (url, requestData, callback) => axios.create({
-
     baseURL: 'http://localhost:8080/api/v1',
     headers: {
       "Authorization": sessionStorage.getItem("token")
@@ -14,12 +12,13 @@ const GetAxios = (url, requestData, callback) => axios.create({
         callback(response.data);
     }
     else {
-      alert(response.data.data);
-
       if(response.data.data === "[WARNING] TOKEN IS NOT VALIDATE") {
+        console.log("may i?");
         sessionStorage.removeItem("token");
-        return <Navigate to={"/login"}/>
+        <Navigate to="/login"/>
       }
+
+      alert(response.data.data);
     }
   })
   .catch(error=>{

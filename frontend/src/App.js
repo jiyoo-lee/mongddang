@@ -14,6 +14,8 @@ import ChangePw from './component/member/ChangePw';
 import Feed from './component/home/homeContents/Feed';
 import NonAuthPage from './utils/route/NonAuthPage';
 import AuthPage from './utils/route/AuthPage';
+import Upload from './component/home/homeContents/Upload';
+import NewDrops from './component/home/upload/NewDrops';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path='/findPw-result' element={<NonAuthPage><FindPwResult/></NonAuthPage>}/>
         <Route path='/change-pw' element={<NonAuthPage><ChangePw/></NonAuthPage>}/>
         <Route path='/home/feed' element={<AuthPage><Feed/></AuthPage>}/>
+        <Route path='/home/upload' element={<AuthPage><Upload/></AuthPage>}/>
+        <Route path='/home/upload/new-drops' element={<AuthPage><NewDrops/></AuthPage>}/>
       </Routes>
     </BrowserRouter>
   </div>

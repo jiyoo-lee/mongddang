@@ -371,14 +371,13 @@ li{
 
 /* feed */
 
-.lasted_upload_friends{
+.contents_wrapper{
   text-align: center;
   font-size: 15px;
   font-weight: bold;
 
   padding-bottom: 10px;
   border-bottom: 1px solid #ececec;
-
 }
 .my_feed_wrapper{
   display: inline-block;
@@ -439,5 +438,39 @@ li{
 
 .icon{
   width: 12px;
+  cursor: pointer;
+}
+
+
+/* upload */
+
+.home_message{
+  font-size: 25px;
+  font-weight: bold;
+
+  color: gray;
+}
+
+.upload_drops{
+  
+  text-align: center;
+}
+
+.drops_default{
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ececec;
+
+  margin-left: 15px;
+
+  cursor: pointer;
+}
+
+.drops{
+  width: 200px;
+  height: 200px;
+
+  margin-left: 15px;
+
   cursor: pointer;
 }
