@@ -1,15 +1,13 @@
-package com.jeeyulee.mongddang.drops.domain;
+package com.jeeyulee.mongddang.genre.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DropsDTO {
-    private String userId;
-    private Long genreId;
+@Data
+public class GenreDTO {
+    private Long id;
     private String name;
-    private Long typeId;
 }
