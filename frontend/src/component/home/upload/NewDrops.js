@@ -19,7 +19,7 @@ const NewDrops = () => {
                 <div className="menu_wrapper">
                     <MyButton text={'피드'}  onClick={()=>{navigate('/home/feed')}}/>
                     <MyButton text={'베스트'} onClick={()=>{navigate('/home/best')}}/>
-                    <MyButton text={'지금 그림'}/>
+                    <MyButton text={'지금 그림'} onClick={()=>{navigate('/home/now')}}/>
                     <MyButton text={'업로드'} type={'nothing'} 
                               onClick={()=>navigate('/home/upload')}/>
                 </div>

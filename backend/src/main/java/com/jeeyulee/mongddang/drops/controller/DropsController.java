@@ -25,6 +25,14 @@ public class DropsController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @ApiOperation(value="드랍 비밀 여부 조회", notes = "드랍 비밀 여부를 조회하여 설정 시 select option으로 줄 수 있음")
+    @GetMapping
+    public ResponseEntity<ResultDTO> retrieveSecret(){
+        ResultDTO result = new ResultDTO(true,dropsService.retrieveSecret());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
     
     @ApiOperation(value="드랍 상세조회 API", notes="드랍의 정보와 그림을 조회하는 API")
     @GetMapping("/{dropsId}")

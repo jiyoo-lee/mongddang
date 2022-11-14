@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import GetAxios from "../../../utils/axios/GetAxios";
+import PostAxios from "../../../utils/axios/PostAxios";
 import getAxiosfn from "../../../utils/axios/getAxiosFn";
 import { useState } from "react";
-import axios from "axios";
+
 
 const MyUpload = () => {
 
@@ -11,10 +11,21 @@ const MyUpload = () => {
     
     const onCreate = () => {
         getAxiosfn('/genre', {param:{}})
-        .then(r=>{
-            navigate("/home/upload/new-drops", {state:{options: r}});
+        .then(res=>{
+            navigate("/home/upload/new-drops", {state:{options: res}});
         });
+    }
 
+    const onUpload= (dropsId) => {
+        getAxiosfn('/genre', {param:{}})
+        .then(res=>{
+            navigate('/home/upload/painting', {
+                state: {
+                    options: res,
+                    dropsId: dropsId
+                }
+            });
+        });
     }
 
     return (
@@ -25,7 +36,7 @@ const MyUpload = () => {
             <br/>
             <br/>
                 <img className="drops" src={process.env.PUBLIC_URL + `../.././img/default_drops.png`} onClick={onCreate}/>
-                <img className="drops" src= {process.env.PUBLIC_URL + `../.././img/test2.jpg`}/>
+                <img className="drops" src= {process.env.PUBLIC_URL + `../.././img/test2.jpg`} onClick={()=>onUpload(4)}/>
                 <img className="drops" src= {process.env.PUBLIC_URL + `../.././img/cat...jpeg`}/>
                 <img className="drops"src= {process.env.PUBLIC_URL + `../.././img/test6.jpeg`}/>
             </div>

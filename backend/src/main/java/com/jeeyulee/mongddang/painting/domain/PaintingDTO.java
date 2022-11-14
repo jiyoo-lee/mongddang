@@ -13,6 +13,6 @@ public class PaintingDTO {
     private Long dropsId;
     private Long genreId;
     private String name;
-    private String extension;
+    private String paintingUrl;
     private String description;
 }

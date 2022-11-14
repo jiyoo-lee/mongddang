@@ -1,6 +1,7 @@
 package com.jeeyulee.mongddang.painting.repository;
 
 import com.jeeyulee.mongddang.painting.domain.PaintingCreationDTO;
+import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
 import com.jeeyulee.mongddang.painting.domain.PaintingUpdateBuilderDTO;
 import com.jeeyulee.mongddang.painting.domain.ConditionalPaintingsDTO;
 import org.apache.ibatis.annotations.*;
@@ -12,7 +13,7 @@ public interface PaintingRepository {
 
     @Insert("insert into painting(member_id, drops_id, genre_id, name, painting_url, description) " +
             "value(#{memberId}, #{dropsId}, #{genreId}, #{name}, #{paintingUrl}, #{description}) ")
-    public Integer save(PaintingCreationDTO paintingCreationDTO);
+    public Integer save(PaintingDTO paintingDTO);
 
     @Update("update painting " +
             "set " +

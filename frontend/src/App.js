@@ -15,7 +15,12 @@ import Feed from './component/home/homeContents/Feed';
 import NonAuthPage from './utils/route/NonAuthPage';
 import AuthPage from './utils/route/AuthPage';
 import Upload from './component/home/homeContents/Upload';
+import NewPainting from './component/home/upload/NewPainting';
 import NewDrops from './component/home/upload/NewDrops';
+import Best from './component/home/homeContents/Best';
+import Now from './component/home/homeContents/Now';
+import Drawer from './component/drawer/Drawer';
+import MyPage from './component/mypage/Mypage';
 
 function App() {
   return (
@@ -33,8 +38,13 @@ function App() {
         <Route path='/findPw-result' element={<NonAuthPage><FindPwResult/></NonAuthPage>}/>
         <Route path='/change-pw' element={<NonAuthPage><ChangePw/></NonAuthPage>}/>
         <Route path='/home/feed' element={<AuthPage><Feed/></AuthPage>}/>
+        <Route path='/home/best' element={<AuthPage><Best/></AuthPage>}/>
+        <Route path='/home/now' element={<AuthPage><Now/></AuthPage>}/>
         <Route path='/home/upload' element={<AuthPage><Upload/></AuthPage>}/>
-        <Route path='/home/upload/new-drops' element={<AuthPage><NewDrops/></AuthPage>}/>
+        <Route path='/home/upload/painting' element={<AuthPage><NewPainting/></AuthPage>}/>
+        <Route path='/home/upload/new-drops' element={<AuthPage><NewDrops/></AuthPage>}/>        
+        <Route path='/drawer' element={<AuthPage><Drawer/></AuthPage>}/>        
+        <Route path='/drawer/mypage' element={<AuthPage><MyPage/></AuthPage>}/>        
       </Routes>
     </BrowserRouter>
   </div>

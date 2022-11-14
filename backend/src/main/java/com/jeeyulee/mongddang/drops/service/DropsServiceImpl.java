@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,12 @@ public class DropsServiceImpl implements DropsService{
     public Boolean createDrop(DropsDTO dropsDTO) {
         return dropsRepository.save(dropsDTO) > 0;
     }
+
+    @Override
+    public DropsType retrieveSecret() {
+        return dropsRepository.retrieveSecret();
+    }
+
 
     @Override
     public DropsDetailDTO retrieveDropsDetail(Long dropsId) {

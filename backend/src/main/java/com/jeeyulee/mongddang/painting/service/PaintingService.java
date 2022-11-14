@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PaintingService {
 
-    public String createPainting(PaintingDTO paintingDTO);
+    public Boolean createPainting(PaintingDTO paintingDTO);
 
     public String updatePainting(Long paintingId, PaintingUpdateDTO paintingUpdateDTO);
 

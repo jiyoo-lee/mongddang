@@ -24,14 +24,13 @@ const JoinProfile = () => {
 
     const profileUploadUrl = '/member/'+userId+'/profile-picture';
 
+    const profileDirectory = ''
+
     const requestBody = {
         extension: extension
     }
 
     const onClick = () => {
-        console.log(profileUploadUrl);
-        console.log(requestBody);
-        console.log(sessionStorage.getItem("token"));
 
         PutAxios(profileUploadUrl, requestBody, (e)=>{
             console.log(e)

@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Nanum+Gothic:wght@400;700&family=Yeon+Sung&display=swap');
+
 
 html, body{
   width: 100%;
   height: 100vh;
   font-family: 'Nanum Gothic', sans-serif;
+  font-size: 14px;
 }
 
 li{
@@ -381,13 +383,13 @@ li{
 }
 .my_feed_wrapper{
   display: inline-block;
-
 }
 
 .items{
   width: 230px;
   text-align: center;
   float: left;
+
 }
 
 .user_info{
@@ -444,16 +446,28 @@ li{
 
 /* upload */
 
+.animation_message{
+  font-family: 'Gaegu', cursive;
+  font-size: 30px;
+
+  animation: cursor .9s infinite steps(2);
+}
+
 .home_message{
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 
-  color: gray;
+}
+
+@keyframes cursor {
+  from { border-right: 2px solid #222; }
+  to { border-right: 2px solid #777; }
 }
 
 .upload_drops{
   
   text-align: center;
+  padding-top: 80px;
 }
 
 .drops_default{
@@ -474,3 +488,75 @@ li{
 
   cursor: pointer;
 }
+
+.select_box{
+  width: 100px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.drops_text{
+  width: 450px;
+  height: 20px;
+}
+/* best */
+
+.select_wrapper{
+  text-align: right;
+  padding-bottom: 20px;
+  border-bottom: 0.5px solid #ececec;
+}
+
+/* drawer */
+
+.drawer_wrapper{
+  margin-top: 70px;
+  text-align: center;
+  height: 500px;
+
+}
+
+.drawer_wrapper .MyButton{
+  text-align: right;
+}
+
+.userid_message{
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  font-size: 30px;
+
+  color: orange;
+}
+
+.drawer_msg{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.drops_list{
+  height: 250px;
+  width: 220px;
+  float: left;
+
+  margin-left: 18px;
+ 
+}
+
+/* my page */
+
+.user_info_wrpper{
+  padding-top: 30px; 
+  
+}
+
+.member_info{
+  width: 400px;
+  height: 500px;
+
+  width: 60%;
+  margin: auto;
+  display: block;
+
+  text-align: center;
+}
+

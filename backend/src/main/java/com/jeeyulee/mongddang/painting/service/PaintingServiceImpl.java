@@ -21,24 +21,8 @@ public class PaintingServiceImpl implements PaintingService {
     private final JwtService jwtService;
 
     @Override
-    public String createPainting(PaintingDTO paintingDTO){
-       String fileName = convertToUUID(paintingDTO.getDropsId(), paintingDTO.getName());
-
-        PaintingCreationDTO paintingCreationDTO = PaintingCreationDTO.builder()
-                                .memberId(paintingDTO.getMemberId())
-                                .genreId(paintingDTO.getGenreId())
-                                .dropsId(paintingDTO.getDropsId())
-                                .name(paintingDTO.getName())
-                                .paintingUrl(fileName + paintingDTO.getExtension())
-                                .description(paintingDTO.getDescription())
-                                .build();
-
-        int result = paintingRepository.save(paintingCreationDTO);
-
-        if (result > 0) {
-            return fileName + paintingDTO.getExtension();
-        }
-        throw new ResultException("그림을 업로드할 수 없습니다.");
+    public Boolean createPainting(PaintingDTO paintingDTO){
+        return paintingRepository.save(paintingDTO) > 0;
     }
 
     @Override

@@ -13,6 +13,10 @@ public interface DropsRepository {
     @Insert("insert into drops( member_id, genre_id, name, type_id ) value (#{userId},#{genreId},#{name},#{typeId})")
     public Integer save(DropsDTO dropsDTO);
 
+    @Select("select * from drops_type")
+    public DropsType retrieveSecret();
+
+
     @Select("select M.user_id as memberId," +
             "       M.nickname as nickname, " +
             "       D.name as dropsName, " +

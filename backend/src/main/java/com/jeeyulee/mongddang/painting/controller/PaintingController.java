@@ -24,8 +24,7 @@ public class PaintingController {
     @PostMapping
     public ResponseEntity<ResultDTO> createPainting(@RequestBody PaintingDTO paintingDTO){
         ResultDTO result = new ResultDTO();
-        result.setData(paintingService.createPainting(paintingDTO));
-        result.setSuccess(true);
+        result.setSuccess(paintingService.createPainting(paintingDTO));
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

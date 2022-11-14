@@ -29,6 +29,7 @@ const Login = ()=> {
 
                 PostAxios('/member/login', requestBody, (data)=>{
                     sessionStorage.setItem("token", data.data);
+                    sessionStorage.setItem("userId", userId);
                     alert("로그인 되었습니다.");
                     navigate('/home/feed');
                 });
