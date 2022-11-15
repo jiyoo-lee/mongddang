@@ -5,50 +5,46 @@ import  GetAxios  from "../../../utils/axios/GetAxios";
 const MyBest = () => {
 
     const [option, setOption] = useState([]);
+    const [ paintingsByGenre , setPaintingByGenre ] = useState([]); 
 
     useEffect(()=>{
         GetAxios('/genre',{params:{}},(res)=>{setOption(res.data)})
     },[])
 
+    const onUpdate = (genreId) => {
+        console.log(genreId)
+        GetAxios('painting/popular/genre/'+genreId,{params:{}},(res)=>{
+            setPaintingByGenre(res.data);
+        })
+    }
     return (
         <>
         <div className="select_wrapper">
-            장르 별 <select className="select_box">
+            장르 별 <select className="select_box" onChange={(e)=>onUpdate(e.target.value)}>
             {option.map(op=>(
                     <option key={op.id} value={op.id}>{op.name}</option>
                 ))}
             </select>
         </div>
         <div className="my_feed_wrapper">
+            {paintingsByGenre.map(painting => (
+            <div key={painting.paintingId}>
             <div className="items">
-                <img className="items_img" src='../.././img/test7.jpeg' alt="drawing"/>
+                <img className="items_img" src={painting.paintingUrl} alt="drawing"/>
             </div>
             <div className="items_desc">
-                <img className="items_profile" src='../.././img/test12.jpeg' alt="profile"/>
-                <span className="user_info">짱돌(spring12)</span>
+                <img className="items_profile" src={painting.profileUrl} alt="profile"/>
+                <span className="user_info">{painting.nickname}({painting.memberId})</span>
         <br/>
                  <span className="user_info">2022-11-11 21:32</span>
         <br/>
-                <p className="items_title">실시간 그림~~</p>
-                <p className="items_content">재밌다 요즘!!!!! </p>
-            <span className="user_like"> <img className="icon" src="../.././img/like.png" alt="like"/> 28 </span>
-            <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment"/> 81 </span>
+                <p className="items_title">{painting.name}</p>
+                <p className="items_content">{painting.decription}</p>
+            <span className="user_like"> <img className="icon" src="../.././img/like.png" alt="like"/>{painting.mongddangCount}</span>
+            <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment"/>댓글수</span>
             </div>
-
-            <div className="items">
-                <img className="items_img" src='../.././img/test14.jpeg' alt="drawing"/>
             </div>
-            <div className="items_desc">
-                <img className="items_profile" src='../.././img/test5.jpeg' alt="profile"/>
-                <span className="user_info">도라에몽(doradora12)</span>
-        <br/>
-            <span className="user_info">2022-11-02 10:32</span>
-        <br/>
-                <p className="items_title">새로운 라이브러리 다운 받았음ㅎㅎ</p>
-                <p className="items_content">ㅋㅋㅋㅋㅋ나름 만족함 </p>
-                <span className="user_like"> <img className="icon" src="../.././img/like.png" alt="like"/> 5 </span>
-                <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment"/> 11 </span>
-            </div>
+            ))}
         </div>
         </>
     );

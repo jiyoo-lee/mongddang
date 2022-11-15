@@ -70,7 +70,6 @@ public class PaintingServiceImpl implements PaintingService {
 
         List<ConditionalPaintingsDTO> popularGenrePaintings =
                 paintingRepository.retrievePopularPaintingsByGenreId(genreId);
-        checkEmpty(popularGenrePaintings);
         return popularGenrePaintings;
     }
 
