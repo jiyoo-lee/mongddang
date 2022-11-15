@@ -1,20 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
 import Profile from "../home/homeContents/Profile";
 import Friends from "../home/homeContents/Friends";
-import MyDrawer from "./MyDrawer";
+import DropsPaintings from "./DropsPaintings";
 import { useEffect, useState } from "react";
 import GetAxios from "../../utils/axios/GetAxios";
 
-const Drawer = () => {
 
+const Paintings = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const [drops, setDrops] = useState([]);
+    const [paintings, setPaintings] = useState([]);
+
+    const dropsId = location.state.dropsId;
 
     useEffect(()=>{
-        GetAxios('/drawer/my/'+(sessionStorage.getItem("userId")),{params:{}},(res)=>{setDrops(res.data)})
+        GetAxios('/drops/'+dropsId,{params:{}},(res)=>{setPaintings(res.data.paintings)})
     },[])
+
 
     return (
         <div className="all_wrapper">
@@ -27,7 +31,7 @@ const Drawer = () => {
        </div>
    <div className="home_wrapper">
    <br/>
-       <MyDrawer drops={drops}/>
+      <DropsPaintings paintings={paintings} />
    </div>
    </div>
    <div className="sub_wrapper">
@@ -38,4 +42,4 @@ const Drawer = () => {
     );
 }
 
-export default Drawer;
+export default Paintings;

@@ -1,16 +1,14 @@
-import { useState } from "react";
-import  getAxiosFn  from "../../../utils/axios/getAxiosFn";
+import { useEffect, useState } from "react";
+import  GetAxios  from "../../../utils/axios/GetAxios";
 
 
 const MyBest = () => {
 
     const [option, setOption] = useState([]);
 
-    const genre = () =>{
-    getAxiosFn('/genre', {param:{}})
-    .then(res=>{ setOption(res)})};
-
-    genre();
+    useEffect(()=>{
+        GetAxios('/genre',{params:{}},(res)=>{setOption(res.data)})
+    },[])
 
     return (
         <>

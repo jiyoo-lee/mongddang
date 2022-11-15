@@ -467,7 +467,7 @@ li{
 .upload_drops{
   
   text-align: center;
-  padding-top: 80px;
+  padding-top: 10px;
 }
 
 .drops_default{
@@ -540,6 +540,14 @@ li{
 
   margin-left: 18px;
  
+}
+
+
+/* painting upload */
+
+.painting{
+  max-width: 800px;
+  max-height: 800px;
 }
 
 /* my page */

@@ -88,7 +88,6 @@ public class PaintingServiceImpl implements PaintingService {
 
         List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings =
                 paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId());
-        checkEmpty(retrieveLastFollowingPaintings);
         return retrieveLastFollowingPaintings;
     }
 

@@ -39,7 +39,8 @@ public class MemberController {
     @GetMapping("/overlap")
     public ResponseEntity<ResultDTO> checkOverlap(String userId){
        ResultDTO result = new ResultDTO();
-       result.setSuccess(memberService.checkOverlap(userId));
+       result.setSuccess(true);
+       result.setData(memberService.checkOverlap(userId));
 
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
@@ -114,8 +115,7 @@ public class MemberController {
     public ResponseEntity<ResultDTO> uploadProfilePicture(@PathVariable String userId,
                                                           @Valid @RequestBody ProfilePictureUploadDTO profilePictureUploadDTO) {
         ResultDTO result = new ResultDTO();
-        result.setSuccess(true);
-        result.setData(memberService.uploadProfilePicture(userId, profilePictureUploadDTO.getExtension()));
+        result.setSuccess(memberService.uploadProfilePicture(userId, profilePictureUploadDTO.getProfileUrl()));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

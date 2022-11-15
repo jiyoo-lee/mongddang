@@ -17,12 +17,11 @@ const GetAxios = (url, requestData, callback) => axios.create({
         sessionStorage.removeItem("token");
         <Navigate to="/login"/>
       }
-
       alert(response.data.data);
     }
   })
   .catch(error=>{
-    alert(error);
+    console.log(error);
   });
 
 export default GetAxios;

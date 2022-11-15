@@ -1,9 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
 
-const MyDrawer = () => {
+const MyDrawer = (props) => {
 
     const navigate = useNavigate();
+
+
+    const goToPage = (dropsId) => {
+        navigate('/drawer/paintings',{state:{dropsId:dropsId}})
+    }
+
     return (
         <div className="drawer_wrapper">
             <span className="userid_message">{sessionStorage.getItem("userId")}</span> <span className="drawer_msg">님의 드랍 개수 : </span>
@@ -15,22 +21,12 @@ const MyDrawer = () => {
         <br/>
         <br/>
         <br/>
-            <div className="drops_list">
-                <img className="drops"src= {process.env.PUBLIC_URL + `../.././img/test5.jpeg`}/>
-                <span className="drawer_msg">나의 추억</span>
+        {props.drops.map(drop => (
+            <div className="drops_list" key={drop.id} >
+                <img className="drops"src={drop.lastPaintingUrl}onClick={()=>goToPage(drop.id)}/>
+                <span className="drawer_msg">{drop.name}</span>
             </div>
-            <div className="drops_list">
-                <img className="drops"src= {process.env.PUBLIC_URL + `../.././img/test6.jpeg`}/>
-                <span className="drawer_msg" >20세기 소녀</span>
-            </div>
-            <div className="drops_list">
-                <img className="drops"src= {process.env.PUBLIC_URL + `../.././img/test2.jpg`}/>
-                <span className="drawer_msg">편의점 알바로 살아남기</span>
-            </div>
-            <div className="drops_list">
-                <img className="drops"src= {process.env.PUBLIC_URL + `../.././img/test9.jpeg`}/>
-                <span className="drawer_msg">재밌다</span>
-            </div>
+        ))}
             <br/>
         </div>
     );

@@ -7,6 +7,7 @@ import MyUpload from "./MyUpload";
 
 const Upload = () => {
 
+
     const navigate = useNavigate();
     return (
         <div className="all_wrapper">

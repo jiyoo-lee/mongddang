@@ -25,4 +25,9 @@ public class DrawerController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/my/{userId}")
+    public ResponseEntity<ResultDTO> retrieveMyDrawer(@NotBlank @PathVariable String userId) {
+        ResultDTO result = new ResultDTO(true, drawerService.retrieveMyDrawer(userId));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ProfilePictureUploadDTO {
-    private String extension;
+    private String profileUrl;
 }

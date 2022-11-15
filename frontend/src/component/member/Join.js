@@ -70,17 +70,24 @@ const Join = () => {
                 password:password
             };
             
-            PostAxios('/member/join', joinRequestBody,()=>{
-                                        
+            PostAxios('/member/join', joinRequestBody, ()=>{
                                         axios.get('https://geolocation-db.com/json/')
                                         .then((res) => {
+                                            console.log(res);
                                             loginRequestBody.accessIp = res.data["IPv4"];
                                             loginRequestBody.latitude = res.data["latitude"];
                                             loginRequestBody.longitude = res.data["longitude"]
                             
                                             PostAxios('/member/login', loginRequestBody, (data)=>{
-                                                sessionStorage.setItem("token", data.data)})})
-                                            .then(navigate('/join/profile',{state:{userId:memberId}}))})
+                                                console.log(data);
+                                                sessionStorage.setItem("token", data.data);
+                                                sessionStorage.setItem("userId", memberId);
+                                            }).then((res)=>{
+                                                console.log(res);
+                                                navigate('/join/profile',{state:{userId:memberId}});
+                                            })
+                                        })
+                                    })
         
         }else{
             alert("회원 정보를 다시 정확하게 기재해주세요")
@@ -96,7 +103,9 @@ const Join = () => {
         else if(memberId.length > 4) {
                 GetAxios('/member/overlap',
                 {params: {userId:memberId}},
-                (data)=>  {if(data === null){
+                (data)=> {
+                    console.log(data)
+                    if(!data.data){
                             setMemberIdMessage("멋진 아이디네요!")
                             setNotOverlap(true)
                 }else{

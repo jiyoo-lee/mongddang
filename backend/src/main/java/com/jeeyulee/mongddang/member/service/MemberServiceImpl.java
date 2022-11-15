@@ -143,14 +143,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String uploadProfilePicture(String userId, String extension) {
-        String fileName = getFileName(userId, extension);
+    public Boolean uploadProfilePicture(String userId, String paintingUrl) {
 
-        int update = memberRepository.updateProfilePicture(userId, fileName);
+        int update = memberRepository.updateProfilePicture(userId, paintingUrl);
+        System.out.println(userId);
+        System.out.println(paintingUrl);
         if (update  < 1) {
             throw new ResultException("프로필 사진 업로드 중 오류가 발생했습니다.");
         }
-        return fileName;
+        return update > 0;
     }
 
     private String getFileName(String userId, String extenstion){

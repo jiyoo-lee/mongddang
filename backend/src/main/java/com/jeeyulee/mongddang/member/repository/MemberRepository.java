@@ -70,7 +70,7 @@ public interface MemberRepository {
     public Integer updatePassword(PasswordUpdateDTO passwordUpdateDTO);
 
     @Update("update member " +
-            "set profile_picture = #{fileName} " +
+            "set profile_picture = #{paintingUrl} " +
             "where user_id = #{userId}")
-    public Integer updateProfilePicture(String userId, String fileName);
+    public Integer updateProfilePicture(String userId, String paintingUrl);
 }

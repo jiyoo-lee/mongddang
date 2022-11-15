@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
 
 const Friends = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="friends_wrapper">
         <div className="recommend">
@@ -7,7 +10,7 @@ const Friends = () => {
         <div className="friends_message">알 수도 있는 친구들</div>
         <br/>
         <br/>
-            <img className="friendsRecommend" src='../.././img/test.jpg' alt="profile"/>
+            <img className="friendsRecommend" src='../.././img/test.jpg' alt="profile" onClick={()=>(navigate("/drawer/jeeyu"))}/>
             <img className="friendsRecommend" src='../.././img/test2.jpg' alt="profile"/>
             <img className="friendsRecommend" src='../.././img/test3.png' alt="profile"/>
             <img className="friendsRecommend" src='../.././img/test4.jpeg' alt="profile"/>

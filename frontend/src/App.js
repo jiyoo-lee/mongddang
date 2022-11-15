@@ -21,6 +21,8 @@ import Best from './component/home/homeContents/Best';
 import Now from './component/home/homeContents/Now';
 import Drawer from './component/drawer/Drawer';
 import MyPage from './component/mypage/Mypage';
+import Paintings from './component/drawer/Paintings';
+import OtherDrawer from './component/drawer/OtherDrawer';
 
 function App() {
   return (
@@ -44,7 +46,10 @@ function App() {
         <Route path='/home/upload/painting' element={<AuthPage><NewPainting/></AuthPage>}/>
         <Route path='/home/upload/new-drops' element={<AuthPage><NewDrops/></AuthPage>}/>        
         <Route path='/drawer' element={<AuthPage><Drawer/></AuthPage>}/>        
+        <Route path='/drawer/paintings' element={<AuthPage><Paintings/></AuthPage>}/>        
         <Route path='/drawer/mypage' element={<AuthPage><MyPage/></AuthPage>}/>        
+        <Route path='/drawer/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
+
       </Routes>
     </BrowserRouter>
   </div>

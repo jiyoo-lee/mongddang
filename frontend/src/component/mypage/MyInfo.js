@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import getAxiosFn from "../../utils/axios/getAxiosFn";
+import GetAxios from "../../utils/axios/GetAxios";
+import PutAxios from "../../utils/axios/PutAxios";
 import MyButton from "../button/MyButton";
 
 const MyInfo = () => {
@@ -9,13 +10,26 @@ const MyInfo = () => {
 
     let userId = sessionStorage.getItem("userId");
     
-    useEffect(() => getAxiosFn('/member/' + userId, {params:{}})
-        .then((res) => {
-            setNickname(res.nickname);
-            setEmail(res.email);
-            setPhoneNumber(res.phoneNumber);
-        })
-    , []);
+    useEffect( (e) => {
+        async function fetchData(){
+            await GetAxios('/member/'+userId,{params:{}},(res)=>{
+                setNickname(res.data.nickname)
+                setEmail(res.data.email)
+                setPhoneNumber(res.data.phoneNumber)
+            })
+        }
+            fetchData();
+    },[]);
+
+    const requestBody = {
+        userId: userId,
+        nickname : nickname,
+        email : email,
+        phoneNumber : phoneNumber,
+    }
+    const onEdit = () => {
+        PutAxios('/member/',requestBody,(res)=>{console.log(res)})
+    }
 
     return (
         <div className="user_info_wrpper">
@@ -27,18 +41,18 @@ const MyInfo = () => {
         <br/>
             <input className="member_text" type='text' value={sessionStorage.getItem("userId")} readOnly/>
         <br/>
-            <input className="member_text" name = "nickname" type="text" value={nickname} onChange={e => {
-                console.log(e.target.value);
-                setNickname(e.target.value);
-            }}/>
+            <input className="member_text" name = "nickname" type="text" value={nickname} onChange={(e) => {
+                setNickname(e.target.value)}}/>
         <br/>
-            <input className="member_text" type='text' value={email} onChange={()=>{}}/>
+            <input className="member_text" type='text' value={email} onChange={ (e) => {
+                setEmail(e.target.value)}}/>
         <br/>
-            <input className="member_text" type='text'  value={phoneNumber} onChange={()=>{}} />
+            <input className="member_text" type='text'  value={phoneNumber} onChange={(e) => {
+                setPhoneNumber(e.target.value)}} />
         <br/>
         <br/>
         <br/>
-            <MyButton text={' 저장 '}/>
+            <MyButton text={' 저장 '} onClick={onEdit}/>
             <MyButton text={' 비밀번호 변경 '} type={'positive'}/>
             </div>
         </div>

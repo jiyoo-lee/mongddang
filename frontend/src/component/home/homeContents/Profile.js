@@ -13,7 +13,7 @@ const Profile = () => {
             </div>
         <br/>
             <div className="social_wrapper">
-                <div className="social"> 지유 [jeeyu] <br/><br/>
+                <div className="social"> {sessionStorage.getItem("userId")} <br/><br/>
                 팔로우  <span className="people">98981</span> | 팔로잉 <span className="people"> 907</span> </div>
             </div>
         <br/>
