@@ -1,6 +1,7 @@
 import MyButton from "../../button/MyButton";
 import Profile from "./Profile";
 import Friends from "./Friends";
+import MyNow from "./MyNow";
 import { useNavigate } from "react-router-dom";
 import UploadedFriends from "./UploadedFriends";
 
@@ -23,7 +24,7 @@ const Now = () => {
             <br/>
             <UploadedFriends/>
         <br/>
-        
+            <MyNow/>
             </div>
             </div>
         <div className="sub_wrapper">

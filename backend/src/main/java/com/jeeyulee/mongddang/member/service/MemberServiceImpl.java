@@ -154,6 +154,11 @@ public class MemberServiceImpl implements MemberService {
         return update > 0;
     }
 
+    @Override
+    public Boolean deleteProfilePicture(String userId) {
+        return memberRepository.deleteProfilePicture(userId) > 0;
+    }
+
     private String getFileName(String userId, String extenstion){
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         return UUID.randomUUID() + "_" + userId + today + extenstion;

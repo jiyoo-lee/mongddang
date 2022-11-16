@@ -72,4 +72,9 @@ public interface MemberRepository {
             "set profile_picture = #{paintingUrl} " +
             "where user_id = #{userId}")
     public Integer updateProfilePicture(String userId, String paintingUrl);
+
+    @Update("update member " +
+            "set profile_url = null " +
+            "where user_id = #{userId}")
+    public Integer deleteProfilePicture(String userId);
 }

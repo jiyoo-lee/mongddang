@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import GetAxios from "../../utils/axios/GetAxios";
 import PutAxios from "../../utils/axios/PutAxios";
+import DeleteAxios from "../../utils/axios/DeleteAxios";
 import MyButton from "../button/MyButton";
 
 const MyInfo = () => {
@@ -38,6 +39,10 @@ const MyInfo = () => {
         PutAxios('/member/',requestBody,(res)=>{console.log(res)})
     }
 
+    const onDelete = () => {
+        DeleteAxios('/member/'+userId+'/profile-picture',{params:{}},window.location.reload())
+    }
+
     return (
         <div className="user_info_wrpper">
             <div className="member_info">
@@ -45,7 +50,8 @@ const MyInfo = () => {
         <br/>
         <br/>
             <img className="profile" src={profile === null? process.env.PUBLIC_URL + `../.././img/present_logo.png` : profile}/>
-            <img className="user_like" src={process.env.PUBLIC_URL + `../.././img/edit_icon.svg`} onClick={()=>navigate('/profile')}/>
+            <img className="info_icon" src={process.env.PUBLIC_URL + `../.././img/edit_icon.svg`} onClick={()=>navigate('/profile')}/>
+            <img className="info_icon" src={process.env.PUBLIC_URL + `../.././img/delete_icon.svg`} onClick={onDelete}/>
         <br/>
             <input className="member_text" type='text' value={sessionStorage.getItem("userId")} readOnly/>
         <br/>

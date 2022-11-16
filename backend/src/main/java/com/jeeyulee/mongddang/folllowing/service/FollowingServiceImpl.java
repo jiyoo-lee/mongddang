@@ -64,6 +64,7 @@ public class FollowingServiceImpl implements FollowingService {
         return followingRepository.retrieveLastUpdatedFriends(userId);
     }
 
+
     private void checkTokenIsEmpty(String userIdOnToken){
         if(userIdOnToken == null) throw new ResultException("유효하지않은 접근입니다.");
     }

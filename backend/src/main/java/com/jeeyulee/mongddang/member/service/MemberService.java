@@ -15,5 +15,7 @@ public interface MemberService {
     public String retrieveAuthNumber(String email);
     public Boolean updatePassword(PasswordUpdateDTO passwordUpdateDTO);
     public Boolean uploadProfilePicture(String userId, String paintingUrl);
+
+    public Boolean deleteProfilePicture(String userId);
 }
 

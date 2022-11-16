@@ -2,10 +2,7 @@ package com.jeeyulee.mongddang.folllowing.repository;
 
 import com.jeeyulee.mongddang.folllowing.domain.FollowCountDTO;
 import com.jeeyulee.mongddang.folllowing.domain.FollowingDTO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -53,9 +50,11 @@ public interface FollowingRepository {
             "group by P.member_id")
     public List<FollowingDTO> retrieveLastUpdatedFriends(String userId);
 
+
     @Delete("delete from social " +
             "where member_id = #{userIdOnToken} and follow_member_id = #{userId} ")
     public Integer delete(String userIdOnToken, String userId);
+
 
 
 }

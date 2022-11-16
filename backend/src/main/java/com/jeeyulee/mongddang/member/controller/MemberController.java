@@ -118,4 +118,14 @@ public class MemberController {
         result.setSuccess(memberService.uploadProfilePicture(userId, profilePictureUploadDTO.getProfileUrl()));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @ApiOperation(value = "프로필 사진 삭제", notes = "프로필 사진을 삭제하는 API")
+    @DeleteMapping("/{userId}/profile-picture")
+    public ResponseEntity<ResultDTO> deleteProfilePicture(@PathVariable String userId) {
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(memberService.deleteProfilePicture(userId));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }

@@ -24,6 +24,7 @@ import MyPage from './component/mypage/Mypage';
 import Paintings from './component/drawer/Paintings';
 import OtherDrawer from './component/drawer/OtherDrawer';
 import Guestbook from './component/guestbook/Guestbook';
+import Followers from './component/home/homeContents/Followers';
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
         <Route path='/drawer/paintings' element={<AuthPage><Paintings/></AuthPage>}/>        
         <Route path='/drawer/mypage' element={<AuthPage><MyPage/></AuthPage>}/>        
         <Route path='/drawer/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
-        <Route path='/drawer/followers/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
+        <Route path='/drawer/buddy/:userId' element={<AuthPage><Followers/></AuthPage>}/>
 
         /* 방명록 */
         <Route path='/guestbook/:userId' element={<AuthPage><Guestbook/></AuthPage>}/>

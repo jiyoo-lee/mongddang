@@ -35,9 +35,9 @@ const Profile = () => {
         <br/>
             <div className="social_wrapper">
                 <div className="social"> {nickname} ({userId}) <br/><br/>
-                팔로워  <span className="people" onClick={()=>navigate('/drawer/followers/'+userId)}>{followers}</span> 
+                팔로워  <span className="people" onClick={()=>navigate('/drawer/buddy/'+userId)}>{followers}</span> 
                  
-                팔로잉 <span className="people" onClick={()=>navigate('/drawer/followings/'+userId)}>{following}</span> </div>
+                팔로잉 <span className="people" onClick={()=>navigate('/drawer/buddy/'+userId)}>{following}</span> </div>
             </div>
         <br/>
         <br/>
