@@ -101,7 +101,7 @@ const MyPainting = () => {
                     style= {{ margin:"auto"}} />
                 )}
             </div>
-       {/* //onDrop(e.target.files[0]) */}
+       
         <br/>
         <br/>
             <textarea name="content" onChange={onChange}></textarea>

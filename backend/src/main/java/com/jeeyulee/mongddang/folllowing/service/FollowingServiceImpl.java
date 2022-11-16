@@ -2,6 +2,7 @@ package com.jeeyulee.mongddang.folllowing.service;
 
 import com.jeeyulee.mongddang.common.exception.DeniedAccessException;
 import com.jeeyulee.mongddang.common.result.ResultException;
+import com.jeeyulee.mongddang.folllowing.domain.FollowCountDTO;
 import com.jeeyulee.mongddang.folllowing.domain.FollowingDTO;
 import com.jeeyulee.mongddang.folllowing.repository.FollowingRepository;
 import com.jeeyulee.mongddang.member.service.JwtService;
@@ -50,6 +51,17 @@ public class FollowingServiceImpl implements FollowingService {
         String userIdOnToken = jwtService.retrieveUserId();
         checkTokenIsEmpty(userIdOnToken);
         return followingRepository.delete(userIdOnToken, userId) > 0;
+    }
+
+    @Override
+    public FollowCountDTO retrieveCountFollowers(String userId) {
+        return followingRepository.retrieveCountFollowers(userId);
+    }
+
+    @Override
+    public List<FollowingDTO> retrieveLastUpdatedFriends(String userId) {
+        checkTokenIsEmpty(userId);
+        return followingRepository.retrieveLastUpdatedFriends(userId);
     }
 
     private void checkTokenIsEmpty(String userIdOnToken){

@@ -1,21 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import GetAxios from "../../utils/axios/GetAxios";
 import PutAxios from "../../utils/axios/PutAxios";
 import MyButton from "../button/MyButton";
 
 const MyInfo = () => {
+
+    const navigate = useNavigate();
+
     const [nickname, setNickname] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [profile, setProfile] = useState("");
+  
 
     let userId = sessionStorage.getItem("userId");
-    
+
     useEffect( (e) => {
         async function fetchData(){
             await GetAxios('/member/'+userId,{params:{}},(res)=>{
                 setNickname(res.data.nickname)
                 setEmail(res.data.email)
                 setPhoneNumber(res.data.phoneNumber)
+                setProfile(res.data.profilePicture)
             })
         }
             fetchData();
@@ -37,7 +44,8 @@ const MyInfo = () => {
             <span className="userid_message">회원 정보</span>
         <br/>
         <br/>
-            <img className="profile"src= {process.env.PUBLIC_URL + `../.././img/test5.jpeg`}/>
+            <img className="profile" src={profile === null? process.env.PUBLIC_URL + `../.././img/present_logo.png` : profile}/>
+            <img className="user_like" src={process.env.PUBLIC_URL + `../.././img/edit_icon.svg`} onClick={()=>navigate('/profile')}/>
         <br/>
             <input className="member_text" type='text' value={sessionStorage.getItem("userId")} readOnly/>
         <br/>

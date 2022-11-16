@@ -1,13 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import PostAxios from "../../../utils/axios/PostAxios";
 import getAxiosfn from "../../../utils/axios/getAxiosFn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import GetAxios from "../../../utils/axios/GetAxios";
 
 
 const MyUpload = () => {
 
     const navigate = useNavigate();
-    const [options, setOptions] = useState([]);
+    const [drops, setDrops] = useState([]);
+    const userId = sessionStorage.getItem("userId");
+
+    useEffect(()=> {
+        GetAxios('/drawer/list/'+userId, {params:{}},(res)=>{
+            setDrops(res.data)
+        })
+    },[])
     
     const onCreate = () => {
         getAxiosfn('/genre', {param:{}})
@@ -36,9 +44,13 @@ const MyUpload = () => {
             <br/>
             <br/>
                 <img className="drops" src={process.env.PUBLIC_URL + `../.././img/default_drops.png`} onClick={onCreate}/>
-                <img className="drops" src= {process.env.PUBLIC_URL + `../.././img/test2.jpg`} onClick={()=>onUpload(4)}/>
-                <img className="drops" src= {process.env.PUBLIC_URL + `../.././img/cat...jpeg`}/>
-                <img className="drops"src= {process.env.PUBLIC_URL + `../.././img/test6.jpeg`}/>
+                {
+                    drops && drops.map(drop => (
+                        <img className="drops" key={drop.id}
+                        src={drop.lastPaintingUrl === null?process.env.PUBLIC_URL + `../.././img/no_image_.png`: drop.lastPaintingUrl} onClick={()=>onUpload(drop.id)}/>
+                    ))
+                }
+                
             </div>
         </>
     );

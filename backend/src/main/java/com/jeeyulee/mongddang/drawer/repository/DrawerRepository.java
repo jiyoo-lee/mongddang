@@ -47,7 +47,7 @@ public interface DrawerRepository {
     public List<DrawerDropsDTO> findDropsByUserId(String userId);
 
     @Select("select D.*," +
-            "(select P.painting_url from painting P where D.member_id = P.member_id limit 0,1)lastPaintingUrl " +
+            "(select P.painting_url from painting P where D.member_id = P.member_id and D.id = P.drops_id order by create_datetime desc limit 0,1)lastPaintingUrl " +
             "from drops D where D.member_id = #{userId}")
     public List<DrawerDTO> retrieveMyDrops(String userId);
 }

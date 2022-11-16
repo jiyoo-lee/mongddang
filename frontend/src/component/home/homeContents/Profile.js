@@ -1,21 +1,45 @@
+import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
+import GetAxios from "../../../utils/axios/GetAxios";
 
 
 const Profile = () => {
     
     const navigate = useNavigate();
 
+    const [nickname, setNickname] = useState("");
+    const [profile, setProfile] = useState("");
+    const [following ,setFollowing] = useState("");
+    const [followers ,setFollowers] = useState("");
+    let userId = sessionStorage.getItem("userId");
+
+    useEffect( (e) => {
+        async function fetchData(){
+            await GetAxios('/member/'+userId,{params:{}},(res)=>{
+                setNickname(res.data.nickname)
+                setProfile(res.data.profilePicture)
+            }).then (GetAxios('/following/count/'+userId,{params:{}},(res)=>{
+                setFollowers(res.data.followers)
+                setFollowing(res.data.followings)
+            }))
+        }
+            fetchData();
+    },[]);
+
     return (
         <div className="profile_wrapper">
             <div className="img_wrapper">
             <br/>
-                    <img className='profile_img' src='../.././img/test5.jpeg'/>
+                    <img className='profile_img' src={profile}/>
             </div>
         <br/>
             <div className="social_wrapper">
-                <div className="social"> {sessionStorage.getItem("userId")} <br/><br/>
-                팔로우  <span className="people">98981</span> | 팔로잉 <span className="people"> 907</span> </div>
+                <div className="social"> {nickname} ({userId}) <br/><br/>
+                팔로워  <span className="people" onClick={()=>navigate('/drawer/followers/'+userId)}>{followers}</span> 
+                 
+                팔로잉 <span className="people" onClick={()=>navigate('/drawer/followings/'+userId)}>{following}</span> </div>
             </div>
+        <br/>
         <br/>
             <div className="top_menu_wrapper">
                 <ul className ="top_menu_ul">

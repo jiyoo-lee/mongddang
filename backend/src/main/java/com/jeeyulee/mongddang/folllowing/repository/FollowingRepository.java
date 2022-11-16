@@ -1,5 +1,6 @@
 package com.jeeyulee.mongddang.folllowing.repository;
 
+import com.jeeyulee.mongddang.folllowing.domain.FollowCountDTO;
 import com.jeeyulee.mongddang.folllowing.domain.FollowingDTO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -36,7 +37,25 @@ public interface FollowingRepository {
             "on M.user_id = S.member_id")
     public List<FollowingDTO> retrieveRecommendFriends(String userId);
 
+    @Select("select count(member_id) followers, " +
+            "       (select count(follow_member_id) " +
+            "       from social " +
+            "       where member_id = #{userId}) followings " +
+            "from social " +
+            "where follow_member_id = #{userId}")
+    public FollowCountDTO retrieveCountFollowers(String userId);
+
+    @Select("select P.member_id," +
+            "   (select M.nickname from member M where M.user_id = P.member_id)nickname," +
+            "   (select M.profile_picture from member M where M.user_id = P.member_id)profileUrl " +
+            "   from painting P where P.member_id in (select follow_member_id from social where member_id = #{userId}) " +
+            "and create_datetime > date_add(now(), interval -7 day) " +
+            "group by P.member_id")
+    public List<FollowingDTO> retrieveLastUpdatedFriends(String userId);
+
     @Delete("delete from social " +
             "where member_id = #{userIdOnToken} and follow_member_id = #{userId} ")
     public Integer delete(String userIdOnToken, String userId);
+
+
 }

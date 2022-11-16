@@ -76,7 +76,7 @@ const JoinProfile = () => {
             <MyButton onClick={onClickImageUpload} text={'이미지 업로드'}/>
         <br/>
         <br/>
-            <MyButton type={'positive'} text={'몽땅 시작하기'} onClick={onDrop}/>
+            <MyButton type={'positive'} text={'프로필 저장'} onClick={onDrop}/>
         </div>
     </div>
  );

@@ -23,6 +23,7 @@ import Drawer from './component/drawer/Drawer';
 import MyPage from './component/mypage/Mypage';
 import Paintings from './component/drawer/Paintings';
 import OtherDrawer from './component/drawer/OtherDrawer';
+import Guestbook from './component/Guestbook';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         <Route path='/' element={<NonAuthPage><Home/></NonAuthPage>}/>
         <Route path='/login' element={<NonAuthPage><Login/></NonAuthPage>}/>
         <Route path='/join' element={<NonAuthPage><Join/></NonAuthPage>}/>
-        <Route path='/join/profile' element={<AuthPage><JoinProfile/></AuthPage>}/>
+        <Route path='/profile' element={<AuthPage><JoinProfile/></AuthPage>}/>
         <Route path='/findId' element={<NonAuthPage><FindId/></NonAuthPage>}/>
         <Route path='/findPw' element={<NonAuthPage><FindPw/></NonAuthPage>}/>
         <Route path='/find-result' element={<NonAuthPage><Findresult/></NonAuthPage>}/>
@@ -49,6 +50,10 @@ function App() {
         <Route path='/drawer/paintings' element={<AuthPage><Paintings/></AuthPage>}/>        
         <Route path='/drawer/mypage' element={<AuthPage><MyPage/></AuthPage>}/>        
         <Route path='/drawer/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
+        <Route path='/drawer/followers/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
+
+        /* 방명록 */
+        <Route path='/guestbook/:userId' element={<AuthPage><Guestbook/></AuthPage>}/>
 
       </Routes>
     </BrowserRouter>

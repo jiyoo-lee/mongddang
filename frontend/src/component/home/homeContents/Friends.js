@@ -1,7 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import GetAxios from "../../../utils/axios/GetAxios";
 
 const Friends = () => {
     const navigate = useNavigate();
+
+    const [friendRecommend, setFriendRecommend] = useState([]);
+
+    useEffect(()=>{
+        GetAxios('following/recommend',{params:{}},(res)=>{setFriendRecommend(res.data)})
+    },[])
 
     return (
         <div className="friends_wrapper">
@@ -10,10 +18,21 @@ const Friends = () => {
         <div className="friends_message">알 수도 있는 친구들</div>
         <br/>
         <br/>
-            <img className="friendsRecommend" src='../.././img/test.jpg' alt="profile" onClick={()=>(navigate("/drawer/jeeyu"))}/>
-            <img className="friendsRecommend" src='../.././img/test2.jpg' alt="profile"/>
-            <img className="friendsRecommend" src='../.././img/test3.png' alt="profile"/>
-            <img className="friendsRecommend" src='../.././img/test4.jpeg' alt="profile"/>
+        {
+            friendRecommend && 
+            friendRecommend.length < 1 ? <div>
+                <img className="friendsRecommend" src={process.env.PUBLIC_URL + `../.././img/present_logo.png`}/>
+            <br/>
+                <span className="message">추천 친구가 없습니다. 친구를 팔로우 해보세요 !</span>
+            </div> :
+            (friendRecommend.map(friend=> (
+                <div key={friend.memberId}>
+                    <img className="friendsRecommend" src={friend.profileUrl} alt="profile" onClick={()=>(navigate("/drawer/"+friend.memberId))}/>
+                <br/>
+                    <span>{friend.nickname}</span>
+                </div>
+            )))
+        }    
         <br/>
         </div>
         </div>

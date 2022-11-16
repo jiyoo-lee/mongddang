@@ -13,7 +13,8 @@ const Drawer = () => {
     const [drops, setDrops] = useState([]);
 
     useEffect(()=>{
-        GetAxios('/drawer/my/'+(sessionStorage.getItem("userId")),{params:{}},(res)=>{setDrops(res.data)})
+        GetAxios('/drawer/list/'+(sessionStorage.getItem("userId")),{params:{}},(res)=>{setDrops(res.data)
+        console.log(res.data)})
     },[])
 
     return (

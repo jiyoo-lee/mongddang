@@ -30,8 +30,7 @@ public interface MemberRepository {
             "set password = IFNULL(SHA2(#{password}, 512), password), " +
             "    nickname = IFNULL(#{nickname}, nickname), " +
             "    profile_picture = IFNULL(#{profilePicture}, profile_picture), " +
-            "    phone_number = IFNULL(#{phoneNumber}, phone_number), " +
-            "    address = IFNULL(#{address}, address) " +
+            "    phone_number = IFNULL(#{phoneNumber}, phone_number) " +
             "where user_id = #{userId}")
     public Integer update(MemberDTO memberDTO);
 

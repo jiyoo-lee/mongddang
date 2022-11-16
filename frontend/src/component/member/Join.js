@@ -84,7 +84,7 @@ const Join = () => {
                                                 sessionStorage.setItem("userId", memberId);
                                             }).then((res)=>{
                                                 console.log(res);
-                                                navigate('/join/profile',{state:{userId:memberId}});
+                                                navigate('/profile',{state:{userId:memberId}});
                                             })
                                         })
                                     })

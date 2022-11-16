@@ -15,5 +15,4 @@ public class MemberDTO {
     private String profilePicture;
     private String email;
     private String phoneNumber;
-    private String address;
 }
