@@ -20,8 +20,9 @@ public class GuestBookCommentController {
     @ApiOperation(value="방명록 댓글 등록 API", notes = "방명록 댓글 등록 API")
     @PostMapping("/{userId}/guestbook/comment")
     public ResponseEntity<ResultDTO> createGuestBookComment(@PathVariable String userId,
-                                                            GuestBookCommentDTO guestBookCommentDTO){
+                                                            @RequestBody GuestBookCommentDTO guestBookCommentDTO){
         ResultDTO result = new ResultDTO();
+        System.out.println(guestBookCommentDTO.toString());
         result.setSuccess(guestBookCommentService.createGuestBookComment(userId, guestBookCommentDTO));
 
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -30,7 +31,7 @@ public class GuestBookCommentController {
     @ApiOperation(value="방명록 댓글 수정 API", notes = "방명록 댓글 수정 API")
     @PutMapping("/{userId}/guestbook/comment")
     public ResponseEntity<ResultDTO> updateGuestBookComment(@PathVariable String userId,
-                                                            GuestBookCommentUpdateDTO guestBookCommentUpdateDTO){
+                                                            @RequestBody GuestBookCommentUpdateDTO guestBookCommentUpdateDTO){
 
         ResultDTO result = new ResultDTO();
         result.setSuccess(guestBookCommentService.updateGuestBookComment(userId, guestBookCommentUpdateDTO));

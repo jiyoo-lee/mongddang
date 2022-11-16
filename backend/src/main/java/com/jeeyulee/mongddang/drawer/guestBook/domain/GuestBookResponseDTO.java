@@ -13,6 +13,6 @@ public class GuestBookResponseDTO {
     private Long guestBookId;
     private String guestId;
     private String contents;
-    private String createDatetime;
+    private String guestBookCreateDatetime;
     private GuestBookResponseCommentDTO comment;
 }

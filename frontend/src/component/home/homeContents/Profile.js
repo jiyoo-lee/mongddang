@@ -45,7 +45,7 @@ const Profile = () => {
                 <ul className ="top_menu_ul">
                     <li className="top_menu" onClick={()=>{navigate('/home/feed')}}> <img className='top_menu_logo' src='../.././img/home_logo.png' alt="logo"/>홈 </li>
                     <li className="top_menu" onClick={()=>{navigate('/drawer')}}> <img className='top_menu_logo' src='../.././img/drawer_logo.svg' alt="logo"/> 나의 서랍</li>
-                    <li className="top_menu"> <img className='top_menu_logo' src='../.././img/guestbook_logo.svg' alt="logo"/>  방명록 </li>
+                    <li className="top_menu" onClick={()=>{navigate('/guestbook/' + userId)}}> <img className='top_menu_logo' src='../.././img/guestbook_logo.svg' alt="logo"/>  방명록 </li>
                     <li className="top_menu"> <img className='top_menu_logo' src='../.././img/ac_logo.svg' alt="logo"/>  예술의 몽땅 </li>
                 </ul>
             </div>

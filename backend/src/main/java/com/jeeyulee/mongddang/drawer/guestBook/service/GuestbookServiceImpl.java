@@ -69,11 +69,11 @@ public class GuestbookServiceImpl implements GuestBookService{
                 .guestBookId(guestBookAndCommentDTO.getGuestBookId())
                 .guestId(guestBookAndCommentDTO.getGuestId())
                 .contents(guestBookAndCommentDTO.getGuestBookContents())
-                .createDatetime(guestBookAndCommentDTO.getGuestBookCreateDatetime())
+                .guestBookCreateDatetime(guestBookAndCommentDTO.getGuestBookCreateDatetime())
                 .comment(GuestBookResponseCommentDTO.builder()
                         .commentId(guestBookAndCommentDTO.getCommentId())
                         .contents(guestBookAndCommentDTO.getCommentContents())
-                        .createDatetime(guestBookAndCommentDTO.getCommentCreateDatetime())
+                        .commentCreateDatetime(guestBookAndCommentDTO.getCommentCreateDatetime())
                         .build())
                 .build();
     }

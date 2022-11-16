@@ -28,7 +28,7 @@ public interface GuestBookRepository {
             "       GB.create_datetime guestBookCreateDatetime, " +
             "       GBC.id commentId, " +
             "       GBC.contents commentContents, " +
-            "       GBC.create_datetime contentsCreateDatetime " +
+            "       GBC.create_datetime commentCreateDatetime " +
             "from (select id, drawer_guest_id, contents, create_datetime " +
             "      from guest_book " +
             "      where drawer_member_id = #{userId}) GB left outer join guest_book_comment GBC " +

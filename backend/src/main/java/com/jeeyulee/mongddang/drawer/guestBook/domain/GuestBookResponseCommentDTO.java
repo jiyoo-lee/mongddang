@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class GuestBookResponseCommentDTO {
     private Long commentId;
     private String contents;
-    private String createDatetime;
+    private String commentCreateDatetime;
 }
