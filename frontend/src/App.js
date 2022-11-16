@@ -23,7 +23,7 @@ import Drawer from './component/drawer/Drawer';
 import MyPage from './component/mypage/Mypage';
 import Paintings from './component/drawer/Paintings';
 import OtherDrawer from './component/drawer/OtherDrawer';
-import Guestbook from './component/Guestbook';
+import Guestbook from './component/guestbook/Guestbook';
 
 function App() {
   return (
