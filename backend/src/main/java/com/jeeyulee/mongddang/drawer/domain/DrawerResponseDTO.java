@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class DrawerResponseDTO {
     private Integer paintingCount;
+    private DrawerUserInfoDTO drawerUserInfo;
     private List<DrawerGenreCountDTO> paintingCountGroupingGenre;
     private List<DrawerDropsDTO> drops;
 }

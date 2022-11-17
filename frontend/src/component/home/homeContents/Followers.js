@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import MyButton from "../../button/MyButton";
 import Profile from "./Profile";
 import Friends from "./Friends";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GetAxios from "../../../utils/axios/GetAxios";
+import DeleteAxios from "../../../utils/axios/DeleteAxios";
 
 
 const Followers = () => {
@@ -13,6 +14,11 @@ const Followers = () => {
 
     const [followerList, setFollowerList] = useState([]);
     const [followingList, setFollowingList] = useState([]);
+
+
+    useEffect(()=>{
+        GetAxios('/following/my-followers',{params:{}},(res)=>{setFollowerList(res.data)})
+    },[])
 
     const onToggleActive1 = () => {
         setFollowerBtn("nothing")
@@ -28,6 +34,10 @@ const Followers = () => {
         GetAxios('/following/my-followings',{params:{}},(res)=>{setFollowingList(res.data)})
     }
 
+    const unfollow = (e) => {
+        DeleteAxios('/following/'+e,{params:{}},(res)=>{})
+    }
+
 
     return (
         <div className="all_wrapper">
@@ -39,22 +49,25 @@ const Followers = () => {
        </div>
    <div className="home_wrapper">
    <br/>
+    <br/>
+    <br/>
     <div>
         {followerBtn === "nothing"&& followerList.length > 0 ? followerList && followerList.map(follower => (
             <div className="social_list" key={follower.memberId}>
-                <img className="social_profile" src={follower.profileUrl}/>
-                <span className="social_msg">{follower.nickname}({follower.memberId})</span>
+                <img className="social_profile" src={follower.profileUrl} alt="profile"/>
+                <div style={{}}>{follower.nickname}({follower.memberId})</div>
                 <MyButton type={'negative'} text={'삭제'}/>
             </div>
         )) : followerBtn === "nothing" ? <div className="social_list"> 
-            <img className="default_page" src={ process.env.PUBLIC_URL + `../.././img/no_followers.png`}/> </div>
+            <img className="default_page" src={ process.env.PUBLIC_URL + `../.././img/no_followers.png`} alt="profile"/> </div>
             : <></> }
 
         {followingBtn === "nothing"&& followingList.length > 0 ? followingList && followingList.map(following => (
             <div className="social_list" key={following.memberId}>
-                <img className="social_profile" src={following.profileUrl}/>
+                <img className="social_profile" src={following.profileUrl} alt="profile"/>
+                <br/>
                 <span className="social_msg">{following.nickname}({following.memberId})</span>
-                <MyButton type={'negative'} text={'삭제'}/>
+                <MyButton type={'positive'} text={'팔로잉'} onClick={()=>unfollow(following.memberId)}/>
             </div>
         )) : followingBtn === "nothing" ? <div className="social_list"> 
                 <img className="default_page" src={ process.env.PUBLIC_URL + `../.././img/no_followings.png`}/> 

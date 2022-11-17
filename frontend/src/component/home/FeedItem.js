@@ -1,21 +1,26 @@
+import { useNavigate } from "react-router-dom";
+import PaintingHeart from "../like/PaintingHeart";
 
-const FeedItem = (props) => {
+const FeedItem = ({painting}) => {
+    const navigate = useNavigate();
+
     return (
         <>
         <div className="items">
-        <img className="items_img" src={props.painting.paintingUrl} alt="drawing"/>
-    </div>
-    <div className="items_desc">
-        <img className="items_profile" src={props.painting.profileUrl} alt="profile"/>
-        <span className="user_info">{props.painting.nickname}({props.painting.memberId})</span>
-<br/>
-         <span className="user_info">2022-11-11 21:32</span>
-<br/>
-        <p className="items_title">{props.painting.name}</p>
-        <p className="items_content">{props.painting.description}</p>
-    <span className="user_like"> <img className="icon" src="../.././img/like.png" alt="like"/> {props.painting.mongddangCount} </span>
-    <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment"/> 81 </span>
-    </div>
+            <img className="items_img" src={painting.paintingUrl} alt="drawing"/>
+        </div>
+
+        <div className="items_desc">
+            <img className="items_profile" src={painting.profileUrl} onClick={()=>navigate('/drawer/'+painting.memberId)} alt="profile"/>
+            <span className="user_info">{painting.nickname}({painting.memberId})</span>
+            <br/>
+            <span className="user_info">{painting.createDatetime}</span>
+            <br/>
+            <p className="items_title">{painting.name}</p>
+            <p className="items_content">{painting.description}</p>
+            <PaintingHeart paintingId={painting.paintingId} like={painting.isLike} count={painting.mongddangCount}/>
+            <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment"/> 81 </span>
+        </div>
     </>
     );
 }

@@ -20,6 +20,8 @@ import NewDrops from './component/home/upload/NewDrops';
 import Best from './component/home/homeContents/Best';
 import Now from './component/home/homeContents/Now';
 import Drawer from './component/drawer/Drawer';
+import Like from './component/drawer/like/Like';
+import OtherLike from './component/drawer/like/OtherLike';
 import MyPage from './component/mypage/Mypage';
 import Paintings from './component/drawer/Paintings';
 import OtherDrawer from './component/drawer/OtherDrawer';
@@ -48,7 +50,9 @@ function App() {
         <Route path='/home/upload/painting' element={<AuthPage><NewPainting/></AuthPage>}/>
         <Route path='/home/upload/new-drops' element={<AuthPage><NewDrops/></AuthPage>}/>        
         <Route path='/drawer' element={<AuthPage><Drawer/></AuthPage>}/>        
-        <Route path='/drawer/paintings' element={<AuthPage><Paintings/></AuthPage>}/>        
+        <Route path='/drawer/paintings' element={<AuthPage><Paintings/></AuthPage>}/>       
+        <Route path='/drawer/like' element={<AuthPage><Like/></AuthPage>}/>       
+        <Route path='/drawer/like/:userId' element={<AuthPage><OtherLike/></AuthPage>}/>       
         <Route path='/drawer/mypage' element={<AuthPage><MyPage/></AuthPage>}/>        
         <Route path='/drawer/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
         <Route path='/drawer/buddy/:userId' element={<AuthPage><Followers/></AuthPage>}/>

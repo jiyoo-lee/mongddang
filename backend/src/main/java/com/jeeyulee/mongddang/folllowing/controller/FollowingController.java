@@ -32,6 +32,15 @@ public class FollowingController {
             return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "팔로잉 목록 조회", notes = "팔로잉 목록 조회 API")
+    @GetMapping("/my-followers")
+    public ResponseEntity<ResultDTO> retrieveFollowers(){
+        ResultDTO result = new ResultDTO();
+        result.setSuccess(true);
+        result.setData(followingService.retrieveMyFollowers());
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "친구 추천 API", notes = "친구 추천 API")
     @GetMapping("/recommend")
     public ResponseEntity<ResultDTO> retrieveRecommendFriends(){

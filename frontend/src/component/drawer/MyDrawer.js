@@ -23,7 +23,7 @@ const MyDrawer = (props) => {
         <br/>
         {props.drops.map(drop => (
             <div className="drops_list" key={drop.id} >
-                <img className="drops"src={drop.lastPaintingUrl}onClick={()=>goToPage(drop.id)}/>
+                <img className="drops"src={drop.lastPaintingUrl} onClick={()=>goToPage(drop.id)}/>
                 <span className="drawer_msg">{drop.name}</span>
             </div>
         ))}

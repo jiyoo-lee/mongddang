@@ -437,7 +437,7 @@ li{
 }
 
 .user_like{
-  font-size: 12px;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -513,7 +513,7 @@ li{
 /* drawer */
 
 .drawer_wrapper{
-  margin-top: 70px;
+  margin-top: 30px;
   text-align: center;
   height: 500px;
 
@@ -533,7 +533,7 @@ li{
 
 .drawer_msg{
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .drops_list{
@@ -543,6 +543,12 @@ li{
 
   margin-left: 18px;
  
+}
+
+.genre{
+  background-color: yellow;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 
@@ -586,6 +592,11 @@ li{
 
 .social_list{
   text-align: center;
+  width: 180px;
+  float:left;
+
+  padding-right: 22px;
+  padding-left: 22px
 }
 
 .default_page{
@@ -595,8 +606,8 @@ li{
 
 .social_profile{
   border-radius: 100%;
-  width: 120px;
-  margin-right: 20px;
+  width: 100px;
+  height: 100px;
 }
 
 .social_msg{

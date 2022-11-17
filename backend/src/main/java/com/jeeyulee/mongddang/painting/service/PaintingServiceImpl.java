@@ -83,11 +83,17 @@ public class PaintingServiceImpl implements PaintingService {
     }
 
     @Override
-    public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings() {
+    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings() {
 
-        List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings =
+        List<FeedPaintingsDTO> retrieveLastFollowingPaintings =
                 paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId());
         return retrieveLastFollowingPaintings;
+    }
+
+    @Override
+    public List<PaintingMongddangDTO> retrieveMongddangPaintings(String userId) {
+
+        return paintingRepository.retrieveMongddangPaintings(userId);
     }
 
     private String convertToUUID(Long dropsId, String fileName){

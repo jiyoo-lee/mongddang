@@ -1,8 +1,6 @@
 package com.jeeyulee.mongddang.painting.service;
 
-import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
-import com.jeeyulee.mongddang.painting.domain.PaintingUpdateDTO;
-import com.jeeyulee.mongddang.painting.domain.ConditionalPaintingsDTO;
+import com.jeeyulee.mongddang.painting.domain.*;
 
 import java.util.List;
 
@@ -20,6 +18,8 @@ public interface PaintingService {
 
     public List<ConditionalPaintingsDTO> retrieveLastPaintings();
 
-    public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings();
+    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings();
+
+    public List<PaintingMongddangDTO> retrieveMongddangPaintings(String userId);
 
 }

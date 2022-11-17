@@ -3,6 +3,7 @@ package com.jeeyulee.mongddang.drawer.repository;
 import com.jeeyulee.mongddang.drawer.domain.DrawerDTO;
 import com.jeeyulee.mongddang.drawer.domain.DrawerDropsDTO;
 import com.jeeyulee.mongddang.drawer.domain.DrawerGenreCountDTO;
+import com.jeeyulee.mongddang.drawer.domain.DrawerUserInfoDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -25,29 +26,25 @@ public interface DrawerRepository {
             "group by genre_id")
     public List<DrawerGenreCountDTO> countPaintingGroupingGenre(String userId);
 
-    @Select("select D1.id dropsId, " +
-            "       D1.name dropsName, " +
-            "       (select name from genre where id = D1.genre_id) dropsGenre, " +
-            "       P3.painting_url lastPaintingUrl, " +
-            "       D2.count mongddangCount " +
-            "from drops D1 " +
-            "right outer join (select drops_id, count(member_id) count " +
-            "                  from drops_mongddang " +
-            "                  where drops_id in (select id " +
-            "                                     from drops " +
-            "                                     where member_id = #{userId}) " +
-            "                  group by drops_id) D2 " +
-            "on D1.id = D2.drops_id " +
-            "left outer join (select drops_id, painting_url " +
-            "                 from painting " +
-            "                 where member_id = #{userId} " +
-            "                 order by create_datetime desc " +
-            "                 limit 0, 1) P3 " +
-            "on D2.drops_id = P3.drops_id")
+    @Select("select D.id dropsId, D.name dropsName, (select name from genre " +
+            "                       where id = D.genre_id) dropsGenre, " +
+            "                      (select P.painting_url from painting P where P.drops_id = D.id order by P.create_datetime desc limit 0,1) lastPaintingUrl, " +
+            "                      (select count(member_id) from drops_mongddang where drops_id = D.id)mongddangCount " +
+            "                        from drops D where member_id = #{userId}")
     public List<DrawerDropsDTO> findDropsByUserId(String userId);
 
     @Select("select D.*," +
             "(select P.painting_url from painting P where D.member_id = P.member_id and D.id = P.drops_id order by create_datetime desc limit 0,1)lastPaintingUrl " +
             "from drops D where D.member_id = #{userId}")
     public List<DrawerDTO> retrieveMyDrops(String userId);
+
+    @Select("select profile_picture profileUrl, (select count(member_id) from social where follow_member_id = #{drawerUserId}) followerCount, " +
+            "(select count(follow_member_id) from social where member_id= #{drawerUserId}) followingCount, " +
+            "(select if(S1.follow_member_id is null, false, true) " +
+            "       from social S1 " +
+            "       left outer join social S2 " +
+            "       on S1.follow_member_id=S2.member_id and S1.member_id= S2.follow_member_id " +
+            "       where S1.follow_member_id = #{drawerUserId} and S1.member_id = #{userId} )isFollow " +
+            "from member where user_id = #{drawerUserId} ")
+    public DrawerUserInfoDTO findMemberInfo(String userId, String drawerUserId);
 }

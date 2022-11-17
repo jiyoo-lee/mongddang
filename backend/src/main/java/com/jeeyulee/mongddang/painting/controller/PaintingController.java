@@ -102,4 +102,12 @@ public class PaintingController {
     }
 
 
+    @ApiOperation(value="좋아요한 그림 목록을 보여준다. ",notes ="좋아요 누른 그림목록 조회API")
+    @GetMapping("/like/{userId}")
+    public ResponseEntity<ResultDTO> retrieveMongddangPaintings(@PathVariable String userId) {
+
+        ResultDTO result = new ResultDTO(true, paintingService.retrieveMongddangPaintings(userId));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

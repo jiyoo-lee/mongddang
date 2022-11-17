@@ -1,9 +1,6 @@
 package com.jeeyulee.mongddang.painting.repository;
 
-import com.jeeyulee.mongddang.painting.domain.PaintingCreationDTO;
-import com.jeeyulee.mongddang.painting.domain.PaintingDTO;
-import com.jeeyulee.mongddang.painting.domain.PaintingUpdateBuilderDTO;
-import com.jeeyulee.mongddang.painting.domain.ConditionalPaintingsDTO;
+import com.jeeyulee.mongddang.painting.domain.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -99,18 +96,34 @@ public interface PaintingRepository {
     public List<ConditionalPaintingsDTO> retrieveLastPaintings();
 
 
-    @Select("select M.user_id memberId, (select name from genre where id = P.genre_id)genreName, " +
-            "M.profile_picture profileUrl, M.nickname, " +
-            "P.id paintingId, P.name, P.painting_url paintingUrl, P.description, P.create_datetime, " +
-            "IFNULL(M2.count, 0)mongddangCount " +
+    @Select("select M.user_id memberId, " +
+            "       M.nickname, " +
+            "       M.profile_picture profileUrl, " +
+            "       P2.painting_url paintingUrl, " +
+            "       P2.id paintingId, " +
+            "       P2.name, " +
+            "       P2.create_datetime createDatetime, " +
+            "       P2.description, " +
+            "       (select count(*) " +
+            "        from painting_mongddang PM " +
+            "        where PM.painting_id = P2.id) mongddangCount, " +
+            "       if((select PM2.painting_id " +
+            "        from painting_mongddang PM2 " +
+            "        where PM2.member_id = #{userId} " +
+            "        and PM2.painting_id = P2.id) is null, false, true) isLike " +
             "from member M " +
-                "join painting P " +
-            "                   left outer join (select painting_id, count(*) count " +
-            "                                   from painting_mongddang " +
-                                                "group by painting_id ) M2 " +
-            "on P.id = M2.painting_id " +
-                        "on M.user_id = P.member_id and M.user_id " +
-            "           in (select follow_member_id from social where member_id = #{userId}) " +
-            "           order by P.create_datetime desc")
-    public List<ConditionalPaintingsDTO> retrieveLastFollowingPaintings(String userId);
+            "right outer join painting P2 " +
+            "on P2.member_id = M.user_id and " +
+            "M.user_id in (select P.member_id " +
+            "              from painting P " +
+            "              where P.member_id in (select follow_member_id " +
+            "                                    from social " +
+            "                                    where member_id= #{userId})) " +
+            "order by createDatetime desc ")
+    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings(String userId);
+
+    @Select("select P.painting_url paintingUrl, P.member_id memberId, P.name from painting P " +
+            "where P.id in (select painting_id from painting_mongddang " +
+            "               where member_id = #{userId})")
+    public List<PaintingMongddangDTO> retrieveMongddangPaintings(String userId);
 }
