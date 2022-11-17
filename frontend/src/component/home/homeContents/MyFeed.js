@@ -7,7 +7,7 @@ const MyFeed = () => {
     const [paintings, setPaintings] = useState([]); 
 
     useEffect(()=> {
-        GetAxios('/painting/following', {params:{}},(res)=>{setPaintings(res.data)})
+        GetAxios('/painting/following', {params:{}},(res)=>{setPaintings(res.data)});
         },[])
 
     return (

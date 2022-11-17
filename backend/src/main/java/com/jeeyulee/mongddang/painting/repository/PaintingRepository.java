@@ -104,6 +104,9 @@ public interface PaintingRepository {
             "       P2.name, " +
             "       P2.create_datetime createDatetime, " +
             "       P2.description, " +
+            "       (select name " +
+            "        from genre" +
+            "        where id = P2.genre_id) genreName, " +
             "       (select count(*) " +
             "        from painting_mongddang PM " +
             "        where PM.painting_id = P2.id) mongddangCount, " +
@@ -113,12 +116,12 @@ public interface PaintingRepository {
             "        and PM2.painting_id = P2.id) is null, false, true) isLike " +
             "from member M " +
             "right outer join painting P2 " +
-            "on P2.member_id = M.user_id and " +
-            "M.user_id in (select P.member_id " +
-            "              from painting P " +
-            "              where P.member_id in (select follow_member_id " +
-            "                                    from social " +
-            "                                    where member_id= #{userId})) " +
+            "on P2.member_id = M.user_id " +
+            "where M.user_id in (select P.member_id " +
+            "                    from painting P " +
+            "                    where P.member_id in (select follow_member_id " +
+            "                                          from social " +
+            "                                          where member_id= #{userId})) " +
             "order by createDatetime desc ")
     public List<FeedPaintingsDTO> retrieveLastFollowingPaintings(String userId);
 
