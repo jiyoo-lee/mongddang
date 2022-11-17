@@ -30,7 +30,7 @@ import Followers from './component/home/homeContents/Followers';
 
 function App() {
   return (
-  <div>    
+  <div> 
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<NonAuthPage><Home/></NonAuthPage>}/>
@@ -56,10 +56,7 @@ function App() {
         <Route path='/drawer/mypage' element={<AuthPage><MyPage/></AuthPage>}/>        
         <Route path='/drawer/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
         <Route path='/drawer/buddy/:userId' element={<AuthPage><Followers/></AuthPage>}/>
-
-        /* 방명록 */
         <Route path='/guestbook/:userId' element={<AuthPage><Guestbook/></AuthPage>}/>
-
       </Routes>
     </BrowserRouter>
   </div>
