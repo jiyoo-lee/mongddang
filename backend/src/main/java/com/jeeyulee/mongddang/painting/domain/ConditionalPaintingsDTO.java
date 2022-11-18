@@ -16,6 +16,9 @@ public class ConditionalPaintingsDTO {
     private String name;
     private String paintingUrl;
     private String description;
+    private String createDatetime;
+    private Boolean isLike;
+    private Integer comment;
     private Integer mongddangCount;
 
 }

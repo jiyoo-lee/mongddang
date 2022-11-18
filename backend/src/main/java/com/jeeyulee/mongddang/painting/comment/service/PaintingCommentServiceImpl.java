@@ -30,8 +30,7 @@ public class PaintingCommentServiceImpl implements PaintingCommentService {
         PaintingCommentBuilderDTO builderDTO = PaintingCommentBuilderDTO.builder()
                 .memberId(userIdOnToken)
                 .paintingId(paintingCommentDTO.getPaintingId())
-                .contents(paintingCommentDTO.getContents())
-                .secret(paintingCommentDTO.getSecret()).build();
+                .contents(paintingCommentDTO.getContents()).build();
 
         return paintingCommentRepository.save(builderDTO) > 0;
     }
@@ -47,9 +46,7 @@ public class PaintingCommentServiceImpl implements PaintingCommentService {
     public Boolean update(Long commentId, PaintingCommentDTO paintingCommentDTO) {
         PaintingCommentUpdateDTO updateDTO = PaintingCommentUpdateDTO.builder()
                 .commentId(commentId)
-                .contents(paintingCommentDTO.getContents())
-                .secret(paintingCommentDTO.getSecret())
-                .build();
+                .contents(paintingCommentDTO.getContents()).build();
 
         return paintingCommentRepository.update(updateDTO) > 0;
     }

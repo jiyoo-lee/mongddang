@@ -31,69 +31,48 @@ public interface PaintingRepository {
             "where id = #{dropsId} ")
     public String findUserIdByDropsId(Long dropsId);
 
-    @Select("select M.user_id as memberId, " +
-            "            M.nickname, " +
-            "            M.profile_picture as profileUrl, " +
-            "            (select name from genre where id = P2.genre_id ) as genreName, " +
-            "            P2.id as paintingId, " +
-            "            P2.name, " +
-            "            P2.painting_url as paintingUrl, " +
-            "            P2.description, " +
-            "            P2.mongddangCount, " +
-            "            P2.create_datetime " +
-            "from member M right outer join " +
-            "(select P.*, C.count mongddangCount from painting P " +
-            "right outer join (select painting_id, count(*) count " +
-            "from painting_mongddang " +
-            "group by painting_id " +
-            "order by count desc " +
-            "limit 0, 20) C " +
-            "on P.id = C.painting_id) P2 " +
-            "            on P2.member_id = M.user_id")
-    public List<ConditionalPaintingsDTO> retrievePopularPaintings();
+    @Select("select P.id paintingId, P.name, P.description,P.create_datetime createDatetime, " +
+            " M.nickname, M.profile_picture profileUrl, M.user_id memberId, " +
+            "(select name from genre where P.genre_id = genre.id) genreName, " +
+            "If((select PM.painting_id from painting_mongddang PM where PM.member_id = #{userIdOnToken} " +
+            "and PM.painting_id = P.id) is null, false , true)isLike, " +
+            "(select count(*) from painting_mongddang PM2 where P.id = PM2.painting_id)mongddangCount, " +
+            "(select count(*) from comment C where C.painting_id = P.id)comment " +
+            "from painting P join member M on P.member_id = M.user_id " +
+            " order by mongddangCount desc limit 0,20")
+    public List<ConditionalPaintingsDTO> retrievePopularPaintings(String userIdOnToken);
 
-    @Select("select M.user_id as memberId, " +
-            "            M.nickname, " +
-            "            M.profile_picture as profileUrl, " +
-            "            (select name from genre where id = P2.genre_id ) as genreName, " +
-            "            P2.id as paintingId, " +
-            "            P2.name, " +
-            "            P2.painting_url as paintingUrl, " +
-            "            P2.description, " +
-            "            P2.mongddangCount, " +
-            "            P2.create_datetime " +
-            "from member M right outer join " +
-            "(select P.*, C.count mongddangCount from painting P " +
-            "join (select painting_id, count(*) count " +
-            "from painting_mongddang " +
-            "group by painting_id " +
-            "order by count desc " +
-            "limit 0, 20) C " +
-            "on P.id = C.painting_id and P.genre_id = #{genreId}) P2 " +
-            "            on P2.member_id = M.user_id")
-    public List<ConditionalPaintingsDTO> retrievePopularPaintingsByGenreId(Long genreId);
+    @Select("select P.id paintingId, P.painting_url PaintingUrl, P.name, P.description,P.create_datetime createDatetime, " +
+            " M.nickname, M.profile_picture profileUrl, M.user_id memberId, " +
+            "If(" +
+            "(select PM.painting_id from painting_mongddang PM where PM.member_id = #{userIdOnToken} " +
+            "and PM.painting_id = P.id) is null, false , true)isLike, " +
+            "(select count(*) from painting_mongddang PM2 where P.id = PM2.painting_id)mongddangCount, " +
+            "(select count(*) from comment C where C.painting_id = P.id)comment " +
+            "from painting P join member M on P.member_id = M.user_id " +
+            "where P.genre_id = (select id from genre where id = #{genreId}) " +
+            "having mongddangCount > 0 order by mongddangCount desc limit 0,20")
+    public List<ConditionalPaintingsDTO> retrievePopularPaintingsByGenreId(String userIdOnToken, Long genreId);
 
 
-    @Select("select M.user_id as memberId, " +
-            "            M.nickname, " +
-            "            M.profile_picture as profileUrl, " +
-            "           (select name from genre where id = P2.genre_id ) as genreName, " +
-            "            P2.id as paintingId, " +
-            "            P2.name, " +
-            "            P2.painting_url as paintingUrl, " +
-            "            P2.description, " +
-            "            P2.mongddangCount, " +
-            "            P2.create_datetime " +
-            "from member M right outer join " +
-            "           (select P.*, IFNULL(C.count, 0)mongddangCount from painting P " +
-            "       left outer join (select painting_id, count(*) count " +
-            "                        from painting_mongddang " +
-            "                        group by painting_id " +
-            "                        order by count desc " +
-            "                        limit 0, 20) C " +
-            "        on P.id = C.painting_id) P2 " +
-            "            on P2.member_id = M.user_id order by P2.create_datetime desc")
-    public List<ConditionalPaintingsDTO> retrieveLastPaintings();
+    @Select("select P.id paintingId, P.painting_url PaintingUrl ,P.name, P.description,P.create_datetime createDatetime, " +
+            " M.nickname, M.profile_picture profileUrl, M.user_id memberId, " +
+            " (select name " +
+            "            from genre " +
+            "            where id = P.genre_id) genreName, " +
+            "If((select PM.painting_id " +
+            "    from painting_mongddang PM " +
+            "   where PM.member_id = #{userIdOnToken} " +
+            "   and PM.painting_id = P.id) is null, false , true)isLike, " +
+            " (select count(*) " +
+            "  from painting_mongddang PM2 " +
+            "  where P.id = PM2.painting_id)mongddangCount, " +
+            " (select count(*) " +
+            "  from comment C " +
+            "  where C.painting_id = P.id)comment " +
+            "from painting P join member M on P.member_id = M.user_id " +
+            "order by createDatetime desc limit 0,20 ")
+    public List<ConditionalPaintingsDTO> retrieveLastPaintings(String userIdOnToken);
 
 
     @Select("select M.user_id memberId, " +
@@ -104,6 +83,9 @@ public interface PaintingRepository {
             "       P2.name, " +
             "       P2.create_datetime createDatetime, " +
             "       P2.description, " +
+            "       (select count(*) " +
+            "       from comment " +
+            "       where comment.painting_id = P2.id)comment, " +
             "       (select name " +
             "        from genre" +
             "        where id = P2.genre_id) genreName, " +

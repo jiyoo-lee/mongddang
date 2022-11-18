@@ -4,6 +4,7 @@ import Friends from "../home/homeContents/Friends";
 import { useNavigate, useParams } from "react-router-dom";
 import MyGuestBook from "./MyGuestBook";
 import OtherGuestBook from "./OtherGuestBook";
+import LogoHeader from "../LogoHeader";
 
 
 const Guestbook = () => {
@@ -14,7 +15,7 @@ const Guestbook = () => {
 
     return (
     <div className="all_wrapper">
-        <img className='login_logo' src={process.env.PUBLIC_URL + `../.././img/login_logo.png`} onClick={()=> {navigate('/home/feed')}} alt='login_logo'/>
+        <LogoHeader/>
         <div className="main_wrapper">
             <div className="menu_wrapper">
                 <MyButton text={'방명록'} type={'nothing'} onClick={()=>{navigate('/home/feed')}}/>

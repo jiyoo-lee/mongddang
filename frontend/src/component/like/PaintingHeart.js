@@ -31,14 +31,14 @@ const PaintingHeart = ({paintingId, like, count}) => {
     };
 
     return (
-    <div>
+    <>
         { 
             data.like ? 
             <img className="icon" src="../.././img/like.png" alt="like" onClick={handleClickLike}/> : 
             <img className="icon" src="../.././img/unlike.png" alt="unlike" onClick={handleClickUnLike}/>
         }
         {data.count}
-    </div>
+    </>
     );
 }
 

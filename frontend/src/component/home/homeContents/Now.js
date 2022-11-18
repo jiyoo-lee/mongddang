@@ -4,6 +4,7 @@ import Friends from "./Friends";
 import MyNow from "./MyNow";
 import { useNavigate } from "react-router-dom";
 import UploadedFriends from "./UploadedFriends";
+import LogoHeader from "../../LogoHeader";
 
 
 const Now = () => {
@@ -12,7 +13,7 @@ const Now = () => {
 
     return (
     <div className="all_wrapper">
-        <img className='login_logo' src={process.env.PUBLIC_URL + `../.././img/login_logo.png`} onClick={()=> {navigate('/home/feed')}} alt='login_logo'/>
+       <LogoHeader/>
         <div className="main_wrapper">
             <div className="menu_wrapper">
                 <MyButton text={'피드'}  onClick={()=>{navigate('/home/feed')}}/>

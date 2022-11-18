@@ -19,7 +19,9 @@ const FeedItem = ({painting}) => {
             <p className="items_title">{painting.name}</p>
             <p className="items_content">{painting.description}</p>
             <PaintingHeart paintingId={painting.paintingId} like={painting.isLike} count={painting.mongddangCount}/>
-            <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment"/> 81 </span>
+            <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment" 
+                    onClick={()=>navigate('/comments/'+painting.paintingId)}/>
+                {painting.comment}</span>
         </div>
     </>
     );

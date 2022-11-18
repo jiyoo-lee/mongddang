@@ -11,7 +11,7 @@ import LogoHeader from "../../LogoHeader";
 const Feed = () =>{
 
     const navigate = useNavigate();
-
+    
     return (
         <div className="all_wrapper">
             <LogoHeader/>

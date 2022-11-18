@@ -396,7 +396,7 @@ li{
 }
 
 .user_info{
-  font-size: 11px;
+  font-size: 12px;
   padding-right: 70px;
 }
 
@@ -431,7 +431,7 @@ li{
 }
 
 .items_content{
-  font-size: 12px;
+  font-size: 13px;
 
   cursor: pointer;
 }
@@ -442,8 +442,11 @@ li{
 }
 
 .icon{
-  width: 12px;
+  width: 20px;
   cursor: pointer;
+
+  padding-left: 10px;
+  padding-right: 5px;
 }
 
 
@@ -578,11 +581,6 @@ li{
 }
 
 
-.test{
-  border: 1px solid black;
-  width: 120px;
-}
-
 .info_icon{
   width: 30px;
   height: 30px;
@@ -612,4 +610,70 @@ li{
 
 .social_msg{
   padding-right: 10px;
+}
+
+/* comments */
+
+.commnets_wrapper{
+  height: 500px;
+
+}
+
+.comment_profile{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  margin-left: 30px;
+  float: left;
+}
+
+.post_box{
+  padding-bottom: 40px;
+}
+
+.user_info{
+ 
+}
+
+.user_info_detail{
+  font-weight: bold;
+  margin-left: 30px;
+}
+
+.post_comment{
+  margin-left: 20px;
+}
+
+.time{
+  float: right;
+  font-weight: lighter;
+}
+
+.text{
+  font-family: 'Gaegu', cursive;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #ffbe2a;
+  margin-left: 20px;
+}
+
+.no_comment{
+  text-align: center;
+}
+
+.input_box{
+  border: 1px solid #ececec;
+}
+
+.input_comment:focus{
+  background-color: #ececec;
+}
+
+.input_comment{
+  width: 900px;
+  height: 86px;
+
+  resize: none;
+  border: none;
 }

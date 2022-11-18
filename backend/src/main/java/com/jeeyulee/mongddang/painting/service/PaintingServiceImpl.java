@@ -59,25 +59,26 @@ public class PaintingServiceImpl implements PaintingService {
 
     @Override
     public List<ConditionalPaintingsDTO> retrievePopularPaintings() {
+        String userIdOnToken = jwtService.retrieveUserId();
         List<ConditionalPaintingsDTO> popularPaintingsList =
-                paintingRepository.retrievePopularPaintings();
+                paintingRepository.retrievePopularPaintings(userIdOnToken);
         checkEmpty(popularPaintingsList);
         return popularPaintingsList;
     }
 
     @Override
     public List<ConditionalPaintingsDTO> retrievePopularGenrePaintings(Long genreId) {
-
+        String userIdOnToken = jwtService.retrieveUserId();
         List<ConditionalPaintingsDTO> popularGenrePaintings =
-                paintingRepository.retrievePopularPaintingsByGenreId(genreId);
+                paintingRepository.retrievePopularPaintingsByGenreId(userIdOnToken,genreId);
         return popularGenrePaintings;
     }
 
     @Override
     public List<ConditionalPaintingsDTO> retrieveLastPaintings() {
-
+        String userIdOnToken = jwtService.retrieveUserId();
         List<ConditionalPaintingsDTO> retrieveLastPaintings =
-                paintingRepository.retrieveLastPaintings();
+                paintingRepository.retrieveLastPaintings(userIdOnToken);
         checkEmpty(retrieveLastPaintings);
         return retrieveLastPaintings;
     }

@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class PaintingCommentDTO {
     private Long paintingId;
     private String contents;
-    private Boolean secret;
 }

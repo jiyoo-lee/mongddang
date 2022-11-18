@@ -27,10 +27,11 @@ import Paintings from './component/drawer/Paintings';
 import OtherDrawer from './component/drawer/OtherDrawer';
 import Guestbook from './component/guestbook/Guestbook';
 import Followers from './component/home/homeContents/Followers';
+import Comments from './component/Comments';
 
 function App() {
   return (
-  <div> 
+  <div>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<NonAuthPage><Home/></NonAuthPage>}/>
@@ -57,6 +58,7 @@ function App() {
         <Route path='/drawer/:userId' element={<AuthPage><OtherDrawer/></AuthPage>}/>
         <Route path='/drawer/buddy/:userId' element={<AuthPage><Followers/></AuthPage>}/>
         <Route path='/guestbook/:userId' element={<AuthPage><Guestbook/></AuthPage>}/>
+        <Route path='/comments/:paintingId' element={<AuthPage><Comments/></AuthPage>}/>
       </Routes>
     </BrowserRouter>
   </div>

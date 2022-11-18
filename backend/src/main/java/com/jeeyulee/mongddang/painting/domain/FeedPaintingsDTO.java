@@ -17,6 +17,7 @@ public class FeedPaintingsDTO {
     private String paintingUrl;
     private String description;
     private String createDatetime;
+    private String comment;
     private Boolean isLike;
     private Integer mongddangCount;
 }
