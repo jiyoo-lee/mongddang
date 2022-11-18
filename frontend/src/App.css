@@ -681,3 +681,46 @@ li{
   resize: none;
   border: none;
 }
+
+/* 예술의 몽땅 */
+.arts_center_wrapper{
+  text-align: center;
+
+}
+
+.arts_center_logo{
+  width: 250px;
+}
+
+.status_box{
+  border-bottom: 1px solid lightgray;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+
+.contest_box{
+  width: 450px;
+  margin-left: 10px;
+}
+
+.contest_box:hover{
+  border: 3px solid orange;
+}
+
+
+.contest_poster{
+  width: 450px;
+  height: 200px;
+
+  cursor: pointer;
+}
+
+.contest_title{
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+
+  cursor: pointer;
+}
+

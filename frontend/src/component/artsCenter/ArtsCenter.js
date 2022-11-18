@@ -1,9 +1,9 @@
 import MyButton from "../button/MyButton";
 import Profile from "../home/homeContents/Profile";
 import Friends from "../home/homeContents/Friends";
-import UploadedFriends from "../home/homeContents/UploadedFriends";
 import { useNavigate } from "react-router-dom";
 import LogoHeader from "../LogoHeader";
+import ArtsCenterInProgress from "./ArtsCenterInProgress";
 
 const ArtsCenter = () =>{
     const navigate = useNavigate();
@@ -13,15 +13,13 @@ const ArtsCenter = () =>{
             <LogoHeader/>
         <div className="main_wrapper">
             <div className="menu_wrapper">
-                <MyButton text={'피드'} type={'nothing'} onClick={()=>{navigate('/home/feed')}}/>
-                <MyButton text={'베스트'} onClick={()=>{navigate('/home/best')}}/>
-                <MyButton text={'지금 그림'} onClick={()=>{navigate('/home/now')}}/>
-                <MyButton text={'업로드'} onClick={()=>{navigate('/home/upload')}}/>
+                <MyButton text={'진행 중'} type={'nothing'} onClick={()=>{navigate('/home/feed')}}/>
+                <MyButton text={'수상작'} onClick={()=>{navigate('/home/best')}}/>
             </div>
         <div className="home_wrapper">
         <br/>
         <br/>
-
+        <ArtsCenterInProgress/>
         </div>
         </div>
         <div className="sub_wrapper">
