@@ -28,6 +28,7 @@ import OtherDrawer from './component/drawer/OtherDrawer';
 import Guestbook from './component/guestbook/Guestbook';
 import Followers from './component/home/homeContents/Followers';
 import Comments from './component/Comments';
+import ArtsCenter from './component/artsCenter/ArtsCenter';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         <Route path='/drawer/buddy/:userId' element={<AuthPage><Followers/></AuthPage>}/>
         <Route path='/guestbook/:userId' element={<AuthPage><Guestbook/></AuthPage>}/>
         <Route path='/comments/:paintingId' element={<AuthPage><Comments/></AuthPage>}/>
+        <Route path='/arts-center' element={<AuthPage><ArtsCenter/></AuthPage>}/>
       </Routes>
     </BrowserRouter>
   </div>

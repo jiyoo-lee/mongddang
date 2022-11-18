@@ -20,7 +20,7 @@ public class GuestbookServiceImpl implements GuestBookService{
     private final JwtService jwtService;
 
     @Override
-    public Boolean createGuestBook(String userId, GuestBookDTO guestBookDTO) throws ResultException {
+    public Boolean createGuestBook(String userId, GuestBookDTO guestBookDTO) {
 
         String guestIdOnToken = jwtService.retrieveUserId();
 

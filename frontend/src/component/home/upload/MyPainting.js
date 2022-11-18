@@ -72,7 +72,7 @@ const MyPainting = () => {
             };
 
             PostAxios('/painting', requestBody, (res)=>{
-                alert(" 저장 되었습니다 ").then(navigate('/drawer/paintings'))
+                navigate('/drawer')
             });
         })
     }

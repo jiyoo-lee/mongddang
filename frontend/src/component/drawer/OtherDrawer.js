@@ -42,7 +42,7 @@ const OtherDrawer = () => {
         <div className="menu_wrapper">
             <MyButton text={'서랍장'} type={'nothing'} onClick={()=>{navigate('/drawer/'+userId)}}/>
             <MyButton text={'몽땅'} onClick={()=>{navigate('/drawer/like/'+userId)}}/>
-
+            <MyButton text={'방명록'} onClick={()=>{navigate('/guestbook/'+userId)}}/>
         </div>
         <div className="home_wrapper">
             <div className="drawer_wrapper">

@@ -39,12 +39,16 @@ public interface DropsRepository {
             "and drops_id = #{dropsId}")
     public Integer countByMemberIdAndDropsId(String memberId, Long dropsId);
 
-    @Select("select (select name " +
+    @Select("select id paintingId, (select name " +
             "        from genre " +
-            "        where id = genre_id) as genre," +
+            "        where id = genre_id) as genre, " +
+            "       (select count(*) from comment " +
+            "       where comment.painting_id = painting.id) comment, " +
+            "       (select count(*) from painting_mongddang " +
+            "       where painting_mongddang.painting_id = painting.id) mongddangCount, " +
             "       name, " +
-            "       painting_url as url, " +
-            "       description " +
+            "       painting_url paintingUrl, " +
+            "       description, create_datetime createDatetime " +
             "from painting " +
             "where drops_id = #{dropsId}")
     public List<PaintingDetailDTO> findPaintingsByDropsId(Long dropsId);

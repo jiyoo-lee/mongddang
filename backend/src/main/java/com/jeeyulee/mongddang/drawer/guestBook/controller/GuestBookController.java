@@ -20,7 +20,8 @@ public class GuestBookController {
 
     @ApiOperation(value = "방명록 등록 API", notes = "서랍장 방명록 등록 API")
     @PostMapping("/{userId}/guestbook")
-    public ResponseEntity<ResultDTO> createGuestBook(@PathVariable String userId, GuestBookDTO guestBookDTO){
+    public ResponseEntity<ResultDTO> createGuestBook(@PathVariable String userId,
+                                                     @RequestBody GuestBookDTO guestBookDTO){
         ResultDTO result = new ResultDTO();
         result.setSuccess(guestBookService.createGuestBook(userId, guestBookDTO));
 
@@ -35,9 +36,9 @@ public class GuestBookController {
     }
 
     @ApiOperation(value="방명록 수정 API", notes = "방명록 수정 API")
-    @PutMapping("/{userId})/guestbook")
+    @PutMapping("/{userId}/guestbook")
     public ResponseEntity<ResultDTO> updateGuestBook(@PathVariable String userId,
-                                                     GuestBookUpdateDTO guestBookUpdateDTO){
+                                                     @RequestBody GuestBookUpdateDTO guestBookUpdateDTO){
         ResultDTO result = new ResultDTO();
         result.setSuccess(guestBookService.updateGuestBook(userId,guestBookUpdateDTO));
 

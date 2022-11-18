@@ -10,8 +10,13 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class PaintingDetailDTO {
+    private String paintingId;
     private String genre;
     private String name;
-    private String url;
+    private String paintingUrl;
     private String description;
+    private Integer mongddangCount;
+    private Integer comment;
+    private String createDatetime;
+
 }

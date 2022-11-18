@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class GuestBookUpdateDTO {
-    private String GuestId;
-    private Long GuestBookId;
+    private String guestId;
+    private Long guestBookId;
     private String contents;
 }

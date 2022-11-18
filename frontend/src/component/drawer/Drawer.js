@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import MyButton from "../button/MyButton";
 import Profile from "../home/homeContents/Profile";
 import Friends from "../home/homeContents/Friends";
@@ -11,12 +11,18 @@ const Drawer = () => {
 
     const navigate = useNavigate();
 
-    const [drops, setDrops] = useState([]);
+    const [state, setState] = useState([]);
+    const [info, setInfo] = useState([]);
+    const userId = sessionStorage.getItem("userId")
 
     useEffect(()=>{
-        GetAxios('/drawer/list/'+(sessionStorage.getItem("userId")),{params:{}},(res)=>{setDrops(res.data)
-        console.log(res.data)})
-    },[])
+
+        GetAxios('/drawer/' + userId, {param:{}}, (res)=>{
+            console.log(res.data);
+            setState(res.data);
+            setInfo(res.data.drawerUserInfo);
+        });
+    }, []);
 
     return (
         <div className="all_wrapper">
@@ -29,7 +35,7 @@ const Drawer = () => {
        </div>
    <div className="home_wrapper">
    <br/>
-       <MyDrawer drops={drops}/>
+       <MyDrawer state={state} info={info}/>
    </div>
    </div>
    <div className="sub_wrapper">
