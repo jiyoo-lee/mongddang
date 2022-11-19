@@ -18,16 +18,13 @@ public interface ContestPaintingRepository {
     public Integer savePainting(ContestPaintingDTO contestPaintingDTO);
 
 
-    @Select("select id paintingId, " +
-            "       contest_id contestId, " +
-            "       member_id memberId, " +
-            "       title, " +
-            "       contest_painting_url contestPaintingUrl, " +
-            "       description, " +
-            "       create_datetime createDatetime " +
-            "from contest_painting " +
-            "where contest_id = #{contestId} " +
-            "and member_id = #{userId}")
+    @Select("select C.id paintingId, C.member_id memberId, C.id contestId, C.title, C.contest_painting_url contestPaintingUrl, " +
+            "C.description, C.create_datetime createDatetime, " +
+            "(select count(*) from contest_comment CC where CC.contest_painting_id = C.id)comment, " +
+            "(select count(*) from contest_mongddang M where M.contest_painting_id = C.id)mongddangCount, " +
+            "(select count(*) from contest_mongddang CM where CM.contest_painting_id = C.id)isLike " +
+            "from contest_painting C " +
+            "where C.contest_id = #{contestId} and C.member_id = #{userId}")
     public List<ContestPaintingDTO> retrieveMyPainting(Long contestId, String userId);
 
     @Delete("delete from contest_painting " +

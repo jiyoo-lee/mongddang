@@ -37,10 +37,13 @@ const SearchMyPainting = () => {
                 {myPainting && myPainting.map(painting => 
                     <div key={painting.paintingId}>
                          <div className="items">
-                        <img  className="items_img" src={painting.contestPaintingUrl} />
+                        <img  className="items_img" src={painting.contestPaintingUrl} alt="contest_painting" />
                         </div>
-                        {painting.title}
+                        <div className="items_desc">
+                        <p className="items_title">{painting.title}</p>
+                        <p className="items_content">{painting.description}</p>
                         <button onClick={()=>(handleDeletePainting(painting.paintingId))}>삭제</button>
+                    </div>
                     </div>
                 )}
             </div>
