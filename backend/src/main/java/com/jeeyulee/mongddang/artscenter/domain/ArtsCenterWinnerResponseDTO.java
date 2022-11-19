@@ -11,8 +11,8 @@ public class ArtsCenterWinnerResponseDTO {
     private String memberId;
     private String nickname;
     private String profileUrl;
+    private String paintingId;
     private String paintingName;
-    private String genreName;
     private String description;
     private String paintingUrl;
     private Integer paintingMongddangCount;

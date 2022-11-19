@@ -29,6 +29,9 @@ import Guestbook from './component/guestbook/Guestbook';
 import Followers from './component/home/homeContents/Followers';
 import Comments from './component/Comments';
 import ArtsCenter from './component/artsCenter/ArtsCenter';
+import ArtsCenterDetail from './component/artsCenter/ArtsCenterDetail';
+import ArtsCenterUpload from './component/artsCenter/ArtsCenterUpload';
+import SearchMyPainting from './component/artsCenter/SearchMyPainting';
 
 function App() {
   return (
@@ -61,6 +64,9 @@ function App() {
         <Route path='/guestbook/:userId' element={<AuthPage><Guestbook/></AuthPage>}/>
         <Route path='/comments/:paintingId' element={<AuthPage><Comments/></AuthPage>}/>
         <Route path='/arts-center' element={<AuthPage><ArtsCenter/></AuthPage>}/>
+        <Route path='/arts-center/:contestId' element={<AuthPage><ArtsCenterDetail/></AuthPage>}/>
+        <Route path='/arts-center/:contestId/upload' element={<AuthPage><ArtsCenterUpload/></AuthPage>}/>
+        <Route path='/arts-center/:contestId/upload/:userId' element={<AuthPage><SearchMyPainting/></AuthPage>}/>
       </Routes>
     </BrowserRouter>
   </div>

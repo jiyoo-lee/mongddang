@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,19 +24,15 @@ public class ContestPaintingServiceImpl implements ContestPaintingService{
     @Override
     public Boolean savePainting(ContestPaintingDTO contestPaintingDTO) {
 
-        String fileName =
-                convertToUUID(contestPaintingDTO.getContestId(), contestPaintingDTO.getTitle());
 
-        ContestPaintingBuilderDTO builderDTO =
-                ContestPaintingBuilderDTO.builder()
-                        .contestId(contestPaintingDTO.getContestId())
-                        .memberId(contestPaintingDTO.getMemberId())
-                        .title(contestPaintingDTO.getTitle())
-                        .contestPaintingUrl(fileName + contestPaintingDTO.getExtension())
-                        .description(contestPaintingDTO.getDescription()).build();
+        log.info("ArtsCenterServiceImpl savePainting ====> {}", contestPaintingDTO.toString());
+        return contestPaintingRepository.savePainting(contestPaintingDTO) > 0;
+    }
 
-        log.info("ArtsCenterServiceImpl savePainting ====> {}", builderDTO.toString());
-        return contestPaintingRepository.savePainting(builderDTO) > 0;
+    @Override
+    public List<ContestPaintingDTO> retrieveMyPainting(Long contestId, String userId) {
+
+        return contestPaintingRepository.retrieveMyPainting(contestId, userId);
     }
 
     @Override

@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ContestPaintingDTO {
-
+    private Long paintingId;
     private Long contestId;
     private String memberId;
     private String title;
-    private String extension;
+    private String contestPaintingUrl;
     private String description;
 
 }

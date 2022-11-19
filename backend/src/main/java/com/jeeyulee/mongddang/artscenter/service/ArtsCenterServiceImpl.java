@@ -17,8 +17,8 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
     private final ArtsCenterRepository artsCenterRepository;
 
     @Override
-    public List<ArtsCenterResponseDTO> retrieveArtCenters() {
-        return artsCenterRepository.findAll();
+    public List<ArtsCenterResponseDTO> retrieveInProgressArtCenters() {
+        return artsCenterRepository.findInProgress();
     }
 
     @Override

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DeleteAxios from "../../utils/axios/DeleteAxios";
 import MyButton from "../button/MyButton";

@@ -700,18 +700,14 @@ li{
 
 
 .contest_box{
-  width: 450px;
   margin-left: 10px;
-}
 
-.contest_box:hover{
-  border: 3px solid orange;
+  text-align: center;
 }
-
 
 .contest_poster{
-  width: 450px;
-  height: 200px;
+  width: 700px;
+  height: 300px;
 
   cursor: pointer;
 }
@@ -724,3 +720,29 @@ li{
   cursor: pointer;
 }
 
+.button_wrapper{
+  text-align: right;
+  margin-right: 20px;
+}
+
+/* contest upload */
+
+.contest_wrapper{
+  text-align: center;
+}
+
+.contest_title{
+  height: 20px;
+  width: 800px;
+  border: 1px solid #ececec;
+}
+
+.contest_upload_img{
+  min-width: 500px;
+  min-height: 500px;
+}
+
+.contest_post_box{
+  
+  height: 200px;
+}

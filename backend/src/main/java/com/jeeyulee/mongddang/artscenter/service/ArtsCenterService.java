@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ArtsCenterService {
 
-    List<ArtsCenterResponseDTO> retrieveArtCenters();
+    List<ArtsCenterResponseDTO> retrieveInProgressArtCenters();
 
     List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId);
 

@@ -13,10 +13,4 @@ public class ArtsCenterResponseDTO {
     private String posterUrl;
     private String startDay;
     private String endDay;
-    private String memberId;
-    private String nickname;
-    private Long PaintingId;
-    private String paintingTitle;
-    private String paintingUrl;
-    private Integer mongddangCount;
 }
