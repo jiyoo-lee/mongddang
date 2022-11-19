@@ -12,6 +12,7 @@ public class ArtsCenterPaintingDetailDTO {
     private Long paintingId;
     private String memberId;
     private String nickname;
+    private String profileUrl;
     private String title;
     private String contestPaintingUrl;
     private String description;

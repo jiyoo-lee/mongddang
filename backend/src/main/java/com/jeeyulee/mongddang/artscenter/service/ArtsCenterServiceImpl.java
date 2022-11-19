@@ -23,17 +23,22 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
     }
 
     @Override
+    public List<ArtsCenterResponseDTO> retrieveEndArtCenters() {
+        return artsCenterRepository.findEnd();
+    }
+
+    @Override
     public List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId) {
         String userIdOnToken = jwtService.retrieveUserId();
         return artsCenterRepository.findWinnerByDropsId(contestId, userIdOnToken);
     }
 
     @Override
-    public List<ArtsCenterPaintingDetailDTO> retrievePaintingDetail(Long contestId, Long paintingId) {
+    public List<ArtsCenterPaintingDetailDTO> retrievePaintingDetail(Long contestId) {
         String userIdOnToken = jwtService.retrieveUserId();
-        if(contestId == null || paintingId == null) {
+        if(contestId == null) {
             throw new ResultException("잘못된 접근입니다.");
         }
-        return artsCenterRepository.findPaintingDetail(contestId, paintingId, userIdOnToken);
+        return artsCenterRepository.findPaintingDetail(contestId, userIdOnToken);
     }
 }

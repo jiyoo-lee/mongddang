@@ -18,7 +18,10 @@ const Guestbook = () => {
         <LogoHeader/>
         <div className="main_wrapper">
             <div className="menu_wrapper">
-                <MyButton text={'방명록'} type={'nothing'} onClick={()=>{navigate('/home/feed')}}/>
+                {userId === userIdOnSession ? <></> : 
+                <> <MyButton text={'서랍장'} onClick={()=>{navigate('/drawer/'+userId)}}/>
+                    <MyButton text={'몽땅'} onClick={()=>{navigate('/drawer/like/'+userId)}}/></> }
+                    <MyButton text={'방명록'} type={'nothing'} onClick={()=>{navigate('/guestbook/'+userId)}}/>
             </div>
             <div className="home_wrapper">
                 {userId === userIdOnSession ? <MyGuestBook/> : <OtherGuestBook/>}

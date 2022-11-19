@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import GetAxios from "../../../utils/axios/GetAxios";
 import { useState } from "react";
-import FriendList from "./FriendList";
 import { useNavigate } from "react-router-dom";
 
 const UploadedFriends = () => {

@@ -39,7 +39,7 @@ public class DropsServiceImpl implements DropsService{
             isOwner(userIdOnToken, dropsDetailDTO.getMemberId()) ||
             hasAuthority(userIdOnToken, dropsId)) {
 
-            dropsDetailDTO.setPaintings(dropsRepository.findPaintingsByDropsId(dropsId));
+            dropsDetailDTO.setPaintings(dropsRepository.findPaintingsByDropsId(dropsId,userIdOnToken));
             return dropsDetailDTO;
         }
 

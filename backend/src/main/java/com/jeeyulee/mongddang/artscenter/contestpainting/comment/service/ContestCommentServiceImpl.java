@@ -5,11 +5,13 @@ import com.jeeyulee.mongddang.artscenter.contestpainting.comment.domain.ContestC
 import com.jeeyulee.mongddang.artscenter.contestpainting.comment.repository.ContestCommentRepository;
 import com.jeeyulee.mongddang.common.result.ResultException;
 import com.jeeyulee.mongddang.member.service.JwtService;
+import com.jeeyulee.mongddang.painting.comment.domain.CommentDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -35,5 +37,10 @@ public class ContestCommentServiceImpl implements ContestCommentService{
         }catch (Exception e){
             throw new ResultException("불가능한 접근입니다.");
         }
+    }
+
+    @Override
+    public List<CommentDTO> retrieveContestComments(Long paintingId) {
+        return contestCommentRepository.retrieveContestComments(paintingId);
     }
 }

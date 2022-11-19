@@ -5,7 +5,7 @@ const DropsPaintings = (props) =>{
     return (
         <div>
             {props.paintings.map(painting => (
-                <PaintingItem key={painting.url} painting={painting}/>
+                <PaintingItem key={painting.paintingId} painting={painting}/>
             ))}
         </div>
     );

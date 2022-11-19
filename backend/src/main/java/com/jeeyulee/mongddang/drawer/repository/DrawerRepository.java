@@ -36,27 +36,29 @@ public interface DrawerRepository {
             "        where P.drops_id = D.id " +
             "        order by P.create_datetime desc " +
             "        limit 0,1) lastPaintingUrl, " +
-            "       count(select drops_id " +
+            "       (select count(drops_id) " +
             "             from drops_mongddang " +
             "             where drops_id = D.id " +
-            "             and member_id = #{userIdOnToken})) isLike, " +
+            "             and member_id = #{userIdOnToken}) isLike, " +
             "       (select count(member_id) " +
             "        from drops_mongddang " +
             "        where drops_id = D.id) mongddangCount " +
             "from drops D where member_id = #{userId}")
     public List<DrawerDropsDTO> findDropsByUserId(String userId, String userIdOnToken);
 
-    @Select("select D.*," +
+    @Select("select D.*, " +
+            "       (select name from genre where D.genre_id = id)genre, " +
+            "       (select count(*) from drops_mongddang where D.id = drops_mongddang.drops_id)mongddangCount, " +
             "       (select P.painting_url " +
             "        from painting P " +
             "        where D.member_id = P.member_id " +
             "        and D.id = P.drops_id " +
             "        order by create_datetime desc " +
             "        limit 0,1) lastPaintingUrl, " +
-            "       count(select drops_id " +
+            "       (select count(drops_id) " +
             "             from drops_mongddang " +
             "             where drops_id = D.id " +
-            "             and member_id = #{userId})) isLike, " +
+            "             and member_id = #{userId})isLike " +
             "from drops D where D.member_id = #{userId}")
     public List<DrawerDTO> retrieveMyDrops(String userId);
 

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import PaintingHeart from "../like/PaintingHeart";
+import Heart from "../like/Heart";
 
 const FeedItem = ({painting}) => {
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ const FeedItem = ({painting}) => {
             <br/>
             <p className="items_title">{painting.name}</p>
             <p className="items_content">{painting.description}</p>
-            <PaintingHeart paintingId={painting.paintingId} like={painting.isLike} count={painting.mongddangCount}/>
+            <Heart id={painting.paintingId} like={painting.isLike} count={painting.mongddangCount} type="painting"/>
             <span className="user_like"><img className="icon" src="../.././img/comment.png" alt="comment" 
                     onClick={()=>navigate('/comments/'+painting.paintingId)}/>
                 {painting.comment}</span>

@@ -32,6 +32,9 @@ import ArtsCenter from './component/artsCenter/ArtsCenter';
 import ArtsCenterDetail from './component/artsCenter/ArtsCenterDetail';
 import ArtsCenterUpload from './component/artsCenter/ArtsCenterUpload';
 import SearchMyPainting from './component/artsCenter/SearchMyPainting';
+import EndArtsCenter from './component/artsCenter/EndArtsCenter';
+import ContestComment from './component/ContestComment';
+import LogoHeader from './component/LogoHeader';
 
 function App() {
   return (
@@ -67,6 +70,8 @@ function App() {
         <Route path='/arts-center/:contestId' element={<AuthPage><ArtsCenterDetail/></AuthPage>}/>
         <Route path='/arts-center/:contestId/upload' element={<AuthPage><ArtsCenterUpload/></AuthPage>}/>
         <Route path='/arts-center/:contestId/upload/:userId' element={<AuthPage><SearchMyPainting/></AuthPage>}/>
+        <Route path='/arts-center/last' element={<AuthPage><EndArtsCenter/></AuthPage>}/>
+        <Route path='/arts-center/:paintingId/comments' element={<AuthPage><ContestComment/></AuthPage>}/>
       </Routes>
     </BrowserRouter>
   </div>

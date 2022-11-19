@@ -44,6 +44,9 @@ public interface DropsRepository {
             "        where id = genre_id) as genre, " +
             "       (select count(*) from comment " +
             "       where comment.painting_id = painting.id) comment, " +
+            "       if((select painting_id from painting_mongddang " +
+            "       where member_id = #{userId} and " +
+            "       painting_id = painting.id) is null, false, true)isLike, " +
             "       (select count(*) from painting_mongddang " +
             "       where painting_mongddang.painting_id = painting.id) mongddangCount, " +
             "       name, " +
@@ -51,7 +54,7 @@ public interface DropsRepository {
             "       description, create_datetime createDatetime " +
             "from painting " +
             "where drops_id = #{dropsId}")
-    public List<PaintingDetailDTO> findPaintingsByDropsId(Long dropsId);
+    public List<PaintingDetailDTO> findPaintingsByDropsId(Long dropsId,String userId);
 
     @Update("update drops " +
             "set genre_id = IFNULL(#{genreId}, genre_id), " +

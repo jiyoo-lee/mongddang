@@ -7,7 +7,7 @@ const ArtsCenterInProgress = () =>{
     const [ artsCenter, setArtsCenter ] = useState([]);
 
     useEffect(()=>{
-        GetAxios('/arts-center/',{params:{}},(res)=>{setArtsCenter(res.data)})
+        GetAxios('/arts-center/in-progress', {params:{}}, (res)=>{setArtsCenter(res.data)})
     }, []);
 
     return(

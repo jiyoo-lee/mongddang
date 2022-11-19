@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import DeleteAxios from "../../utils/axios/DeleteAxios";
 import MyButton from "../button/MyButton";
+import Heart from "../like/Heart";
 
 const MyDrawer = ({state,info}) => {
+
 
     const navigate = useNavigate();
 
@@ -20,8 +22,8 @@ const MyDrawer = ({state,info}) => {
         <div className="drawer_wrapper">
             <span className="userid_message">반가워요, {sessionStorage.getItem("userId")}님!</span>
             <br/>
-            <span className="drawer_msg"> 드랍 개수 : </span> <span className="userid_message">{state.paintingCount} </span>
-            <span className="drawer_msg"> 그림 개수 : </span>
+            
+            <span className="drawer_msg"> 그림 개수 :</span> <span className="userid_message">{state.paintingCount} </span>
             {state.paintingCountGroupingGenre && state.paintingCountGroupingGenre.map(genre => (
                 <span key={genre.genreName}>{genre.genreName} : <span className="userid_message">{genre.count} </span></span>
             ))}
@@ -38,7 +40,7 @@ const MyDrawer = ({state,info}) => {
                         <img className="items_img" src={drops.lastPaintingUrl} onClick={()=>goToPage(drops.dropsId)}/> <br/>
                         <span className="genre">{drops.dropsGenre}</span> <br/><br/>
                         <span className="drawer_msg">{drops.dropsName}</span> <br/><br/>
-                        <img className="icon" src="../.././img/like.png" alt="like"/> {drops.mongddangCount}
+                        <Heart id={drops.dropsId} like={drops.isLike} count={drops.mongddangCount} type="drops"/>
                         <MyButton type={'negative'} text={'삭제'} onClick={()=>onDeleteDrops(drops.dropsId)}/>
                     </div>
                 ))}

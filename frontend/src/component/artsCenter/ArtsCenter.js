@@ -13,8 +13,8 @@ const ArtsCenter = () =>{
             <LogoHeader/>
             <div className="main_wrapper">
                 <div className="menu_wrapper">
-                    <MyButton text={'진행 중'} type={'nothing'} onClick={()=>{navigate('/home/feed')}}/>
-                    <MyButton text={'수상작'} onClick={()=>{navigate('/arts-center/winners')}}/>
+                    <MyButton text={'진행 중'} type={'nothing'} onClick={()=>{navigate('/arts-center')}}/>
+                    <MyButton text={'지난 공모전'} onClick={()=>{navigate('/arts-center/last')}}/>
                 </div>
                 <div className="home_wrapper">
                     <br/>

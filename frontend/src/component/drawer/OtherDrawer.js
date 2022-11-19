@@ -6,6 +6,8 @@ import Friends from "../home/homeContents/Friends";
 import MyButton from "../button/MyButton";
 import PostAxios from "../../utils/axios/PostAxios";
 import DeleteAxios from "../../utils/axios/DeleteAxios";
+import Heart from "../like/Heart";
+import LogoHeader from "../LogoHeader";
 
 const OtherDrawer = () => {
     const [state, setState] = useState([]);
@@ -37,7 +39,7 @@ const OtherDrawer = () => {
 
     return (
     <div className="all_wrapper">
-        <img className='login_logo' src={process.env.PUBLIC_URL + `../.././img/login_logo.png`} onClick={()=> {navigate('/home/feed')}} alt='login_logo'/>
+        <LogoHeader/>
         <div className="main_wrapper">
         <div className="menu_wrapper">
             <MyButton text={'서랍장'} type={'nothing'} onClick={()=>{navigate('/drawer/'+userId)}}/>
@@ -55,8 +57,7 @@ const OtherDrawer = () => {
                 <span className="drawer_msg"> 팔로워 </span>  <span className="userid_message"> {info.followingCount} </span>
                 {info.isFollow === true? <MyButton text={'팔로우함'} type={'positive'} onClick={unfollow}/> : <MyButton text={'팔로우하기'} onClick={follow}/>}
             <br/>
-            <span className="drawer_msg"> 드랍 개수 : </span> <span className="userid_message">{state.paintingCount} </span>
-            <span className="drawer_msg"> 그림 개수 : </span>
+            <span className="drawer_msg"> 그림 개수 :</span> <span className="userid_message"> {state.paintingCount} </span>
             {state.paintingCountGroupingGenre && state.paintingCountGroupingGenre.map(genre => (
                 <span key={genre.genreName}>{genre.genreName} : <span className="userid_message">{genre.count} </span></span>
             ))}
@@ -70,7 +71,7 @@ const OtherDrawer = () => {
                         <img className="items_img" src={drops.lastPaintingUrl} onClick={()=>goToPage(drops.dropsId)}/> <br/>
                         <span className="genre">{drops.dropsGenre}</span> <br/><br/>
                         <span className="drawer_msg">{drops.dropsName}</span> <br/><br/>
-                        <img className="icon" src="../.././img/like.png" alt="like"/> {drops.mongddangCount}
+                        <Heart id={drops.dropsId} like={drops.isLike} count={drops.mongddangCount} type="drops"/>
                     </div>
                 ))}
             </div>

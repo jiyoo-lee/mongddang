@@ -11,22 +11,30 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/arts-center/painting/{contestPaintingId}/comment")
+@RequestMapping("/api/v1/arts-center/painting")
 public class ContestCommentController {
 
     private final ContestCommentService commentService;
-    private Long contestCommentId;
+
 
     @ApiOperation(value="공모전 댓글 등록 API", notes = "공모전 댓글 등록 API")
-    @PostMapping
+    @PostMapping("/comment")
     public ResponseEntity<ResultDTO> createComment(@RequestBody ContestCommentDTO contestCommentDTO){
         ResultDTO result = new ResultDTO(true,commentService.saveComment(contestCommentDTO) );
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "공모전 댓글 조회 API", notes = "공모전 댓글 조회 API")
+    @GetMapping("/{paintingId}")
+    public ResponseEntity<ResultDTO> retrieveContestComments(@PathVariable Long paintingId){
+        ResultDTO result = new ResultDTO(true, commentService.retrieveContestComments(paintingId));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
     @ApiOperation(value="공모전 댓글 삭제 API", notes = "공모전 댓글 삭제 API")
-    @DeleteMapping("/{contestCommentId}")
+    @DeleteMapping("/comment/{contestCommentId}")
     public ResponseEntity<ResultDTO> deleteContestComment(@PathVariable Long contestCommentId){
         ResultDTO result = new ResultDTO(true, commentService.deleteComment(contestCommentId));
 

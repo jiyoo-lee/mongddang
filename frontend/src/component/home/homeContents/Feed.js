@@ -4,7 +4,6 @@ import Friends from "./Friends";
 import MyFeed from "./MyFeed";
 import { useNavigate } from "react-router-dom";
 import UploadedFriends from "./UploadedFriends";
-import { useEffect } from "react";
 import LogoHeader from "../../LogoHeader";
 
 

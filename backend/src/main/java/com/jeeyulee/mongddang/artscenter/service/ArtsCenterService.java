@@ -10,7 +10,9 @@ public interface ArtsCenterService {
 
     List<ArtsCenterResponseDTO> retrieveInProgressArtCenters();
 
+    List<ArtsCenterResponseDTO> retrieveEndArtCenters();
+
     List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId);
 
-    List<ArtsCenterPaintingDetailDTO> retrievePaintingDetail(Long contestId, Long paintingId);
+    List<ArtsCenterPaintingDetailDTO> retrievePaintingDetail(Long contestId);
 }

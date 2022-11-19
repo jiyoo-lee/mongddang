@@ -16,7 +16,7 @@ const ArtsCenterUpload = () => {
             <div className="main_wrapper">
                 <div className="menu_wrapper">
                     <MyButton text={'진행 중'} type={'nothing'} onClick={()=>{navigate('/arts-center')}}/>
-                    <MyButton text={'수상작'} onClick={()=>{navigate('/')}}/>
+                    <MyButton text={'지난 공모전'} onClick={()=>{navigate('/arts-center/last')}}/>
                 </div>
                 <div className="home_wrapper">
                     <br/>

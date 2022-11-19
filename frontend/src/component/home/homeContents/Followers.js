@@ -54,7 +54,7 @@ const Followers = () => {
     <div>
         {followerBtn === "nothing"&& followerList.length > 0 ? followerList && followerList.map(follower => (
             <div className="social_list" key={follower.memberId}>
-                <img className="social_profile" src={follower.profileUrl} alt="profile"/>
+                <img className="social_profile" src={follower.profileUrl} onClick={()=>navigate('/drawer/'+follower.memberId)} alt="profile"/>
                 <div style={{}}>{follower.nickname}({follower.memberId})</div>
                 <MyButton type={'negative'} text={'삭제'}/>
             </div>
@@ -64,7 +64,7 @@ const Followers = () => {
 
         {followingBtn === "nothing"&& followingList.length > 0 ? followingList && followingList.map(following => (
             <div className="social_list" key={following.memberId}>
-                <img className="social_profile" src={following.profileUrl} alt="profile"/>
+                <img className="social_profile" src={following.profileUrl} onClick={()=>navigate('/drawer/'+following.memberId)} alt="profile"/>
                 <br/>
                 <span className="social_msg">{following.nickname}({following.memberId})</span>
                 <MyButton type={'positive'} text={'팔로잉'} onClick={()=>unfollow(following.memberId)}/>

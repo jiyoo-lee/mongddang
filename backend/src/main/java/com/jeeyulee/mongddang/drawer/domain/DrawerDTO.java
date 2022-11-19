@@ -13,5 +13,6 @@ public class DrawerDTO {
     private String name;
     private String createDatetime;
     private String genre;
+    private Integer mongddangCount;
     private Boolean isLike;
 }
