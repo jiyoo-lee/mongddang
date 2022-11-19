@@ -16,5 +16,6 @@ public class ArtsCenterPaintingDetailDTO {
     private String contestPaintingUrl;
     private String description;
     private Integer mongddangCount;
+    private Boolean isLike;
     private Integer comment;
 }

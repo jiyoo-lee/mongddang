@@ -27,8 +27,9 @@ public interface ContestPaintingRepository {
             "where C.contest_id = #{contestId} and C.member_id = #{userId}")
     public List<ContestPaintingDTO> retrieveMyPainting(Long contestId, String userId);
 
-    @Delete("delete from contest_painting " +
-            "where member_id = #{memberId} and " +
-            "id = #{contestPaintingId}")
+    @Delete("delete " +
+            "from contest_painting " +
+            "where member_id = #{memberId} " +
+            "and id = #{contestPaintingId}")
     public Integer deletePainting(ContestPaintingDeleteDTO contestPaintingDeleteDTO);
 }

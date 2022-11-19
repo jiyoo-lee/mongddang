@@ -15,5 +15,6 @@ public class ArtsCenterWinnerResponseDTO {
     private String paintingName;
     private String description;
     private String paintingUrl;
+    private Boolean isLike;
     private Integer paintingMongddangCount;
 }

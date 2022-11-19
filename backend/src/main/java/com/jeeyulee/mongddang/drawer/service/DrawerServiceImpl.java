@@ -18,12 +18,13 @@ public class DrawerServiceImpl implements DrawerService{
 
     @Override
     public DrawerResponseDTO retrieveDrawer(String userId) {
+        String userIdOnToken = jwtService.retrieveUserId();
+
         DrawerResponseDTO drawerResponseDTO = new DrawerResponseDTO();
         drawerResponseDTO.setPaintingCount(drawerRepository.countPaintingByUserId(userId));
         drawerResponseDTO.setPaintingCountGroupingGenre(drawerRepository.countPaintingGroupingGenre(userId));
-        drawerResponseDTO.setDrops(drawerRepository.findDropsByUserId(userId));
+        drawerResponseDTO.setDrops(drawerRepository.findDropsByUserId(userId, userIdOnToken));
 
-        String userIdOnToken = jwtService.retrieveUserId();
         drawerResponseDTO.setDrawerUserInfo(drawerRepository.findMemberInfo(userIdOnToken,userId));
 
         return drawerResponseDTO;

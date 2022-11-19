@@ -29,7 +29,7 @@ public class ArtsCenterController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value="예술의 몽땅 상세 그림 조회 API", notes = "예술의 몽땅 상세 그림 조회 API")
+    @ApiOperation(value="예술의몽땅 상세 그림 조회 API", notes = "예술의 몽땅 상세 그림 조회 API")
     @GetMapping("/{contestId}/painting/{paintingId}")
     public ResponseEntity<ResultDTO> retrievePaintingDetail(@PathVariable Long contestId,
                                                             @PathVariable Long paintingId){
