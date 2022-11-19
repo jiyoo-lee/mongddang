@@ -3,6 +3,7 @@ package com.jeeyulee.mongddang.artscenter.service;
 import com.jeeyulee.mongddang.artscenter.domain.*;
 import com.jeeyulee.mongddang.artscenter.repository.ArtsCenterRepository;
 import com.jeeyulee.mongddang.common.result.ResultException;
+import com.jeeyulee.mongddang.member.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ArtsCenterServiceImpl implements ArtsCenterService {
     private final ArtsCenterRepository artsCenterRepository;
-
+    private final JwtService jwtService;
     @Override
     public List<ArtsCenterResponseDTO> retrieveInProgressArtCenters() {
         return artsCenterRepository.findInProgress();
@@ -23,12 +24,16 @@ public class ArtsCenterServiceImpl implements ArtsCenterService {
 
     @Override
     public List<ArtsCenterWinnerResponseDTO> retrieveArtCenterWinners(Long contestId) {
-        return artsCenterRepository.findWinnerByDropsId(contestId);
+        String userIdOnToken = jwtService.retrieveUserId();
+        return artsCenterRepository.findWinnerByDropsId(contestId, userIdOnToken);
     }
 
     @Override
     public List<ArtsCenterPaintingDetailDTO> retrievePaintingDetail(Long contestId, Long paintingId) {
-        if(contestId == null || paintingId == null) throw new ResultException("잘못된 접근입니다.");
-        return artsCenterRepository.findPaintingDetail(contestId,paintingId);
+        String userIdOnToken = jwtService.retrieveUserId();
+        if(contestId == null || paintingId == null) {
+            throw new ResultException("잘못된 접근입니다.");
+        }
+        return artsCenterRepository.findPaintingDetail(contestId, paintingId, userIdOnToken);
     }
 }

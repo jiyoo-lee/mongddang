@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class DrawerDTO {
-
     private Long id;
     private String lastPaintingUrl;
     private String name;
     private String createDatetime;
     private String genre;
+    private Boolean isLike;
 }

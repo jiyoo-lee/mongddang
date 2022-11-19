@@ -24,14 +24,19 @@ public interface ContestPaintingRepository {
             "       title, " +
             "       contest_painting_url contestPaintingUrl, " +
             "       description, " +
+            "       count(select member_id " +
+            "             from contest_mongddang " +
+            "             where contest_id = #{contestId} " +
+            "             and member_id = #{userId}) isLike" +
             "       create_datetime createDatetime " +
             "from contest_painting " +
             "where contest_id = #{contestId} " +
             "and member_id = #{userId}")
     public List<ContestPaintingDTO> retrieveMyPainting(Long contestId, String userId);
 
-    @Delete("delete from contest_painting " +
-            "where member_id = #{memberId} and " +
-            "id = #{contestPaintingId}")
+    @Delete("delete " +
+            "from contest_painting " +
+            "where member_id = #{memberId} " +
+            "and id = #{contestPaintingId}")
     public Integer deletePainting(ContestPaintingDeleteDTO contestPaintingDeleteDTO);
 }

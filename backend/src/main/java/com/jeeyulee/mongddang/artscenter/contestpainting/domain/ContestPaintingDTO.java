@@ -14,6 +14,6 @@ public class ContestPaintingDTO {
     private String memberId;
     private String title;
     private String contestPaintingUrl;
+    private Boolean isLike;
     private String description;
-
 }

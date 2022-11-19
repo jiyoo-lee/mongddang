@@ -12,5 +12,6 @@ public class DrawerDropsDTO {
     private String dropsName;
     private String dropsGenre;
     private String lastPaintingUrl;
+    private Boolean isLike;
     private Integer mongddangCount;
 }
