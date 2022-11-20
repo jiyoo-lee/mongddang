@@ -8,5 +8,7 @@ public interface JwtService {
 
     public Boolean validate(String token);
 
+    public Boolean isAdmin(String token);
+
     public String retrieveUserId();
 }

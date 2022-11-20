@@ -80,8 +80,9 @@ const Join = () => {
                             
                                             PostAxios('/member/login', loginRequestBody, (data)=>{
                                                 console.log(data);
-                                                sessionStorage.setItem("token", data.data);
+                                                sessionStorage.setItem("token", data.data.accessToken);
                                                 sessionStorage.setItem("userId", memberId);
+                                                sessionStorage.setItem("isAdmin", data.data.isAdmin);
                                             }).then((res)=>{
                                                 console.log(res);
                                                 navigate('/profile',{state:{userId:memberId}});

@@ -1,5 +1,6 @@
 package com.jeeyulee.mongddang.common.config;
 
+import com.jeeyulee.mongddang.common.interceptor.AdminInterceptor;
 import com.jeeyulee.mongddang.common.interceptor.JwtInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final JwtInterceptor jwtInterceptor;
 
+    private final AdminInterceptor adminInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
@@ -24,6 +27,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/v1/member/login","/api/v1/member/join", "/api/v1/member/overlap",
                                      "/api/v1/member/seeking-id/auth-number", "/api/v1/member/user-id",
                                      "/api/v1/member/update-password/auth-number", "/api/v1/member/password");
+        registry.addInterceptor(adminInterceptor)
+                .addPathPatterns("/api/**/admin/**");
     }
 
     @Override

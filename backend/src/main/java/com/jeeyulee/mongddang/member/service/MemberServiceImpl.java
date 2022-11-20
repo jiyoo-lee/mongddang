@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public String login(MemberLoginDTO memberLoginDTO){
+    public LoginResponseDTO login(MemberLoginDTO memberLoginDTO){
 
         try {
             MemberLoginResponseDTO member = memberRepository.findByUserIdAndPassword(memberLoginDTO);
@@ -52,7 +52,8 @@ public class MemberServiceImpl implements MemberService {
             }
             String jwt = jwtService.createJwt(member);
             memberRepository.updateToken(memberLoginDTO.getUserId(), jwt);
-            return jwt;
+
+            return new LoginResponseDTO(jwt, member.getAdmin());
         }catch (Exception e){
             throw new ResultException("아이디와 패스워드를 확인해주세요");
         }

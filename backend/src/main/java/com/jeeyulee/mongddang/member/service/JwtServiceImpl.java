@@ -47,7 +47,7 @@ public class JwtServiceImpl implements JwtService{
     @Override
     public Boolean validate(String token) {
         try {
-            String userId = parseUserId(token);
+            String userId = parseJwtClaims(token).get("userId").toString();
             return token.equals(memberRepository.findLastTokenById(userId));
         } catch (MissingClaimException | IncorrectClaimException | ExpiredJwtException e) {
             return false;
@@ -55,18 +55,29 @@ public class JwtServiceImpl implements JwtService{
     }
 
     @Override
+    public Boolean isAdmin(String token){
+        Claims claims = parseJwtClaims(token);
+        Boolean isAdmin = (Boolean) claims.get("admin");
+        log.info("isAdmin ===> {}", isAdmin);
+
+        return isAdmin;
+    }
+
+    @Override
     public String retrieveUserId() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return parseUserId(request.getHeader("Authorization"));
+        Claims claims = parseJwtClaims(request.getHeader("Authorization"));
+
+        return claims.get("userId").toString();
     }
 
 
-    private String parseUserId(String token) {
+    private Claims parseJwtClaims(String token) {
         Jws<Claims> jws = Jwts.parserBuilder()
                 .setSigningKey(Base64.getEncoder().encodeToString(issueKey.getBytes()))
                 .build()
                 .parseClaimsJws(token);
 
-        return jws.getBody().get("userId").toString();
+        return jws.getBody();
     }
 }

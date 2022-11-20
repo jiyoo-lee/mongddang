@@ -23,29 +23,20 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Boolean resignMember(AdminResignDTO adminResignDTO) {
+    public Boolean resignMember(String memberId) {
 
-        return adminRepository.deleteMember(adminResignDTO) > 0;
+        return adminRepository.deleteMember(memberId) > 0;
     }
 
     @Override
     public Boolean saveContest(ContestDTO contestDTO) {
 
-        if(contestDTO.getExtension() == null){
-            throw new ResultException("파일이 없습니다.");
-        }
+        return adminRepository.saveContest(contestDTO) > 0;
+    }
 
-        String fileName =
-                convertToUUID(contestDTO.getStartDay(),contestDTO.getTitle());
-        ContestBuilderDTO contestBuilderDTO = ContestBuilderDTO.builder()
-                .memberId(contestDTO.getMemberId())
-                .title(contestDTO.getTitle())
-                .posterUrl(fileName + contestDTO.getExtension())
-                .startDay(contestDTO.getStartDay())
-                .EndDay(contestDTO.getEndDay())
-                .build();
-
-        return adminRepository.saveContest(contestBuilderDTO) > 0;
+    @Override
+    public List<ContestDTO> retrieveAllContest() {
+        return adminRepository.retrieveAllContest();
     }
 
     @Override
@@ -81,14 +72,11 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Boolean updateContest(Long contestId, ContestUpdateDTO contestDTO) {
 
-        if(contestDTO.getExtension() == null) throw new ResultException("파일이 없습니다.");
-        String fileName =
-                convertToUUID(contestDTO.getStartDay(),contestDTO.getTitle());
 
         ContestUpdateBuilderDTO builderDTO = ContestUpdateBuilderDTO.builder()
                 .contestId(contestId)
                 .title(contestDTO.getTitle())
-                .contestPaintingUrl(fileName + contestDTO.getExtension())
+                .posterUrl(contestDTO.getPosterUrl())
                 .startDay(contestDTO.getStartDay())
                 .endDay(contestDTO.getEndDay())
                 .build();

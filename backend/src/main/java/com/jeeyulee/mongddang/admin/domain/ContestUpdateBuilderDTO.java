@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ContestUpdateBuilderDTO {
     private Long contestId;
     private String title;
-    private String contestPaintingUrl;
+    private String posterUrl;
     private String startDay;
     private String endDay;
 }

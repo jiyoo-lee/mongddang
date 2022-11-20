@@ -28,10 +28,13 @@ const Login = ()=> {
                 requestBody.longitude = res.data["longitude"]
 
                 PostAxios('/member/login', requestBody, (data)=>{
-                    sessionStorage.setItem("token", data.data);
+                    sessionStorage.setItem("token", data.data.accessToken);
                     sessionStorage.setItem("userId", userId);
+                    sessionStorage.setItem("isAdmin", data.data.isAdmin);
                     alert("로그인 되었습니다.");
-                    navigate('/home/feed');
+                    
+                    sessionStorage.getItem("isAdmin") === "true" ? navigate('/admin') : navigate('/home/feed')
+                   
                 });
             })
         }

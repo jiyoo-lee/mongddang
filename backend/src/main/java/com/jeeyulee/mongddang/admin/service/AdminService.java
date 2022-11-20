@@ -8,9 +8,11 @@ public interface AdminService {
 
     List<AdminMemberDTO> retrieveAllMembers();
 
-    Boolean resignMember(AdminResignDTO adminResignDTO);
+    Boolean resignMember(String memberId);
 
     Boolean saveContest(ContestDTO contestDTO);
+
+    List<ContestDTO> retrieveAllContest();
 
     List<AdminPaintingDTO> retrieveAllPaintings();
 

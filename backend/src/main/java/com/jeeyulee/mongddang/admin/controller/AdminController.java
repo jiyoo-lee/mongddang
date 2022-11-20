@@ -28,8 +28,15 @@ public class AdminController {
 
     @ApiOperation(value="회원 삭제(강제탈퇴)", notes = "회원 권리자 권한으로 삭제 권한 API")
     @DeleteMapping("/members")
-    public ResponseEntity<ResultDTO> resignMember(AdminResignDTO adminResignDTO){
-        ResultDTO result = new ResultDTO(true, adminService.resignMember(adminResignDTO));
+    public ResponseEntity<ResultDTO> resignMember(@RequestBody AdminResignDTO adminResignDTO){
+        ResultDTO result = new ResultDTO(true, adminService.resignMember(adminResignDTO.getMemberId()));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "예술의 몽땅 공모전 조회", notes = "예술의 몽땅 공모전 리스트 조회")
+    @GetMapping("/arts-center")
+    public ResponseEntity<ResultDTO> retrieveContest () {
+        ResultDTO result = new ResultDTO(true,adminService.retrieveAllContest());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

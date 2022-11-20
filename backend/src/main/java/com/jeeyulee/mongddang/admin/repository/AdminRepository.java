@@ -11,7 +11,7 @@ public interface AdminRepository {
 
     @Insert("insert into contest (admin_id, title, poster_url, start_day, end_day) " +
             "value (#{memberId},#{title},#{posterUrl},#{startDay},#{endDay}) ")
-    Integer saveContest(ContestBuilderDTO contestBuilderDTO);
+    Integer saveContest(ContestDTO contestDTO);
 
     @Select("select M.user_id memberId, M.name, M.nickname, M.email, M.phone_number phoneNumber, " +
             "       (select max(create_datetime) " +
@@ -19,9 +19,16 @@ public interface AdminRepository {
             "from member M where admin = false order by M.name")
     List<AdminMemberDTO> retrieveAllMembers();
 
-    @Select("select P.id paintingId, P.name paintingName, M.user_id memberId, M.name, M.nickname, " +
+    @Select("select id contestId, admin_id memberId, " +
+            "title, poster_url posterUrl, start_day startDay, end_day endDay, " +
+            "deadline, create_datetime createDatetime" +
+            " from contest order by create_datetime desc")
+    List<ContestDTO> retrieveAllContest();
+
+
+    @Select("select P.id paintingId, P.name paintingName, P.painting_url paintingUrl, P.description, M.user_id memberId, M.name, M.nickname, " +
             "P.create_datetime createDatetime " +
-            "from painting P join member M on P.member_id = M.user_id")
+            "from painting P join member M on P.member_id = M.user_id order by P.create_datetime desc")
     List<AdminPaintingDTO> retrieveAllPainting();
 
     @Select("select M.user_id memberId, M.name, M.nickname, M.email, M.phone_number phoneNumber, " +
@@ -32,10 +39,11 @@ public interface AdminRepository {
             "or M.user_id like CONCAT('%',#{keyword},'%') order by M.name")
     List<AdminMemberDTO> findMemberByKeyword(String keyword);
 
-    @Select("select P.id paintingId, P.name paintingName, M.user_id memberId, M.name, M.nickname, " +
+    @Select("select P.id paintingId, P.name paintingName, P.painting_url paintingUrl, P.description, " +
+            " M.user_id memberId, M.name, M.nickname, " +
             "P.create_datetime createDatetime " +
             "from painting P join member M on P.member_id = M.user_id " +
-            "and P.name like CONCAT('%',#{keyword},'%')")
+            "where P.name like CONCAT('%',#{keyword},'%') order by P.create_datetime desc")
     List<AdminPaintingDTO> findPaintingByKeyword(String keyword);
 
     @Update("update contest " +
@@ -48,7 +56,7 @@ public interface AdminRepository {
 
     @Delete("delete from member " +
             "where user_id = #{memberId}")
-    Integer deleteMember(AdminResignDTO adminResignDTO);
+    Integer deleteMember(String memberId);
 
 
     @Delete("delete from painting " +

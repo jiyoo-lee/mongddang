@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import Home from './component/home/Home';
 import Login from './component/member/Login';
 import Join from './component/member/Join';
@@ -34,7 +33,9 @@ import ArtsCenterUpload from './component/artsCenter/ArtsCenterUpload';
 import SearchMyPainting from './component/artsCenter/SearchMyPainting';
 import EndArtsCenter from './component/artsCenter/EndArtsCenter';
 import ContestComment from './component/ContestComment';
-import LogoHeader from './component/LogoHeader';
+import Admin from './component/admin/Admin';
+import AdminPaintings from './component/admin/AdminPaintings';
+import AdminContest from './component/admin/AdminContest';
 
 function App() {
   return (
@@ -72,6 +73,10 @@ function App() {
         <Route path='/arts-center/:contestId/upload/:userId' element={<AuthPage><SearchMyPainting/></AuthPage>}/>
         <Route path='/arts-center/last' element={<AuthPage><EndArtsCenter/></AuthPage>}/>
         <Route path='/arts-center/:paintingId/comments' element={<AuthPage><ContestComment/></AuthPage>}/>
+        <Route path='/admin' element={<AuthPage><Admin/></AuthPage>}/>
+        <Route path='/admin/paintings' element={<AuthPage><AdminPaintings/></AuthPage>}/>
+        <Route path='/admin/arts-center' element={<AuthPage><AdminContest/></AuthPage>}/>
+
       </Routes>
     </BrowserRouter>
   </div>

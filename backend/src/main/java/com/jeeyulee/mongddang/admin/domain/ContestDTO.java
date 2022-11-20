@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class ContestDTO {
 
+    private String contestId;
     private String memberId;
     private String title;
-    private String extension;
+    private String posterUrl;
+    private Boolean deadline;
     private String startDay;
     private String EndDay;
+    private String createDatetime;
 }

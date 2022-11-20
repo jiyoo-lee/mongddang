@@ -5,7 +5,7 @@ import com.jeeyulee.mongddang.member.domain.*;
 
 public interface MemberService {
     public Boolean join(MemberJoinDTO memberJoinDTO);
-    public String login(MemberLoginDTO memberLoginDTO);
+    public LoginResponseDTO login(MemberLoginDTO memberLoginDTO);
     public Boolean checkOverlap(String userId);
     public MemberDTO findById(String userId);
     public Boolean updateMember(MemberDTO memberDTO);

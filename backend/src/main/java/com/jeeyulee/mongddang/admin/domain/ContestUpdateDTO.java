@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class ContestUpdateDTO {
 
     private String title;
-    private String extension;
+    private String posterUrl;
     private String startDay;
     private String EndDay;
 }

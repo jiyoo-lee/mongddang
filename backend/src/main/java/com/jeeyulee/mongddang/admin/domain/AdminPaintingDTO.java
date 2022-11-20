@@ -13,6 +13,8 @@ public class AdminPaintingDTO {
     private Long paintingId;
     private String paintingName;
     private String memberId;
+    private String paintingUrl;
+    private String description;
     private String name;
     private String createDatetime;
 }
