@@ -44,7 +44,7 @@ public interface MemberRepository {
     public int resignMember(MemberDeleteDTO memberDeleteDTO);
 
     @Update("update member " +
-            "set last_access_token = #{jwt}" +
+            "set last_access_token = #{jwt} " +
             "where user_id = #{userId}")
     public Integer updateToken(String userId,String jwt);
 
