@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GetAxios from "../../utils/axios/GetAxios";
-import DeleteAxios from "../../utils/axios/DeleteAxios";
+import PutAxios from "../../utils/axios/PutAxios";
 
 
 const AdminContest = () => {
@@ -27,6 +27,11 @@ const AdminContest = () => {
     }
 
 
+    const deadlineHandler = (contestId) =>{
+        PutAxios('/admin/arts-center/'+contestId+'/deadline',{},(res)=>{})
+    }
+
+
     return (
     <div className="admin">
         <ul className="admin_wrapper">
@@ -41,7 +46,8 @@ const AdminContest = () => {
                 <li className="admin_menu" onClick={()=>navigate('/admin/paintings')} > 그림 조회 </li>
                 <hr/>
                 <li className="deth_menu"> Contest </li>
-                <li className="admin_menu" onClick={()=>window.location.reload()} > 공모전 관리 </li>
+                <li className="admin_menu" onClick={()=>window.location.reload()} > 공모전 조회 </li>
+                <li className="admin_menu" onClick={()=>navigate('/admin/artscenter-upload')} > 공모전 등록 </li>
                 <li className="admin_menu" onClick={()=>
                                                 {sessionStorage.clear(); navigate('/'); }
                 }> 로그아웃 </li>
@@ -57,7 +63,7 @@ const AdminContest = () => {
         <div className="container">
             <div className="search-window">
                     <div className="search-wrap">
-                        <input type="text"  placeholder="공모전 제목을 입력해주세요." value={keyword} onChange={(e)=>onChange(e)}/>
+                        <input type="text" style={{"width":420}} placeholder="공모전 제목을 입력해주세요." value={keyword} onChange={(e)=>onChange(e)}/>
                         <button type="submit" className="btn btn-dark" onClick={onSearch}>검색</button>
                     </div>
             </div>
@@ -69,14 +75,14 @@ const AdminContest = () => {
             <table className="board-table">
                 <thead>
                 <tr>
-                    <th scope="col" className="th-num">고유번호</th>
+                    <th scope="col" className="th-num">공모번호</th>
                     <th scope="col" className="th-num">작성자</th>
                     <th scope="col" className="th-title">제목</th>
                     <th scope="col" className="th-date">포스터</th>
                     <th scope="col" className="th-date">시작일자</th>
                     <th scope="col" className="th-date">종료일자</th>
                     <th scope="col" className="th-date">마감여부</th>
-                    <th scope="col" className="th-date">작성날짜</th>
+  
                    
                 </tr>
                 </thead>
@@ -86,14 +92,13 @@ const AdminContest = () => {
                     <tr key={contest.contestId}>
                         <td>{contest.contestId}</td>
                         <td>{contest.memberId}</td>
-                        <td>
+                        <th>
                         {contest.title}
-                        </td>
-                        <td><img className="items_img" src={contest.posterUrl}/></td>
+                        </th>
+                        <td><img className="items_img" src={contest.posterUrl} onClick={()=>navigate('/admin/contest'+contest.contestId+'-paintings')}/></td>
                         <td>{contest.startDay}</td>
                         <td>{contest.endDay}</td>
-                        <td>{contest.deadline ? '마감' : <b>진행 중</b>}</td>
-                        <td>{contest.createDatetime}</td>
+                        <td>{contest.deadline ? '마감' : <> <b>진행 중</b> <br/><br/> <button onClick={()=>deadlineHandler(contest.contestId)}> 마감하기 </button></>}</td>
                         
                 </tr>
                 

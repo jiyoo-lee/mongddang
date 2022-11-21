@@ -45,7 +45,7 @@ const Admin = () => {
                 <li className="admin_menu" onClick={()=>navigate('/admin/paintings')} > 그림 조회 </li>
                 <hr/>
                 <li className="deth_menu"> Contest </li>
-                <li className="admin_menu"> 공모전 관리 </li>
+                <li className="admin_menu" onClick={()=>navigate('/admin/arts-center')}> 공모전 관리 </li>
                 <li className="admin_menu" onClick={()=>
                                                 {sessionStorage.clear(); navigate('/'); }
                 }> 로그아웃 </li>
@@ -61,7 +61,7 @@ const Admin = () => {
         <div className="container">
             <div className="search-window">
                     <div className="search-wrap">
-                        <input type="text"  placeholder="회원 이름 혹은 아이디를 입력해주세요." value={keyword} onChange={(e)=>onChange(e)}/>
+                        <input type="text" style={{"width":420}}  placeholder="회원 이름 혹은 아이디를 입력해주세요." value={keyword} onChange={(e)=>onChange(e)}/>
                         <button type="submit" className="btn btn-dark" onClick={onSearch}>검색</button>
                     </div>
             </div>
@@ -94,7 +94,7 @@ const Admin = () => {
                         <td>{member.phoneNumber}</td>
                         <td>{member.email}</td>
                         <td>{member.lastAccessDatetime}</td>
-                        <td onClick={()=>onDelete(member.memberId)}> 삭제 </td>
+                        <td><button onClick={()=>onDelete(member.memberId)}> 삭제 </button> </td>
                 </tr>
                    
                 )): <></>}

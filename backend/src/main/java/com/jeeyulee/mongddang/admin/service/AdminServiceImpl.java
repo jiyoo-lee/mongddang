@@ -83,6 +83,16 @@ public class AdminServiceImpl implements AdminService{
         return adminRepository.updateContest(builderDTO) > 0;
     }
 
+    @Override
+    public Boolean closeContest(Long contestId) {
+        return adminRepository.updateDeadline(contestId) > 0;
+    }
+
+    @Override
+    public List<ContestDTO> retrieveContestByKeyword(String keyword) {
+        return adminRepository.retrieveContestByKeyword(keyword);
+    }
+
 
     private String convertToUUID(Object first, String title){
         return UUID.randomUUID().toString() + "_" + first + "_" + title;

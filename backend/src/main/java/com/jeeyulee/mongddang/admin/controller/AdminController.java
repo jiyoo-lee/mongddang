@@ -83,4 +83,21 @@ public class AdminController {
         ResultDTO result = new ResultDTO(true, adminService.findPaintingByKeyword(keyword));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+
+    @ApiOperation(value = "공모전 마감 API", notes = "공모전 마감 API")
+    @PutMapping("/arts-center/{contestId}/deadline")
+    public ResponseEntity<ResultDTO> closeContest(@PathVariable Long contestId){
+        ResultDTO result = new ResultDTO(true, adminService.closeContest(contestId));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "공모전 제목으로 검색", notes = "공모전 제목으로 검색하여 조회하는 API")
+    @GetMapping("/arts-center/{keyword}")
+    public ResponseEntity<ResultDTO> retrieveContestByKeyword (@PathVariable String keyword) {
+        ResultDTO result = new ResultDTO(true,adminService.retrieveContestByKeyword(keyword));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

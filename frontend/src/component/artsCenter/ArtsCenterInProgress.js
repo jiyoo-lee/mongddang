@@ -19,14 +19,12 @@ const ArtsCenterInProgress = () =>{
         </div>
         <div className="status_box">현재 진행 중인 공모전, 지금 참여해보세요!</div>
         <br/>
+        <br/>
         <div className="contest_wrapper">
         {artsCenter && artsCenter.map(contest=> (
             <div className="contest_box" key={contest.contestId}>
-                {/* <img className="contest_poster" src={contest.posterUrl} 
-                         alt="poster" onClick={()=>navigate('/arts-center/' + contest.contestId)} 
-                         onClick={()=>navigate('/arts-center/' + contest.contestId, {state:{contest: contest}})}/> */}
-                <img className="contest_poster" src={process.env.PUBLIC_URL + `.././img/november_contest_img.png`} 
-                     alt="poster" onClick={()=>navigate('/arts-center/' + contest.contestId, {state:{contest: contest}})}/>
+                 <img className="contest_poster" src={contest.posterUrl} 
+                         alt="poster" onClick={()=>navigate('/arts-center/' + contest.contestId, {state:{contest: contest}})}/> 
                 <br/>
                 <div className="contest_title">{contest.title}
                     <p>{contest.startDay} ~ {contest.endDay}</p>

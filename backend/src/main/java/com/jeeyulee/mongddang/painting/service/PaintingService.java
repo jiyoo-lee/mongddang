@@ -18,7 +18,7 @@ public interface PaintingService {
 
     public List<ConditionalPaintingsDTO> retrieveLastPaintings();
 
-    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings();
+    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings(Integer page, Integer size);
 
     public List<PaintingMongddangDTO> retrieveMongddangPaintings(String userId);
 

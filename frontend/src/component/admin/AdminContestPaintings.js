@@ -1,19 +1,21 @@
 import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import GetAxios from "../../utils/axios/GetAxios";
 import DeleteAxios from "../../utils/axios/DeleteAxios";
 
 
-const AdminPaintings = () => {
+const AdminContestPaintings = () =>{
 
     const navigate = useNavigate();
+    const {contestId} = useParams();
     const [ paintings, setPaintings ] = useState([]);
     const [ keyword, setKeyword ] = useState("");
 
 
     useEffect(()=>{
-        GetAxios('/admin/paintings',{params:{}},(res)=>{
+        GetAxios('/arts-center/'+contestId+'/painting',{params:{}},(res)=>{
             setPaintings(res.data)
+           
         })
     },[]) 
     
@@ -54,17 +56,7 @@ const AdminPaintings = () => {
     <section className="notice">
     <div className="page-title">
         <div className="container">
-            <h3>그림 조회</h3>
-        </div>
-    </div>
-    <div id="board-search">
-        <div className="container">
-            <div className="search-window">
-                    <div className="search-wrap">
-                        <input type="text" style={{"width":420}}  placeholder="그림 제목을 입력해주세요." value={keyword} onChange={(e)=>onChange(e)}/>
-                        <button type="submit" className="btn btn-dark" onClick={onSearch}>검색</button>
-                    </div>
-            </div>
+            <h3>공모전 조회</h3>
         </div>
     </div>
 
@@ -78,6 +70,7 @@ const AdminPaintings = () => {
                     <th scope="col" className="th-title">제목</th>
                     <th scope="col" className="th-date">그림</th>
                     <th scope="col" className="th-date">내용</th>
+                    <th scope="col" className="th-date">좋아요 개수</th>
                     <th scope="col" className="th-date">작성일자</th>
                     <th scope="col" className="th-date">삭제</th>
                 </tr>
@@ -88,11 +81,12 @@ const AdminPaintings = () => {
                     <tr key={painting.paintingId}>
                         <td>{painting.memberId}</td>
                         <td>
-                        {painting.name}
+                        {painting.nickname}
                         </td>
-                        <td>{painting.paintingName}</td>
-                        <td><img className="items_img" src={painting.paintingUrl}/></td>
+                        <td>{painting.title}</td>
+                        <td><img className="items_img" src={painting.contestPaintingUrl}/></td>
                         <td>{painting.description}</td>
+                        <td>{painting.mongddangCount}</td>
                         <td>{painting.createDatetime}</td>
                         <td><button onClick={()=>onDelete(painting.paintingId)}> 삭제 </button> </td>
                 </tr>
@@ -109,4 +103,4 @@ const AdminPaintings = () => {
 );
 }
 
-export default AdminPaintings;
+export default AdminContestPaintings;

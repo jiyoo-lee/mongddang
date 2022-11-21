@@ -7,8 +7,10 @@ import com.jeeyulee.mongddang.painting.domain.PaintingUpdateDTO;
 import com.jeeyulee.mongddang.painting.exception.NotUploadPaintingException;
 import com.jeeyulee.mongddang.painting.service.PaintingService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -92,11 +94,11 @@ public class PaintingController {
 
     @ApiOperation(value="팔로잉한 친구들의 최신 그림보기 API", notes = "팔로잉한 친구들의 최신 그림 보기API")
     @GetMapping("/following")
-    public ResponseEntity<ResultDTO> retrieveLastFollowingPaintings(){
+    public ResponseEntity<ResultDTO> retrieveLastFollowingPaintings(Integer page, Integer size){
 
         ResultDTO result = new ResultDTO();
             result.setSuccess(true);
-            result.setData(paintingService.retrieveLastFollowingPaintings());
+            result.setData(paintingService.retrieveLastFollowingPaintings(page, size));
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

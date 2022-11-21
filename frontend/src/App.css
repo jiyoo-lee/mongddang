@@ -997,5 +997,14 @@ section.notice {
   color: #fff;
 }
 
+.contest_upload_box{
+  width: 1000px;
+  border: 1px solid black;
+  height: 400px;
+  text-align: center;
+  padding-top: 100px;
+
+ 
+}
 
 

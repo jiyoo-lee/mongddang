@@ -19,4 +19,5 @@ public class ArtsCenterPaintingDetailDTO {
     private Integer mongddangCount;
     private Boolean isLike;
     private Integer comment;
+    private String createDatetime;
 }

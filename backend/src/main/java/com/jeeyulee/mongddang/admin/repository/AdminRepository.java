@@ -22,7 +22,7 @@ public interface AdminRepository {
     @Select("select id contestId, admin_id memberId, " +
             "title, poster_url posterUrl, start_day startDay, end_day endDay, " +
             "deadline, create_datetime createDatetime" +
-            " from contest order by create_datetime desc")
+            " from contest order by endDay desc")
     List<ContestDTO> retrieveAllContest();
 
 
@@ -46,6 +46,13 @@ public interface AdminRepository {
             "where P.name like CONCAT('%',#{keyword},'%') order by P.create_datetime desc")
     List<AdminPaintingDTO> findPaintingByKeyword(String keyword);
 
+    @Select("select id contestId, admin_id memberId, title," +
+            "poster_url posterUrl, deadline, start_day startDay," +
+            "end_Day EndDay, create_datetime CreateDatetime " +
+            "from contest where title like CONCAT('%',#{keyword},'%')")
+    List<ContestDTO> retrieveContestByKeyword(String keyword);
+
+
     @Update("update contest " +
             "set title = IFNULL(#{title},title), " +
             "poster_url = IFNULL(#{contestPaintingUrl}, poster_url), " +
@@ -53,6 +60,9 @@ public interface AdminRepository {
             "end_day = IFNULL(#{endDay}, end_day) " +
             "where id = #{contestId}")
     Integer updateContest(ContestUpdateBuilderDTO commentDTO);
+
+    @Update("update contest set deadline = true where id = #{contestId}")
+    Integer updateDeadline(Long contestId);
 
     @Delete("delete from member " +
             "where user_id = #{memberId}")

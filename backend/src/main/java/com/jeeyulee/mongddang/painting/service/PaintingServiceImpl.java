@@ -84,11 +84,12 @@ public class PaintingServiceImpl implements PaintingService {
     }
 
     @Override
-    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings() {
+    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings(Integer page, Integer size) {
 
-        List<FeedPaintingsDTO> retrieveLastFollowingPaintings =
-                paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId());
-        return retrieveLastFollowingPaintings;
+        int start = size * (page - 1);
+
+        return paintingRepository.retrieveLastFollowingPaintings(jwtService.retrieveUserId(), start, size);
+
     }
 
     @Override

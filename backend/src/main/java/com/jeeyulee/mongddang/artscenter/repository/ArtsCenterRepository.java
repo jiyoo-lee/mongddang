@@ -67,7 +67,8 @@ public interface ArtsCenterRepository {
             "       (select count(member_id) " +
             "        from contest_mongddang " +
             "        where member_id = #{userId} " +
-            "        and contest_painting_id = P.id) isLike " +
+            "        and contest_painting_id = P.id) isLike," +
+            "        P.create_datetime createDatetime " +
             "from contest_painting P " +
             "join member M " +
             "on P.member_id = M.user_id " +

@@ -104,8 +104,8 @@ public interface PaintingRepository {
             "                    where P.member_id in (select follow_member_id " +
             "                                          from social " +
             "                                          where member_id= #{userId})) " +
-            "order by createDatetime desc ")
-    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings(String userId);
+            "order by createDatetime desc limit #{start}, #{size}")
+    public List<FeedPaintingsDTO> retrieveLastFollowingPaintings(String userId, Integer start, Integer size);
 
     @Select("select P.painting_url paintingUrl, P.member_id memberId, P.name from painting P " +
             "where P.id in (select painting_id from painting_mongddang " +

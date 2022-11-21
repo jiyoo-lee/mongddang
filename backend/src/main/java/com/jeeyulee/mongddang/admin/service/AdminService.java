@@ -24,4 +24,8 @@ public interface AdminService {
 
     Boolean updateContest(Long contestId, ContestUpdateDTO contestUpdateDTO);
 
+    Boolean closeContest(Long contestId);
+
+    List<ContestDTO> retrieveContestByKeyword(String keyword);
+
 }

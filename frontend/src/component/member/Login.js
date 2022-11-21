@@ -63,9 +63,6 @@ const Login = ()=> {
             <span> 또는 </span>
             <br/>
             <br/>
-            <MyButton text={'Google 로그인'} type={'negative'} onClick={login}/> 
-            <br/> 
-            <br/>
             <span className='find_info' onClick={()=> {navigate('/findId')}}>아이디 찾기  </span> |
             <span className='find_info' onClick={()=> {navigate('/findPw')}}>  비밀번호 찾기</span>
          </div>

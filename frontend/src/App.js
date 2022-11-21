@@ -36,6 +36,8 @@ import ContestComment from './component/ContestComment';
 import Admin from './component/admin/Admin';
 import AdminPaintings from './component/admin/AdminPaintings';
 import AdminContest from './component/admin/AdminContest';
+import AdminUploadContest from './component/admin/AdminUploadContest';
+import AdminContestPaintings from './component/admin/AdminContestPaintings';
 
 function App() {
   return (
@@ -76,7 +78,8 @@ function App() {
         <Route path='/admin' element={<AuthPage><Admin/></AuthPage>}/>
         <Route path='/admin/paintings' element={<AuthPage><AdminPaintings/></AuthPage>}/>
         <Route path='/admin/arts-center' element={<AuthPage><AdminContest/></AuthPage>}/>
-
+        <Route path='/admin/artscenter-upload' element={<AuthPage><AdminUploadContest/></AuthPage>}/>
+        <Route path='/admin/contest:contestId-paintings' element={<AuthPage><AdminContestPaintings/></AuthPage>}/>
       </Routes>
     </BrowserRouter>
   </div>
