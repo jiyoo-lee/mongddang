@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import PutAxios from "../../utils/axios/PutAxios";
+import MyButton from "../button/MyButton";
 
 const GuestBookEditor = ({guestBookId}) => {
     const { userId } = useParams();
@@ -22,12 +23,12 @@ const GuestBookEditor = ({guestBookId}) => {
                         <button onClick={(e)=>(setEdit(false))}>수정취소</button>
                     </div>
 
-    const editWord = <div onClick={(e)=>(setEdit(true))}>수정</div>
+    const editWord = <button onClick={(e)=>(setEdit(true))}> 수정 </button>
 
     return (
-        <div>
+        <>
             {edit ? editForm : editWord}
-        </div>
+        </>
     );
 }
 

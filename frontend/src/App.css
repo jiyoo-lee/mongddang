@@ -1004,7 +1004,89 @@ section.notice {
   text-align: center;
   padding-top: 100px;
 
- 
 }
 
+.text_box{
+  width: 80%;
+  border: 1px solid lightgray;
+  margin: auto;
 
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.comment_box{
+  
+  background-color: #ececec;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+.question_box{
+  width: 100%;
+  text-align: left;
+
+  font-size: 14px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+}
+
+.guestbook_comment{
+  resize: none;
+  width: 95%;
+  height: 80px;
+
+  border: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 15px;
+  border-radius: 5px;
+}
+
+.common_btn_wrapper{
+  text-align: right;
+}
+
+.common_btn_wrapper .common_btn{
+  font-size: 13px;
+  font-weight: bold;
+  background-color: orange;
+  margin-right: 15px;
+}
+
+.common_btn_wrapper .common_btn:hover{
+ background-color: orange;
+ color: white;
+}
+
+.common_btn{
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #ececec;
+
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+
+}
+
+.common_btn:hover{
+  background-color: lightgray;
+}
+
+.guestbook_content{
+  font-size: 13px;
+  padding-right: 40px;
+  padding-left: 10px;
+}
+.guestbook_datetime{
+  font-size: 11px;
+  text-align: right;
+}

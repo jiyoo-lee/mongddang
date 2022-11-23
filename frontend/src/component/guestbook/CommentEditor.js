@@ -7,8 +7,8 @@ const CommentEditor = (props) => {
     const [edit, setEdit] = useState(false);
     const [comment, setComment] = useState("");
 
-    const editForm = <div>
-                        <input type="text" value={comment} placeholder="수정내용을 입력하세요." onChange={(e)=>(setComment(e.target.value))}/>
+    const editForm = <div className="text_box">
+                        <input className="input_s" type="text" value={comment} placeholder="수정내용을 입력하세요." onChange={(e)=>(setComment(e.target.value))}/>
                         <button onClick={()=>{
                             PutAxios('/drawer/' + userId + '/guestbook/comment', {commentId: props.commentId, contents: comment}, (res)=>{
                                 window.location.reload();
@@ -17,12 +17,12 @@ const CommentEditor = (props) => {
                         <button onClick={(e)=>(setEdit(false))}>수정취소</button>
                     </div>
                     
-    const editWord = <div onClick={(e)=>(setEdit(true))}>수정</div>
+    const editWord = <button className="common_btn" onClick={(e)=>(setEdit(true))}>수정</button>
 
     return (
-        <div>
+        <>
             {edit ? editForm : editWord}
-        </div>
+        </>
     );
 }
 
