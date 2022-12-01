@@ -45,10 +45,12 @@ IDE<br>
 
 
 <details><summary>UI 구성안</summary>
-<img src="https://user-images.githubusercontent.com/103879030/197798411-1e2bed0c-3fad-42bf-8203-e6e74993abe2.png"/>
-<img width="959" alt="image" src="https://user-images.githubusercontent.com/103879030/199439301-6931d4a1-7b51-457a-b8ac-22387daf367d.png">
-<img width="953" alt="image" src="https://user-images.githubusercontent.com/103879030/199439534-60fb299d-48eb-459f-8da3-bd8d1a731e26.png">
-<img width="955" alt="image" src="https://user-images.githubusercontent.com/103879030/199439802-12fd4486-f936-4621-a27a-c9a4d160da1e.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/103879030/204977622-9331055c-1269-4bf9-9c65-636d99435c17.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/103879030/204978035-6d4ff869-d89b-4b54-b374-f6cbf43ce0a2.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/103879030/204978307-4b370211-6ed6-4e82-8f93-b992efe56763.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/103879030/204978579-4b7e84dc-dc39-44e7-91d5-50cca7ad0389.png">
+<img width="1000" alt="image" src="https://user-images.githubusercontent.com/103879030/204978766-af6d280b-98e0-4488-98e2-a469b34e2da3.png">
+
 
 
 </details> 
