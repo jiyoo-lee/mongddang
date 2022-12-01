@@ -13,17 +13,17 @@ const GuestBookEditor = ({guestBookId}) => {
         guestBookId: guestBookId,
         contents: guestBook
     }
-    const editForm = <div>
+    const editForm = <>
                         <input type="text" value={guestBook} placeholder="수정내용을 입력하세요." onChange={(e)=>(setGuestBook(e.target.value))}/>
-                        <button onClick={()=>{
+                        <button className ="common_btn" onClick={()=>{
                             PutAxios('/drawer/' + userId + '/guestbook', updateRequestBody, (res)=>{
                                 window.location.reload();
                             });
                         }}>수정</button>
-                        <button onClick={(e)=>(setEdit(false))}>수정취소</button>
-                    </div>
+                        <button className ="common_btn" onClick={(e)=>(setEdit(false))}>수정취소</button>
+                    </>
 
-    const editWord = <button onClick={(e)=>(setEdit(true))}> 수정 </button>
+    const editWord = <button className ="common_btn" onClick={(e)=>(setEdit(true))}> 수정 </button>
 
     return (
         <>

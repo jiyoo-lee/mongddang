@@ -35,7 +35,7 @@ const Followers = () => {
     }
 
     const unfollow = (e) => {
-        DeleteAxios('/following/'+e,{params:{}},(res)=>{})
+        DeleteAxios('/following/'+e,{params:{}},()=>{window.location.reload()})
     }
 
 

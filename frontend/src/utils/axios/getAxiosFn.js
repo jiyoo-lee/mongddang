@@ -5,8 +5,8 @@ async function getAxiosFn(url, requestData) {
     var result;
 
     await axios.create({
-        baseURL: 'http://ec2-52-79-38-165.ap-northeast-2.compute.amazonaws.com/api/v1',
-        //baseURL: 'http://localhost:8080/api/v1',
+        //baseURL: 'http://ec2-52-79-38-165.ap-northeast-2.compute.amazonaws.com/api/v1',
+        baseURL: 'http://localhost:8080/api/v1',
         headers: {
             "Authorization": sessionStorage.getItem("token")
         }})
