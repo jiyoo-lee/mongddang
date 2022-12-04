@@ -26,7 +26,7 @@ const Friends = () => {
                 <span className="message">추천 친구가 없습니다. 친구를 팔로우 해보세요 !</span>
             </div> :
             (friendRecommend.map(friend=> (
-                <div key={friend.memberId}>
+                <div key={friend.memberId} className="friends_recommend_wrapper">
                     <img className="friendsRecommend" src={friend.profileUrl} alt="profile" onClick={()=>(navigate("/drawer/"+friend.memberId))}/>
                 <br/>
                     <span>{friend.nickname}</span>

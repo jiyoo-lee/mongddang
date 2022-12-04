@@ -40,29 +40,32 @@ const MyUpload = () => {
     return (
         <>
             <div className="upload_drops">
-            <span className="home_message"> 업로드 할 드랍을 선택해주세요 </span>
-            <br/>
-            <br/>
-            <br/>
-            <div className="drops_wrappers">
+                <div className="upload_drops_message">
+                    <span className="home_message"> 업로드 할 드랍을 선택해주세요 </span>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <div className="drops_wrappers">
                 
-            </div>    
-                {
-                    drops && drops.map(drop => (
-                        <div className="drops_list" key={drop.id}>
+                </div>
+
+                {drops && drops.map(drop => (
+                    <div className="drops_list" key={drop.id}>
                         <img className="items_img"
-                        src={drop.lastPaintingUrl === null?process.env.PUBLIC_URL + `../.././img/no_image_.png`: drop.lastPaintingUrl} onClick={()=>onUpload(drop.id)}/>
-                    <br/>
-                        <span className="genre">{drop.genre}</span> <br/><br/>
+                            src={drop.lastPaintingUrl === null?process.env.PUBLIC_URL + `../.././img/no_image_.png`: drop.lastPaintingUrl} onClick={()=>onUpload(drop.id)}/>
+                        <br/>
+                        <span className="genre">{drop.genre}</span> 
+                        <br/>
+                        <br/>
                         <span className="drawer_msg">{drop.name}</span>
-                    <br/>
-                    <br/>
+                        <br/>
+                        <br/>
                         <Heart id={drop.id} like={drop.isLike} count={drop.mongddangCount} type="drops"/>
-                        </div>
-                    ))
-                }
-                <img className="items_img" src={process.env.PUBLIC_URL + `../.././img/default_drops.png`} onClick={onCreate}/>
-               
+                    </div>
+                ))}
+                
+                <img className="items_img" src={process.env.PUBLIC_URL + `../.././img/default_drops.png`} onClick={onCreate}/>   
             </div>
         </>
     );
